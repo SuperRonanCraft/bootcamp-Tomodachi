@@ -130,3 +130,49 @@ function boost() {
     }
   }
 }
+
+function checkForDanger() {
+  // takes current values, checks if any of them are dangerously low
+  // returns feedback message to the to user
+  // if no death danger, checks for disbalance in points
+  var currentValues = getCurrentValues();
+  var items = [];
+  for (var key in currentValues) {
+    var value = currentValues[key];
+    if (value <= pet.THRESHOLDS.life) {
+      items.push(key.toUpperCase());
+    }
+  }
+  if (items.length > 0) {
+    warning(`Owner! Do better with ${pet.name}'s ${items}`);
+  } else {
+    checkForExcess();
+  }
+}
+
+// FUNCTIONS TO CHECK FOR BALANCE IN PET LIFE AND HANDLE DISBALANCE :))
+
+function checkForExcess() {
+  // find the largest value and find the index of it
+  // Save key name and value of the largest value into variables
+  // Calculate remainder sum and if conditions are met
+  // Return the name of the key and remainder Sum
+  var currentValues = this.getCurrentValues();
+  var keys = Object.keys(currentValues);
+  var keyValues = Object.values(currentValues);
+
+  var largestValue = Math.max(...keyValues);
+  var largestIndex = keyValues.indexOf(largestValue);
+  var theMaxKey = keys[largestIndex];
+  var theMaxKeyValue = keyValues.splice(largestIndex, 1);
+  var remainderSum = keyValues.reduce((a, b) => a + b, 0);
+
+  if (
+    largestValue >= pet.THRESHOLDS.deductionPoint &&
+    largestValue > remainderSum
+  ) {
+    deductPoints(theMaxKey, remainderSum);
+  } else {
+    warning(`${pet.name} is doing fine!`);
+  }
+}
