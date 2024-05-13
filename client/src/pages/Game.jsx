@@ -1,3 +1,10 @@
+import PetProvider from '../context/PetContext';
+import GameTestValues from '../components/GameTestValues';
+
 export default function Game() {
-  return <div>This is the Game Page</div>;
+  return (
+    <PetProvider>
+      <GameTestValues />
+    </PetProvider>
+  );
 }
