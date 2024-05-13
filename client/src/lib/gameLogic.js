@@ -223,3 +223,27 @@ function tooPerfect() {
   }
   return outcome;
 }
+
+// MAIN ACTIONS AFFECTING PET VALUES
+
+function executeAction(POSSIBILITIES, action_key) {
+  // action key is a corresponding number to know what to communicate to the user
+  var values = getRandomValues(POSSIBILITIES);
+
+  var valuesAfter = {
+    food: pet.food + values.food,
+    happiness: pet.happiness + values.happiness,
+    energy: pet.energy + values.energy,
+  };
+
+  //Test to make sure that the pet is not going to die
+  if (checkImpactDeath(valuesAfter) === false) {
+    pet.food = valuesAfter.food;
+    pet.happiness = valuesAfter.happiness;
+    pet.energy = valuesAfter.energy;
+    checkForDanger();
+  } else {
+    preventDeath(action_key);
+  }
+  return tooPerfect();
+}
