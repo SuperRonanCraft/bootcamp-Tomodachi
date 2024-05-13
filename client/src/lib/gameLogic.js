@@ -65,3 +65,24 @@ function checkImpactDeath(valuesAfter) {
   }
   return false;
 }
+
+function preventDeath(action_key) {
+  // if action would have killed the pet, show relevant message, increase lethal.attempts count
+  var message;
+  switch (action_key) {
+    case 'play':
+      message = "\n!!!!!!!!! Didn't PLAY as it would kill your porg !!!!!!!!!";
+      pet.LETHAL_ACTIONS++;
+      break;
+    case 'feed':
+      message = "\n!!!!!!!!! Didn't FEED as it would kill your porg !!!!!!!!!";
+      pet.LETHAL_ACTIONS++;
+      break;
+    case 'sleep':
+      message = "\n!!!!!!!!! Didn't SLEEP as it would kill your porg !!!!!!!!!";
+      pet.LETHAL_ACTIONS++;
+      break;
+  }
+  warning(message);
+  //boost();
+}
