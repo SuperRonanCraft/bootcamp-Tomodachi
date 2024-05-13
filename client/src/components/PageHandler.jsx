@@ -5,7 +5,7 @@ export default function PageHandler() {
     <div>
       <main>
         <nav>
-          <ul>
+          <ul className="flex flex-row">
             <li>
               <Link to="/">Home</Link>
             </li>
