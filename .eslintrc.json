@@ -9,6 +9,7 @@
     "es2018": true
   },
   "rules": {
+    "react/prop-types": "off",
     "no-undef-init": "error",
     "no-duplicate-case": "error",
     "no-empty": "error",
