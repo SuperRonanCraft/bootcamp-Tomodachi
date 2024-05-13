@@ -3,7 +3,7 @@ import happy from '../../assets/happy.json';
 
 export default function Emoji() {
   return (
-    <div className="border rounded-md">
+    <div className="border rounded-md p-8">
       <Lottie animationData={happy} />
     </div>
   );
