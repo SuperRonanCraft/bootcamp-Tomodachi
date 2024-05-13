@@ -3,7 +3,7 @@ const { signToken, AuthenticationError } = require('../utils/auth');
 
 const resolvers = {
   Query: {
-    users: async () => {
+    me: async () => {
       return await User.find();
     },
   },
@@ -12,13 +12,13 @@ const resolvers = {
       const user = await User.findOne({ email });
 
       if (!user) {
-        throw new AuthenticationError('User not found');
+        throw AuthenticationError;
       }
 
       const correctPassword = await user.isCorrectPassword(password);
 
       if (!correctPassword) {
-        throw new AuthenticationError('Incorrect password');
+        throw AuthenticationError;
       }
 
       const token = signToken(user);
@@ -39,7 +39,7 @@ const resolvers = {
       });
     }
 
-    throw new AuthenticationError('User not authenticated');
+    throw AuthenticationError;
   },
 };
 
