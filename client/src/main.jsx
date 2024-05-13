@@ -6,9 +6,33 @@ import Home from './pages/Home.jsx';
 import Profile from './pages/Profile.jsx';
 import Game from './pages/Game.jsx';
 import Leaderboard from './pages/Leaderboard.jsx';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <App />,
+    children: [
+      {
+        index: true,
+        element: <Game />,
+      },
+      {
+        path: '/profile',
+        element: <Profile />,
+      },
+      {
+        path: '/home',
+        element: <Home />,
+      },
+      {
+        path: '/leaderboard',
+        element: <Leaderboard />,
+      },
+    ],
+  },
+]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <RouterProvider router={router} />
 );
