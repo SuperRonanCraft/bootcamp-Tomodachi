@@ -1,16 +1,32 @@
 // Import required modules
 const express = require('express');
+const { ApolloServer } = require('@apollo/server');
+const { expressMiddleware } = require('@apollo/server/express4');
 
-// Set up server configuration (PORT)
-const PORT = process.env.PORT || 3000;
+const { typeDefs, resolvers } = require('./schemas');
+const db = require('./config/connection');
 
-// Create an Express application
+const PORT = process.env.PORT || 3001;
 const app = express();
-
-// Set up express middleware (app.use)
-app.use(express.static('public'));
-
-// Set up server setup (app.listen)
-app.listen(PORT, () => { 
-    console.log(`Server is running on port ${PORT}`);
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
 });
+
+const startApolloServer = async () => {
+  await server.start();
+
+  app.use(express.urlencoded({ extended: false }));
+  app.use(express.json());
+
+  app.use('/graphql', expressMiddleware(server));
+
+  db.once('open', () => {
+    app.listen(PORT, () => {
+      console.log(`API server running on port ${PORT}!`);
+      console.log(`Use GraphQL at http://localhost:${PORT}/graphql`);
+    });
+  });
+};
+
+startApolloServer();
