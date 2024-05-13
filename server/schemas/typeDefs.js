@@ -1,17 +1,27 @@
 const typeDefs = `
 type User{
-    _id:ID
-    username:String
-    email:String
-    gameData:String
+    _id: ID
+    username: String
+    email: String
+    gameData: GameData
 }
+
 type Auth{
-    token:ID
-    user:User
+    token: ID
+    user: User
 }
+
+type GameData {
+    food: Int
+    energy: Int
+    happiness: Int
+    name: String
+}
+
 type Query{
     user: User
 }
+
 type Mutations{
     addUser(username: String!, email: String!, password: String!): Auth
     updateUser(username: String, _id:ID): User
