@@ -11,4 +11,5 @@ const app = express();
 app.use(express.static('public'));
 
 // Set up server setup (app.listen)
-app.listen(PORT, () => { console.log(`Server is running on port ${PORT}`);
+app.listen(PORT, () => { 
+    console.log(`Server is running on port ${PORT}`);
