@@ -1,32 +1,39 @@
 import { usePetContext } from '../context/PetContext';
-import { executeAction, battle, getPet, getCurrentValues } from './gameLogic';
+import { executeAction, battle, getCurrentValues } from './gameLogic';
+import useGameHandler from './useGameHandler';
 
-export default function useGameLogic() {
-  const { setPetState } = usePetContext();
+export default function useGameHook() {
+  const { petState: pet, setPetState } = usePetContext();
+  const { startGame } = useGameHandler();
 
   function play() {
-    executeAction(getPet(), getPet().POSSIBILITIES.play, 'play');
+    executeAction(pet, 'play');
     updateData();
   }
 
   function feed() {
-    executeAction(getPet(), getPet().POSSIBILITIES.feed, 'feed');
+    console.log('Feed!');
+    executeAction(pet, 'feed');
     updateData();
   }
 
   function sleep() {
-    executeAction(getPet(), getPet().POSSIBILITIES.sleep, 'sleep');
+    executeAction(pet, 'sleep');
     updateData();
   }
 
   function battleBeast() {
-    battle(getPet());
+    battle(pet);
     updateData();
   }
 
   function updateData() {
-    setPetState(getCurrentValues(getPet()));
+    setPetState(getCurrentValues(pet));
   }
 
-  return { play, feed, sleep, battleBeast };
+  function gameLoop() {
+    startGame();
+  }
+
+  return { play, feed, sleep, battleBeast, gameLoop };
 }

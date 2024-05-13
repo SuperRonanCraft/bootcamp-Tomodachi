@@ -1,12 +1,4 @@
-import Pet from './Pet';
-
-const pet = new Pet('Alfonso', 20, 20, 60);
-
-// HELPER FUNCTIONS
-
-export function getPet() {
-  return pet;
-}
+import { POSSIBILITIES, THRESHOLDS } from './Pet';
 
 function warning(message) {
   console.log(message);
@@ -19,7 +11,7 @@ function getRandom(array) {
   return array[index];
 }
 
-function getRandomValues(POSSIBILITIES) {
+function getRandomValues() {
   //for example: POSSIBILITIES.play
   //Takes an object in which each key is a list of numbers
   //Iterates through each key and creates a new object where each key contains one random number from each list
@@ -43,14 +35,14 @@ export function getCurrentValues(pet) {
 
 // FUNCTIONS TO DETECT AND HANDLE SITUATION WHEN PET IS IN DANGER-TO-DIE ZONE :))
 
-function checkImpactDeath(valuesAfter) {
+function checkImpactDeath(pet, valuesAfter) {
   //Takes an object containing the values of the pet
   //Returns FALSE if adding new values to the current values WILL NOT KILL the pet
   //Returns TRUE if changes WILL KILL the pet
   for (var key in valuesAfter) {
     var value = valuesAfter[key];
     //Check to make sure that the value is not less than death threshold
-    if (value <= pet.THRESHOLDS.death) {
+    if (value <= THRESHOLDS.death) {
       return true;
     }
   }
@@ -81,7 +73,7 @@ function preventDeath(pet, action_key) {
 function boost(pet) {
   // if more than 3 lethal attempts either boost the lowest value, or tell user to try another action
   if (pet.LETHAL_ACTIONS >= pet.LETHAL_ACTIONS_TOLLERATED) {
-    var currentValues = getCurrentValues();
+    var currentValues = getCurrentValues(pet);
     var keys = Object.keys(currentValues);
     var keyValues = Object.values(currentValues);
 
@@ -91,7 +83,7 @@ function boost(pet) {
     var theMinKeyValue = keyValues.splice(smallestIndex, 1);
     var secondSmallestValue = Math.min(...keyValues);
 
-    if (secondSmallestValue < pet.THRESHOLDS.life) {
+    if (secondSmallestValue < THRESHOLDS.life) {
       switch (theMinKey) {
         case 'food':
           pet.food += pet.food;
@@ -130,7 +122,7 @@ function checkForDanger(pet) {
   var items = [];
   for (var key in currentValues) {
     var value = currentValues[key];
-    if (value <= pet.THRESHOLDS.life) {
+    if (value <= THRESHOLDS.life) {
       items.push(key.toUpperCase());
     }
   }
@@ -159,7 +151,7 @@ function checkForExcess(pet) {
   var remainderSum = keyValues.reduce((a, b) => a + b, 0);
 
   if (
-    largestValue >= pet.THRESHOLDS.deductionPoint &&
+    largestValue >= THRESHOLDS.deductionPoint &&
     largestValue > remainderSum
   ) {
     deductPoints(theMaxKey, remainderSum);
@@ -193,7 +185,7 @@ function deductPoints(pet, theMaxKey, remainderSum) {
 function tooPerfect(pet) {
   // GAME OVER if all values > 33, pet dies if all values are equal at any point in the game
   var outcome = 0;
-  var currentValues = getCurrentValues();
+  var currentValues = getCurrentValues(pet);
   var keyValues = Object.values(currentValues);
 
   // traverses values array to see if all values are above a game win threshold
@@ -217,9 +209,10 @@ function tooPerfect(pet) {
 
 // MAIN ACTIONS AFFECTING PET VALUES
 
-export function executeAction(pet, POSSIBILITIES, action_key) {
+export function executeAction(pet, action_key) {
   // action key is a corresponding number to know what to communicate to the user
-  var values = getRandomValues(POSSIBILITIES);
+  const possibilities = POSSIBILITIES[action_key];
+  var values = getRandomValues(possibilities);
 
   var valuesAfter = {
     food: pet.food + values.food,
@@ -228,7 +221,7 @@ export function executeAction(pet, POSSIBILITIES, action_key) {
   };
 
   //Test to make sure that the pet is not going to die
-  if (checkImpactDeath(valuesAfter) === false) {
+  if (checkImpactDeath(pet, valuesAfter) === false) {
     pet.food = valuesAfter.food;
     pet.happiness = valuesAfter.happiness;
     pet.energy = valuesAfter.energy;
@@ -241,9 +234,9 @@ export function executeAction(pet, POSSIBILITIES, action_key) {
 
 // FUNCTIONS TO CREATE BEAST FOR BATTLE AND BATTLE
 
-function beast() {
+function beast(pet) {
   //function creating the beast for the battle with max being the half of the sum of the current values of the pet
-  var currentValues = getCurrentValues();
+  var currentValues = getCurrentValues(pet);
   var values = Object.values(currentValues);
   var max_number = values.reduce((a, b) => a + b, 0) / 2;
   var beastValues = [0, 0, 0];
