@@ -40,3 +40,12 @@ function getRandomValues(POSSIBILITIES) {
   }
   return random_values;
 }
+
+function getCurrentValues() {
+  // get object with current values
+  return {
+    food: this.food,
+    happiness: this.happiness,
+    energy: this.energy,
+  };
+}
