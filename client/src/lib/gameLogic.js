@@ -176,3 +176,25 @@ function checkForExcess() {
     warning(`${pet.name} is doing fine!`);
   }
 }
+
+function deductPoints(theMaxKey, remainderSum) {
+  // cuts the highest value if disbalance is found and communicates the cut to the user
+  pet[theMaxKey] = pet[theMaxKey] - remainderSum;
+  switch (theMaxKey) {
+    case 'food':
+      warning(
+        `${pet.name} was too fat, so it got a surgery of -${remainderSum} points!`
+      );
+      break;
+    case 'happiness':
+      warning(
+        `${pet.name} was too happy. Gods just could not stand that and made him more miserable by deducting ${remainderSum} points!`
+      );
+      break;
+    case 'energy':
+      warning(
+        `${pet.name} had too much energy. A special pill reduced energy by ${remainderSum} points!`
+      );
+      break;
+  }
+}
