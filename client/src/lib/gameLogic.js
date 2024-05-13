@@ -198,3 +198,28 @@ function deductPoints(theMaxKey, remainderSum) {
       break;
   }
 }
+
+function tooPerfect() {
+  // GAME OVER if all values > 33, pet dies if all values are equal at any point in the game
+  var outcome = 0;
+  var currentValues = getCurrentValues();
+  var keyValues = Object.values(currentValues);
+
+  // traverses values array to see if all values are above a game win threshold
+  function isAboveWinThreshold(value) {
+    return value > 33;
+  }
+
+  if (keyValues[0] === keyValues[1] && keyValues[1] === keyValues[2]) {
+    warning(
+      `${name} got too balanced and healthy. First Order does not like perfection or equal numbers, so we killed ze porg. Sorry not sorry...`
+    );
+    outcome = 1;
+  } else if (keyValues.every(isAboveWinThreshold) === true) {
+    warning(
+      `${pet.name} exceeded the sum of 111 points and thus defeated the First Order! CONGRATULATIONS! Thanks for playing :)`
+    );
+    outcome = 2;
+  }
+  return outcome;
+}
