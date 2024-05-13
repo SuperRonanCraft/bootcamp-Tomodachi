@@ -1,5 +1,5 @@
 import { usePetContext } from '../context/PetContext';
-import { executeAction, battle, getCurrentValues } from './gameLogic';
+import { executeAction, battle } from './gameLogic';
 import useGameHandler from './useGameHandler';
 
 export default function useGameHook() {
@@ -12,8 +12,9 @@ export default function useGameHook() {
   }
 
   function feed() {
-    console.log('Feed!');
+    console.log(pet);
     executeAction(pet, 'feed');
+    console.log(pet);
     updateData();
   }
 
@@ -28,7 +29,7 @@ export default function useGameHook() {
   }
 
   function updateData() {
-    setPetState(getCurrentValues(pet));
+    setPetState(pet);
   }
 
   function gameLoop() {

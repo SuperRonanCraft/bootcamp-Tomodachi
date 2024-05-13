@@ -35,7 +35,7 @@ export function getCurrentValues(pet) {
 
 // FUNCTIONS TO DETECT AND HANDLE SITUATION WHEN PET IS IN DANGER-TO-DIE ZONE :))
 
-function checkImpactDeath(pet, valuesAfter) {
+function checkImpactDeath(valuesAfter) {
   //Takes an object containing the values of the pet
   //Returns FALSE if adding new values to the current values WILL NOT KILL the pet
   //Returns TRUE if changes WILL KILL the pet
@@ -221,7 +221,7 @@ export function executeAction(pet, action_key) {
   };
 
   //Test to make sure that the pet is not going to die
-  if (checkImpactDeath(pet, valuesAfter) === false) {
+  if (checkImpactDeath(valuesAfter) === false) {
     pet.food = valuesAfter.food;
     pet.happiness = valuesAfter.happiness;
     pet.energy = valuesAfter.energy;
@@ -229,6 +229,7 @@ export function executeAction(pet, action_key) {
   } else {
     preventDeath(pet, action_key);
   }
+  console.log(pet, valuesAfter);
   return tooPerfect(pet);
 }
 

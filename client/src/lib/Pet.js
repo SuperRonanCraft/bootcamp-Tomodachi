@@ -1,9 +1,9 @@
 export default function createPet(name, food, happiness, energy) {
   return {
-    name: name,
-    food: food,
-    happiness: happiness,
-    energy: energy,
+    name,
+    food,
+    happiness,
+    energy,
     //Current and Max Tolerated lethal actions
     LETHAL_ACTIONS: 0,
     LETHAL_ACTIONS_MAX: 3,
