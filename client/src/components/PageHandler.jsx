@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { ModeToggle } from './ModeToggle';
 
 export default function PageHandler() {
   return (
@@ -19,6 +20,7 @@ export default function PageHandler() {
               <Link to="/game">Game</Link>
             </li>
           </ul>
+          <ModeToggle />
         </nav>
       </main>
     </div>
