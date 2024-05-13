@@ -84,5 +84,49 @@ function preventDeath(action_key) {
       break;
   }
   warning(message);
-  //boost();
+  boost();
+}
+
+function boost() {
+  // if more than 3 lethal attempts either boost the lowest value, or tell user to try another action
+  if (pet.LETHAL_ACTIONS >= pet.LETHAL_ACTIONS_TOLLERATED) {
+    var currentValues = getCurrentValues();
+    var keys = Object.keys(currentValues);
+    var keyValues = Object.values(currentValues);
+
+    var smallestValue = Math.min(...keyValues);
+    var smallestIndex = keyValues.indexOf(smallestValue);
+    var theMinKey = keys[smallestIndex];
+    var theMinKeyValue = keyValues.splice(smallestIndex, 1);
+    var secondSmallestValue = Math.min(...keyValues);
+
+    if (secondSmallestValue < this.THRESHOLDS.life) {
+      switch (theMinKey) {
+        case 'food':
+          pet.food += pet.food;
+          warning(
+            '\n^*^*^*^* Low on numbers? No problem! Your pet just got FOOD boost! ^*^*^*^*'
+          );
+          pet.LETHAL_ACTIONS = 0;
+          break;
+        case 'happiness':
+          pet.happiness += pet.happiness;
+          warning(
+            '\n^*^*^*^* Low on numbers? No problem! Your pet just got HAPPINESS boost! ^*^*^*^*'
+          );
+          pet.LETHAL_ACTIONS = 0;
+          break;
+        case 'energy':
+          pet.energy += pet.energy;
+          warning(
+            '\n^*^*^*^* Low on numbers? No problem! Your pet just got ENERGY boost! ^*^*^*^*'
+          );
+          pet.LETHAL_ACTIONS = 0;
+          break;
+      }
+    } else {
+      warning("Why don't you try another action?");
+      pet.LETHAL_ACTIONS = 0;
+    }
+  }
 }
