@@ -2,20 +2,11 @@ import Pet from './Pet';
 
 const pet = new Pet('Alfonso', 20, 20, 60);
 
-export function play() {
-  return executeAction(pet.POSSIBILITIES.play, 'play');
-}
-
-export function feed() {
-  return executeAction(pet.POSSIBILITIES.feed, 'feed');
-}
-
-export function sleep() {
-  return executeAction(pet.POSSIBILITIES.sleep, 'sleep');
-}
-
 // HELPER FUNCTIONS
-this.message;
+
+export function getPet() {
+  return pet;
+}
 
 function warning(message) {
   console.log(message);
@@ -29,7 +20,7 @@ function getRandom(array) {
 }
 
 function getRandomValues(POSSIBILITIES) {
-  //for example: this.POSSIBILITIES.play
+  //for example: POSSIBILITIES.play
   //Takes an object in which each key is a list of numbers
   //Iterates through each key and creates a new object where each key contains one random number from each list
   var random_values = {};
@@ -41,12 +32,12 @@ function getRandomValues(POSSIBILITIES) {
   return random_values;
 }
 
-function getCurrentValues() {
+export function getCurrentValues(pet) {
   // get object with current values
   return {
-    food: this.food,
-    happiness: this.happiness,
-    energy: this.energy,
+    food: pet.food,
+    happiness: pet.happiness,
+    energy: pet.energy,
   };
 }
 
@@ -66,7 +57,7 @@ function checkImpactDeath(valuesAfter) {
   return false;
 }
 
-function preventDeath(action_key) {
+function preventDeath(pet, action_key) {
   // if action would have killed the pet, show relevant message, increase lethal.attempts count
   var message;
   switch (action_key) {
@@ -87,7 +78,7 @@ function preventDeath(action_key) {
   boost();
 }
 
-function boost() {
+function boost(pet) {
   // if more than 3 lethal attempts either boost the lowest value, or tell user to try another action
   if (pet.LETHAL_ACTIONS >= pet.LETHAL_ACTIONS_TOLLERATED) {
     var currentValues = getCurrentValues();
@@ -100,7 +91,7 @@ function boost() {
     var theMinKeyValue = keyValues.splice(smallestIndex, 1);
     var secondSmallestValue = Math.min(...keyValues);
 
-    if (secondSmallestValue < this.THRESHOLDS.life) {
+    if (secondSmallestValue < pet.THRESHOLDS.life) {
       switch (theMinKey) {
         case 'food':
           pet.food += pet.food;
@@ -131,11 +122,11 @@ function boost() {
   }
 }
 
-function checkForDanger() {
+function checkForDanger(pet) {
   // takes current values, checks if any of them are dangerously low
   // returns feedback message to the to user
   // if no death danger, checks for disbalance in points
-  var currentValues = getCurrentValues();
+  var currentValues = getCurrentValues(pet);
   var items = [];
   for (var key in currentValues) {
     var value = currentValues[key];
@@ -146,18 +137,18 @@ function checkForDanger() {
   if (items.length > 0) {
     warning(`Owner! Do better with ${pet.name}'s ${items}`);
   } else {
-    checkForExcess();
+    checkForExcess(pet);
   }
 }
 
 // FUNCTIONS TO CHECK FOR BALANCE IN PET LIFE AND HANDLE DISBALANCE :))
 
-function checkForExcess() {
+function checkForExcess(pet) {
   // find the largest value and find the index of it
   // Save key name and value of the largest value into variables
   // Calculate remainder sum and if conditions are met
   // Return the name of the key and remainder Sum
-  var currentValues = this.getCurrentValues();
+  var currentValues = getCurrentValues(pet);
   var keys = Object.keys(currentValues);
   var keyValues = Object.values(currentValues);
 
@@ -177,7 +168,7 @@ function checkForExcess() {
   }
 }
 
-function deductPoints(theMaxKey, remainderSum) {
+function deductPoints(pet, theMaxKey, remainderSum) {
   // cuts the highest value if disbalance is found and communicates the cut to the user
   pet[theMaxKey] = pet[theMaxKey] - remainderSum;
   switch (theMaxKey) {
@@ -199,7 +190,7 @@ function deductPoints(theMaxKey, remainderSum) {
   }
 }
 
-function tooPerfect() {
+function tooPerfect(pet) {
   // GAME OVER if all values > 33, pet dies if all values are equal at any point in the game
   var outcome = 0;
   var currentValues = getCurrentValues();
@@ -212,7 +203,7 @@ function tooPerfect() {
 
   if (keyValues[0] === keyValues[1] && keyValues[1] === keyValues[2]) {
     warning(
-      `${name} got too balanced and healthy. First Order does not like perfection or equal numbers, so we killed ze porg. Sorry not sorry...`
+      `${pet.name} got too balanced and healthy. First Order does not like perfection or equal numbers, so we killed ze porg. Sorry not sorry...`
     );
     outcome = 1;
   } else if (keyValues.every(isAboveWinThreshold) === true) {
@@ -226,7 +217,7 @@ function tooPerfect() {
 
 // MAIN ACTIONS AFFECTING PET VALUES
 
-function executeAction(POSSIBILITIES, action_key) {
+export function executeAction(pet, POSSIBILITIES, action_key) {
   // action key is a corresponding number to know what to communicate to the user
   var values = getRandomValues(POSSIBILITIES);
 
@@ -241,11 +232,11 @@ function executeAction(POSSIBILITIES, action_key) {
     pet.food = valuesAfter.food;
     pet.happiness = valuesAfter.happiness;
     pet.energy = valuesAfter.energy;
-    checkForDanger();
+    checkForDanger(pet);
   } else {
-    preventDeath(action_key);
+    preventDeath(pet, action_key);
   }
-  return tooPerfect();
+  return tooPerfect(pet);
 }
 
 // FUNCTIONS TO CREATE BEAST FOR BATTLE AND BATTLE
@@ -263,7 +254,7 @@ function beast() {
   return beastValues;
 }
 
-export function battle() {
+export function battle(pet) {
   // pet vs beast battle function
   var battleOutcome;
   var beastValues = beast();
@@ -274,11 +265,10 @@ export function battle() {
     warning(
       `${pet.name} LOST to the Order ${petSum} to ${beastSum} and went to heaven...`
     );
-    //this.warning(message);
     battleOutcome = 0;
   } else {
     warning(`${pet.name} WON the battle ${petSum} to ${beastSum}. Amazing!`);
-    //this.warning(message);
+
     battleOutcome = 1;
   }
   return battleOutcome;
