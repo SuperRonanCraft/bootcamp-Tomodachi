@@ -22,7 +22,7 @@ type Query{
     me: User
 }
 
-type Mutations{
+type Mutation{
     addUser(username: String!, email: String!, password: String!): Auth
     updateUser(username: String, _id:ID): User
     login(username: String!, password: String!): Auth

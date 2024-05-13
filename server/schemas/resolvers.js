@@ -7,7 +7,7 @@ const resolvers = {
       return await User.find();
     },
   },
-  Mutations: {
+  Mutation: {
     login: async (_, { email, password }) => {
       const user = await User.findOne({ email });
 
@@ -25,22 +25,22 @@ const resolvers = {
 
       return { token, user };
     },
-  },
-  addUser: async (_, args) => {
-    const user = await User.create(args);
-    const token = signToken(user);
+    addUser: async (_, args) => {
+      const user = await User.create(args);
+      const token = signToken(user);
 
-    return { token, user };
-  },
-  updateUser: async (_, args, context) => {
-    if (context.user) {
-      const user = await User.findByIdAndUpdate(context.user._id, args, {
-        new: true,
-      });
-      return { user };
-    }
+      return { token, user };
+    },
+    updateUser: async (_, args, context) => {
+      if (context.user) {
+        const user = await User.findByIdAndUpdate(context.user._id, args, {
+          new: true,
+        });
+        return { user };
+      }
 
-    throw AuthenticationError;
+      throw AuthenticationError;
+    },
   },
 };
 
