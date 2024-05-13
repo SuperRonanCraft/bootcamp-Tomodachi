@@ -2,7 +2,7 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 
 import './index.css';
 import { Outlet } from 'react-router-dom';
-import PageHandler from './components/PageHandler';
+import Nav from './components/landing/nav';
 import { TooltipProvider } from '@/components/ui/tooltip';
 
 const client = new ApolloClient({
@@ -14,7 +14,7 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <TooltipProvider>
-        <PageHandler />
+        <Nav />
         <Outlet />
       </TooltipProvider>
     </ApolloProvider>

@@ -1,22 +1,19 @@
 import { Link } from 'react-router-dom';
 
-export default function PageHandler() {
+export default function Nav() {
   return (
     <div>
       <main>
         <nav>
           <ul className="flex flex-row">
             <li>
-              <Link to="/">Home</Link>
+              <Link to="/landing">Home</Link>
             </li>
             <li>
               <Link to="/profile">Profile</Link>
             </li>
             <li>
               <Link to="/leaderboard">Leaderboard</Link>
-            </li>
-            <li>
-              <Link to="/game">Game</Link>
             </li>
           </ul>
         </nav>
