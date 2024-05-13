@@ -7,7 +7,7 @@ const resolvers = {
       return await User.find();
     },
   },
-  Mutation: {
+  Mutations: {
     login: async (_, { email, password }) => {
       const user = await User.findOne({ email });
 
@@ -34,9 +34,10 @@ const resolvers = {
   },
   updateUser: async (_, args, context) => {
     if (context.user) {
-      return await User.findByIdAndUpdate(context.user._id, args, {
+      const user = await User.findByIdAndUpdate(context.user._id, args, {
         new: true,
       });
+      return { user };
     }
 
     throw AuthenticationError;
