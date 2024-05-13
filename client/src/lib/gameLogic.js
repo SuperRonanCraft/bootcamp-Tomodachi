@@ -220,6 +220,7 @@ export function executeAction(pet, action_key) {
     energy: pet.energy + values.energy,
   };
 
+  console.log('Test', pet, valuesAfter, values);
   //Test to make sure that the pet is not going to die
   if (checkImpactDeath(valuesAfter) === false) {
     pet.food = valuesAfter.food;
@@ -229,7 +230,7 @@ export function executeAction(pet, action_key) {
   } else {
     preventDeath(pet, action_key);
   }
-  console.log(pet, valuesAfter);
+  console.log('Test2', pet, valuesAfter);
   return tooPerfect(pet);
 }
 
