@@ -4,6 +4,7 @@ import { createContext, useContext, useState } from 'react';
 const PetContext = createContext();
 
 // We create a custom hook to provide immediate usage of the student context value (students) in other components
+// eslint-disable-next-line react-refresh/only-export-components
 export const usePetContext = () => useContext(PetContext);
 
 // The provider is responsible for creating our state, updating the state, and persisting values to the children
