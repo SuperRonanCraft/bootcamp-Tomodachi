@@ -4,6 +4,7 @@ import './index.css';
 import { Outlet } from 'react-router-dom';
 import Nav from './components/landing/nav';
 import { TooltipProvider } from '@/components/ui/tooltip';
+import { ThemeProvider } from '@/context/ThemeContext';
 
 const client = new ApolloClient({
   uri: '/graphql',
@@ -13,10 +14,12 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      <TooltipProvider>
-        <Nav />
-        <Outlet />
-      </TooltipProvider>
+      <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+        <TooltipProvider>
+          <Nav />
+          <Outlet />
+        </TooltipProvider>
+      </ThemeProvider>
     </ApolloProvider>
   );
 }

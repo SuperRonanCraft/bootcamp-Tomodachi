@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { ModeToggle } from './ModeToggle';
 
 export default function Nav() {
   return (
@@ -16,6 +17,7 @@ export default function Nav() {
               <Link to="/leaderboard">Leaderboard</Link>
             </li>
           </ul>
+          <ModeToggle />
         </nav>
       </main>
     </div>

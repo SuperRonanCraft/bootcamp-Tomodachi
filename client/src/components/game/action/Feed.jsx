@@ -1,15 +1,14 @@
-import { Button } from '@/components/ui/button';
+import { UtensilsCrossed } from 'lucide-react';
+import ActionButton from './ActionButton';
 
 export default function Feed() {
   // call the game logic hook here and add onclick to buttons (for alain)
+
   return (
-    <Button
-      size="sm"
-      onClick={() => {
-        console.log('add the game logic function here');
-      }}
-    >
-      Feed
-    </Button>
+    <ActionButton
+      onClick={() => console.log('test')}
+      text="Feed"
+      icon={<UtensilsCrossed />}
+    />
   );
 }
