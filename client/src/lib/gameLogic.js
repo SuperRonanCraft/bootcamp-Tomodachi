@@ -247,3 +247,39 @@ function executeAction(POSSIBILITIES, action_key) {
   }
   return tooPerfect();
 }
+
+// FUNCTIONS TO CREATE BEAST FOR BATTLE AND BATTLE
+
+function beast() {
+  //function creating the beast for the battle with max being the half of the sum of the current values of the pet
+  var currentValues = getCurrentValues();
+  var values = Object.values(currentValues);
+  var max_number = values.reduce((a, b) => a + b, 0) / 2;
+  var beastValues = [0, 0, 0];
+  for (var i = 0; i < beastValues.length; i++) {
+    var number = Math.ceil(Math.random() * max_number);
+    beastValues[i] = number;
+  }
+  return beastValues;
+}
+
+export function battle() {
+  // pet vs beast battle function
+  var battleOutcome;
+  var beastValues = beast();
+  var petSum = pet.food + pet.happiness + pet.energy;
+  var beastSum = beastValues.reduce((a, b) => a + b, 0);
+
+  if (petSum < beastSum) {
+    warning(
+      `${pet.name} LOST to the Order ${petSum} to ${beastSum} and went to heaven...`
+    );
+    //this.warning(message);
+    battleOutcome = 0;
+  } else {
+    warning(`${pet.name} WON the battle ${petSum} to ${beastSum}. Amazing!`);
+    //this.warning(message);
+    battleOutcome = 1;
+  }
+  return battleOutcome;
+}
