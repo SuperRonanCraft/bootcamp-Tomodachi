@@ -19,7 +19,7 @@ type GameData {
 }
 
 type Query{
-    user: User
+    me: User
 }
 
 type Mutations{
