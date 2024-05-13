@@ -49,3 +49,19 @@ function getCurrentValues() {
     energy: this.energy,
   };
 }
+
+// FUNCTIONS TO DETECT AND HANDLE SITUATION WHEN PET IS IN DANGER-TO-DIE ZONE :))
+
+function checkImpactDeath(valuesAfter) {
+  //Takes an object containing the values of the pet
+  //Returns FALSE if adding new values to the current values WILL NOT KILL the pet
+  //Returns TRUE if changes WILL KILL the pet
+  for (var key in valuesAfter) {
+    var value = valuesAfter[key];
+    //Check to make sure that the value is not less than death threshold
+    if (value <= pet.THRESHOLDS.death) {
+      return true;
+    }
+  }
+  return false;
+}
