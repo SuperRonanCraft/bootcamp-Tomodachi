@@ -7,29 +7,27 @@ export default function useGameHook() {
   const { startGame } = useGameHandler();
 
   function play() {
-    executeAction(pet, 'play');
-    updateData();
+    const newPet = { ...pet };
+    executeAction(newPet, 'play');
+    setPetState(newPet);
   }
 
   function feed() {
-    console.log(pet);
-    executeAction(pet, 'feed');
-    console.log(pet);
-    updateData();
+    const newPet = { ...pet };
+    executeAction(newPet, 'feed');
+    setPetState(newPet);
   }
 
   function sleep() {
-    executeAction(pet, 'sleep');
-    updateData();
+    const newPet = { ...pet };
+    executeAction(newPet, 'sleep');
+    setPetState(newPet);
   }
 
   function battleBeast() {
-    battle(pet);
-    updateData();
-  }
-
-  function updateData() {
-    setPetState(pet);
+    const newPet = { ...pet };
+    battle(newPet);
+    setPetState(newPet);
   }
 
   function gameLoop() {
