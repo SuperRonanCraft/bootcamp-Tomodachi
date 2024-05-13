@@ -1,3 +1,12 @@
+import { usePetContext } from '../context/PetContext';
+import PetProvider from '../context/PetContext';
+
 export default function Game() {
-  return <div>This is the Game Page</div>;
+  const pet = usePetContext();
+  console.log(pet);
+  return (
+    <PetProvider>
+      <h1>test</h1>
+    </PetProvider>
+  );
 }
