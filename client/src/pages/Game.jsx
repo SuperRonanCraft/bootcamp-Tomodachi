@@ -1,12 +1,10 @@
-import { usePetContext } from '../context/PetContext';
 import PetProvider from '../context/PetContext';
+import GameTestValues from '../components/GameTestValues';
 
 export default function Game() {
-  const pet = usePetContext();
-  console.log(pet);
   return (
     <PetProvider>
-      <h1>test</h1>
+      <GameTestValues />
     </PetProvider>
   );
 }
