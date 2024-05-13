@@ -9,3 +9,5 @@ const app = express();
 
 // Set up express middleware (app.use)
 app.use(express.static('public'));
+
+// Set up server setup (app.listen)
