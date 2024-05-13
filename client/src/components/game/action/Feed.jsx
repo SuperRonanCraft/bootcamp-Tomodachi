@@ -1,9 +1,9 @@
 import { UtensilsCrossed } from 'lucide-react';
 import ActionButton from './ActionButton';
-import useGameLogic from '../../../lib/useGameHook';
+import useGameHook from '../../../lib/useGameHook';
 
 export default function Feed() {
-  const { feed } = useGameLogic();
+  const { feed } = useGameHook();
 
   // call the game logic hook here and add onclick to buttons (for alain)
 

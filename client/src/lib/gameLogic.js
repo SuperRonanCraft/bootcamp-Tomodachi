@@ -11,14 +11,17 @@ function getRandom(array) {
   return array[index];
 }
 
-function getRandomValues() {
+function getRandomValues(possibilities) {
   //for example: POSSIBILITIES.play
   //Takes an object in which each key is a list of numbers
   //Iterates through each key and creates a new object where each key contains one random number from each list
   var random_values = {};
-  for (var key in POSSIBILITIES) {
-    var item_array = POSSIBILITIES[key];
+  console.log(possibilities);
+  console.log('  ');
+  for (var key in possibilities) {
+    var item_array = possibilities[key];
     var random_number = getRandom(item_array);
+    console.log('Key:', key, random_number);
     random_values[key] = random_number;
   }
   return random_values;
@@ -67,7 +70,7 @@ function preventDeath(pet, action_key) {
       break;
   }
   warning(message);
-  boost();
+  boost(pet);
 }
 
 function boost(pet) {
@@ -154,7 +157,7 @@ function checkForExcess(pet) {
     largestValue >= THRESHOLDS.deductionPoint &&
     largestValue > remainderSum
   ) {
-    deductPoints(theMaxKey, remainderSum);
+    deductPoints(pet, theMaxKey, remainderSum);
   } else {
     warning(`${pet.name} is doing fine!`);
   }
@@ -209,18 +212,18 @@ function tooPerfect(pet) {
 
 // MAIN ACTIONS AFFECTING PET VALUES
 
-export function executeAction(pet, action_key) {
+export function executeAction(pet, action_key, props) {
   // action key is a corresponding number to know what to communicate to the user
   const possibilities = POSSIBILITIES[action_key];
   var values = getRandomValues(possibilities);
 
+  console.log('Values', possibilities, values);
   var valuesAfter = {
     food: pet.food + values.food,
     happiness: pet.happiness + values.happiness,
     energy: pet.energy + values.energy,
   };
 
-  console.log('Test', pet, valuesAfter, values);
   //Test to make sure that the pet is not going to die
   if (checkImpactDeath(valuesAfter) === false) {
     pet.food = valuesAfter.food;
@@ -230,7 +233,6 @@ export function executeAction(pet, action_key) {
   } else {
     preventDeath(pet, action_key);
   }
-  console.log('Test2', pet, valuesAfter);
   return tooPerfect(pet);
 }
 

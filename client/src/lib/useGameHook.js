@@ -6,9 +6,9 @@ export default function useGameHook() {
   const { petState: pet, setPetState } = usePetContext();
   const { startGame } = useGameHandler();
 
-  function play() {
+  function play(happiness_array) {
     const newPet = { ...pet };
-    executeAction(newPet, 'play');
+    executeAction(newPet, 'play', { happiness_array });
     setPetState(newPet);
   }
 
