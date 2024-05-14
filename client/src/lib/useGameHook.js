@@ -1,10 +1,10 @@
 import { usePetContext } from '../context/PetContext';
 import { executeAction, battle } from './gameLogic';
-import useGameHandler from './useGameHandler';
+import useGameLoop from './useGameLoop';
 
 export default function useGameHook() {
   const { petState: pet, setPetState } = usePetContext();
-  const { startGame } = useGameHandler();
+  const { startGame } = useGameLoop();
 
   function play(happiness_array) {
     const newPet = { ...pet };

@@ -3,16 +3,18 @@ import Emoji from './Emoji';
 import Status from './Status';
 import { useEffect } from 'react';
 import { usePetContext } from '../../context/PetContext';
-import useGameHook from '../../lib/useGameHook';
 import createPet from '../../lib/Pet';
+import useGameHandler from '../../lib/useGameLoop';
 
 export default function GameDashboard() {
-  const { gameLoop } = useGameHook();
-  const { setPetState } = usePetContext();
+  const { petState, setPetState } = usePetContext();
+  const { gameTick, getTickDelay } = useGameHandler();
 
   useEffect(() => {
     setPetState(createPet('Alfonso'));
-    gameLoop();
+    setInterval(() => {
+      gameTick(petState);
+    }, getTickDelay());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
