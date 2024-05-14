@@ -12,11 +12,13 @@ export default function GameDashboard() {
 
   useEffect(() => {
     setPetState(createPet('Alfonso'));
-    setInterval(() => {
-      gameTick(petState);
+    const inverval = setInterval(() => {
+      gameTick();
+      console.log(getTickDelay());
     }, getTickDelay());
+    return clearInterval(inverval);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [petState]);
   return (
     <div className="flex flex-col gap-4 w-fit mx-auto h-screen justify-center items-center">
       <Emoji />

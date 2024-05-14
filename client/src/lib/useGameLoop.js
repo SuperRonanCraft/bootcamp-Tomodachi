@@ -11,19 +11,21 @@ export default function useGameHandler() {
   let happinessDecay_prev = 0;
   let energyDecay_prev = 0;
 
+  const { petState: pet, setPetState } = usePetContext();
+
   function getTickDelay() {
     return defaultTickDelay * tickMultiplier;
   }
 
-  function gameTick(pet, delay) {
+  function gameTick(delay) {
     console.log('Pet', pet);
     // console.log('Time Progresses...');
     // Later, when you want to cancel the interval
-    progressTime(pet, delay);
+    progressTime(delay);
     // clearInterval(intervalID);
   }
 
-  function progressTime(pet, time) {
+  function progressTime(time) {
     const gameTicks = time / defaultTickDelay;
     let foodDecay = gameTicks / foodDecayTicks;
     let happinessDecay = gameTicks / happinessDecayTicks;
@@ -59,7 +61,7 @@ export default function useGameHandler() {
     newPet.energy -= energyDecay;
     newPet.happiness -= happinessDecay;
     console.log(newPet, pet);
-    // setPetState(newPet);
+    setPetState(newPet);
   }
 
   return { getTickDelay, gameTick };
