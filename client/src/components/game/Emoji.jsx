@@ -1,12 +1,6 @@
 import Lottie from 'lottie-react';
 import happy from '../../assets/happy.json';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 
 export default function Emoji() {
   return (
