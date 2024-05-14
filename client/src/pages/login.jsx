@@ -34,5 +34,33 @@ const LoginForm = () => {
     alert('Login successful!');
     return true; // Allow the form to be submitted
   };
+  
+  return (
+    <div>
+      <form onSubmit={validateForm}>
+        <div>
+          <label htmlFor="username">Username:</label>
+          <input
+            type="text"
+            id="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </div>
+        <div>
+          <label htmlFor="password">Password:</label>
+          <input
+            type="password"
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        <button type="submit">Login</button>
+      </form>
+      {errorMessage && <p id="error-message" style={{ color: 'red' }}>{errorMessage}</p>}
+    </div>
+  );
+};
 
-}
+export default LoginForm;
