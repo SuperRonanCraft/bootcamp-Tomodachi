@@ -16,6 +16,8 @@ type GameData {
     energy: Int
     happiness: Int
     name: String
+    createdDate:Int
+    lastSavedDate:Int
 }
 
 type Query{

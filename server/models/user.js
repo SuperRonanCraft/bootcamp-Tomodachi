@@ -20,6 +20,12 @@ const userSchema = new Schema({
     required: true,
     minlength: 5,
   },
+  gameData: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'gameData',
+    },
+  ],
 });
 userSchema.pre('save', async function (next) {
   if (this.isNew || this.isModified('password')) {
