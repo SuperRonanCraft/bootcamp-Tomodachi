@@ -31,7 +31,7 @@ const LoginForm = () => {
         },
       });
 
-      auth.login(data.login.token); // Assuming your auth module handles login token
+      AuthService.login(data.login.token); // Assuming your auth module handles login token
     } catch (error) {
       console.error('Login error:', error);
     }
