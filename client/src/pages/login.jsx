@@ -15,4 +15,5 @@ const LoginForm = () => {
     event.preventDefault();
 
     // Clear any previous error messages
+    setErrorMessage('');
 }
