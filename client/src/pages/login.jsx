@@ -4,6 +4,7 @@ function validateForm() {
     var username = document.getElementById('username').value;
     // Get the value of the password input field
     var password = document.getElementById('password').value;
+    // Get the error message element to display validation messages
     var errorMessage = document.getElementById('error-message');
 
     errorMessage.textContent = '';
