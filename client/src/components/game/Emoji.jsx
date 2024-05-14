@@ -6,7 +6,7 @@ import emj_sleeping from '../../assets/sleep.json';
 import emj_tired from '../../assets/almostDead.json';
 import { Card, CardContent } from '@/components/ui/card';
 import { useGameContext } from '../../context/GameContext';
-import { RATING, getRating } from '../../lib/petStatus';
+import { RATING, STATUS, getRating } from '../../lib/petStatus';
 
 export default function Emoji() {
   const { petState } = useGameContext();
@@ -21,16 +21,22 @@ export default function Emoji() {
 }
 
 function getEmoji(pet) {
-  switch (getRating(pet)) {
-    case RATING.HAPPY:
-      return emj_happy;
-    case RATING.SAD:
+  const status = pet.status;
+  switch (status) {
+    case STATUS.DEAD:
       return emj_dead;
-    case RATING.TIRED:
-      return emj_sleeping;
-    case RATING.UPSET:
-      return emj_tired;
-    case RATING.HUNGRY:
-      return emj_almostDead;
+    default:
+      switch (getRating(pet)) {
+        case RATING.HAPPY:
+          return emj_happy;
+        case RATING.SAD:
+          return emj_dead;
+        case RATING.TIRED:
+          return emj_sleeping;
+        case RATING.UPSET:
+          return emj_tired;
+        case RATING.HUNGRY:
+          return emj_almostDead;
+      }
   }
 }

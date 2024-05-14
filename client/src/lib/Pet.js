@@ -31,7 +31,7 @@ export function createPetLog(text, importance = IMPORTANCE.NORMAL) {
     importance,
   };
 
-  console.log(log);
+  // console.log(log);
   return log;
 }
 

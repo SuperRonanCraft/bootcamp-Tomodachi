@@ -6,5 +6,12 @@ export default function Food() {
   const {
     petState: { food },
   } = useGameContext();
-  return <StatusBar icon={<Drumstick />} value={food} tooltip="Food" />;
+  return (
+    <StatusBar
+      icon={<Drumstick />}
+      value={food}
+      tooltip="Food"
+      indicatorClass="bg-orange-500"
+    />
+  );
 }

@@ -19,7 +19,8 @@ export default function Status() {
         <CardTitle>{gameState.name} </CardTitle>
 
         <CardDescription className="text-right">
-          <p>{getRating(petState)}</p>
+          <p>Emotion: {getRating(petState)}</p>
+          <p>Status: {petState.status}</p>
           <p>Multiplier x{gameState.tickMultiplier}</p>
         </CardDescription>
       </CardHeader>

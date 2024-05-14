@@ -12,10 +12,10 @@ export default function useGameLoop() {
 
   const { setPetState, gameState, setGameState } = useGameContext();
 
-  function gameTick(delay, pet) {
+  function gameTick(pet) {
     // console.log('Time Progresses...');
     // Later, when you want to cancel the interval
-    progressTime(delay * gameState.tickMultiplier, pet);
+    progressTime(1000 * gameState.tickMultiplier, pet);
 
     // clearInterval(intervalID);
   }
