@@ -1,10 +1,10 @@
-import PetProvider from '../context/PetContext';
+import GameProvider from '../context/GameContext';
 import GameDashboard from '../components/game/GameDashboard';
 
 export default function Game() {
   return (
-    <PetProvider>
+    <GameProvider>
       <GameDashboard />
-    </PetProvider>
+    </GameProvider>
   );
 }

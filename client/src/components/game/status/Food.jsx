@@ -1,10 +1,10 @@
 import { Drumstick } from 'lucide-react';
 import StatusBar from './StatusBar';
-import { usePetContext } from '@/context/PetContext.jsx';
+import { useGameContext } from '@/context/GameContext.jsx';
 
 export default function Food() {
   const {
     petState: { food },
-  } = usePetContext();
+  } = useGameContext();
   return <StatusBar icon={<Drumstick />} value={food} tooltip="Food" />;
 }

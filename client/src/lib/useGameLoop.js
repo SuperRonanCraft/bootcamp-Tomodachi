@@ -1,4 +1,4 @@
-import { usePetContext } from '../context/PetContext';
+import { useGameContext } from '../context/GameContext';
 
 const defaultTickDelay = 1000;
 const tickMultiplier = 1;
@@ -11,7 +11,7 @@ export default function useGameHandler() {
   let happinessDecay_prev = 0;
   let energyDecay_prev = 0;
 
-  const { setPetState } = usePetContext();
+  const { setPetState } = useGameContext();
 
   function getTickDelay() {
     return defaultTickDelay * tickMultiplier;
@@ -60,7 +60,6 @@ export default function useGameHandler() {
     newPet.food -= foodDecay;
     newPet.energy -= energyDecay;
     newPet.happiness -= happinessDecay;
-
     setPetState(newPet);
   }
 

@@ -1,14 +1,12 @@
 import { STATUS } from '../lib/petStatus';
 
 export default function createPet(
-  name,
   food = 30,
   happiness = 25,
   energy = 50,
   status = STATUS.IDLE
 ) {
   return {
-    name,
     food,
     happiness,
     energy,

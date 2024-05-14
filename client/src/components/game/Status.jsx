@@ -8,11 +8,11 @@ import {
 import Food from './status/Food';
 import Happiness from './status/Happiness';
 import Energy from './status/Energy';
-import { usePetContext } from '../../context/PetContext';
+import { useGameContext } from '../../context/GameContext';
 import { getRating } from '../../lib/petStatus';
 
 export default function Status() {
-  const { petState } = usePetContext();
+  const { petState } = useGameContext();
   return (
     <Card className="col-span-2">
       <CardHeader>

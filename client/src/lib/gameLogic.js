@@ -16,12 +16,12 @@ function getRandomValues(possibilities) {
   //Takes an object in which each key is a list of numbers
   //Iterates through each key and creates a new object where each key contains one random number from each list
   var random_values = {};
-  console.log(possibilities);
-  console.log('  ');
+  // console.log(possibilities);
+  // console.log('  ');
   for (var key in possibilities) {
     var item_array = possibilities[key];
     var random_number = getRandom(item_array);
-    console.log('Key:', key, random_number);
+    // console.log('Key:', key, random_number);
     random_values[key] = random_number;
   }
   return random_values;
@@ -57,7 +57,7 @@ function preventDeath(pet, action_key) {
   var message;
   switch (action_key) {
     case 'play':
-      message = "\n!!!!!!!!! Didn't PLAY as it would kill your porg !!!!!!!!!";
+      message = `\n!!!!!!!!! Didn't PLAY as it would have killed ${pet.name}!!!!!!!!!`;
       pet.LETHAL_ACTIONS++;
       break;
     case 'feed':
@@ -217,7 +217,7 @@ export function executeAction(pet, action_key, props) {
   const possibilities = POSSIBILITIES[action_key];
   var values = getRandomValues(possibilities);
 
-  console.log('Values', possibilities, values);
+  // console.log('Values', possibilities, values);
   var valuesAfter = {
     food: pet.food + values.food,
     happiness: pet.happiness + values.happiness,

@@ -5,11 +5,11 @@ import emj_dead from '../../assets/dead.json';
 import emj_sleeping from '../../assets/sleep.json';
 import emj_tired from '../../assets/almostDead.json';
 import { Card, CardContent } from '@/components/ui/card';
-import { usePetContext } from '../../context/PetContext';
+import { useGameContext } from '../../context/GameContext';
 import { RATING, getRating } from '../../lib/petStatus';
 
 export default function Emoji() {
-  const { petState } = usePetContext();
+  const { petState } = useGameContext();
   const emoji = getEmoji(petState);
   return (
     <Card className="dark:border-primary dark:border-4 dark:shadow-primary dark:shadow-lg shadow-2xl bg-inherit">
