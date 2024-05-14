@@ -26,6 +26,7 @@ function validateForm() {
         return false;
     }
 
+    // If the credentials are valid, display a success message
     alert('Login successful!');
     return true;
 }
