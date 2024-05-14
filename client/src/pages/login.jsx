@@ -15,4 +15,5 @@ function validateForm() {
         return false;
     }
 
+    alert('Login successful!');
 }
