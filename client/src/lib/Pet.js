@@ -37,5 +37,5 @@ export const POSSIBILITIES = {
 export const THRESHOLDS = {
   death: 0,
   life: 3,
-  deductionPoint: 50,
+  deductionPoint: 40,
 };
