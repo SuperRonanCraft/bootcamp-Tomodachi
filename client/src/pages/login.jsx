@@ -24,3 +24,5 @@ const LoginForm = () => {
     // Prevent the form from being submitted
     return false;
 }
+
+// Check if the username and password match the hardcoded credentials
