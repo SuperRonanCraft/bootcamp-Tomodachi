@@ -11,4 +11,6 @@ const LoginForm = () => {
 
     // Function to validate the form inputs
     const validateForm = (event) =>
+    // Prevent the default form submission behavior
+    event.preventDefault();
 }
