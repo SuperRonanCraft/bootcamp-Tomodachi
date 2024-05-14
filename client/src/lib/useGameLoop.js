@@ -1,20 +1,20 @@
 import { useGameContext } from '../context/GameContext';
+import { createPetLog } from './Pet';
 
-const defaultTickDelay = 1000;
-const tickMultiplier = 1;
-const foodDecayTicks = 5;
-const happinessDecayTicks = 10;
-const energyDecayTicks = 5;
+const defaultTickDelay = 2000;
+const foodDecayTicks = 8;
+const happinessDecayTicks = 12;
+const energyDecayTicks = 7;
 
-export default function useGameHandler() {
+export default function useGameLoop() {
   let foodDecay_prev = 0;
   let happinessDecay_prev = 0;
   let energyDecay_prev = 0;
 
-  const { setPetState } = useGameContext();
+  const { setPetState, gameState } = useGameContext();
 
   function getTickDelay() {
-    return defaultTickDelay * tickMultiplier;
+    return defaultTickDelay * gameState.tickMultiplier;
   }
 
   function gameTick(delay, pet) {
@@ -61,6 +61,18 @@ export default function useGameHandler() {
     newPet.energy -= energyDecay;
     newPet.happiness -= happinessDecay;
     setPetState(newPet);
+    if (foodDecay > 1 || energyDecay > 1 || happinessDecay > 1) {
+      const message = `${gameState.name}'s `;
+      if (foodDecay > 1) log(`${message} food has decayed! -${foodDecay}`);
+      if (energyDecay > 1)
+        log(`${message} energy has decayed! -${energyDecay}`);
+      if (happinessDecay > 1)
+        log(`${message} happiness has decayed! -${happinessDecay}`);
+    }
+  }
+
+  function log(message) {
+    gameState.logs.push(createPetLog(message));
   }
 
   return { getTickDelay, gameTick };

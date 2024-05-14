@@ -17,6 +17,21 @@ export default function createPet(
   };
 }
 
+export function createPetLog(text, importance = IMPORTANCE.NORMAL) {
+  const options = {
+    hour: 'numeric',
+    minute: 'numeric',
+    second: 'numeric',
+    hour12: false,
+    timeZone: 'America/Los_Angeles',
+  };
+  return {
+    timestamp: new Intl.DateTimeFormat('en-US', options).format(new Date()),
+    text,
+    importance,
+  };
+}
+
 export const POSSIBILITIES = {
   // how each action can change pet data
   play: {
@@ -40,4 +55,10 @@ export const THRESHOLDS = {
   death: 0,
   life: 3,
   deductionPoint: 30,
+};
+
+export const IMPORTANCE = {
+  NORMAL: 'normal',
+  WARNING: 'warning',
+  SEVERE: 'severe',
 };

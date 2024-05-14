@@ -6,14 +6,17 @@ import { useGameContext } from '../../context/GameContext';
 import createPet from '../../lib/Pet';
 import useGameHandler from '../../lib/useGameLoop';
 import GameLog from './gamelog/GameLog';
+import useGameLoop from '../../lib/useGameLoop';
+import createGame from '../../lib/Game';
 
 export default function GameDashboard() {
-  const { petState, setPetState } = useGameContext();
+  const { petState, setPetState, gameState, setGameState } = useGameContext();
   const { food, happiness, energy } = petState;
-  const { gameTick, getTickDelay } = useGameHandler();
+  const { gameTick, getTickDelay } = useGameLoop();
 
   useEffect(() => {
     setPetState(createPet());
+    setGameState(createGame('Mike'));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

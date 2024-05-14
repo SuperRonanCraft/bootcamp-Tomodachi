@@ -12,12 +12,16 @@ import { useGameContext } from '../../context/GameContext';
 import { getRating } from '../../lib/petStatus';
 
 export default function Status() {
-  const { petState } = useGameContext();
+  const { petState, gameState } = useGameContext();
   return (
     <Card className="col-span-2">
-      <CardHeader>
-        <CardTitle>{petState ? petState.name : 'Pet Name'}</CardTitle>
-        <CardDescription>Pet Status {getRating(petState)}</CardDescription>
+      <CardHeader className="flex flex-row justify-between">
+        <CardTitle>{gameState.name} </CardTitle>
+
+        <CardDescription className="text-right">
+          <p>{getRating(petState)}</p>
+          <p>Multiplier x{gameState.tickMultiplier}</p>
+        </CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col justify-between gap-2">
         <Food />
