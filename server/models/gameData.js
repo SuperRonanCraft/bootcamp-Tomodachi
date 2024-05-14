@@ -16,14 +16,13 @@ const GameDataSchema = new Schema({
   },
   lastSaveDate: {
     type: Number,
-    required: true,
-    // need to fix: the last state date needs to be equal to the current date if anything is updated
+    default: Date.now,
   },
   createdDate: {
     type: Number,
-    required: true,
     default: Date.now,
   },
 });
 
-module.exports = GameDataSchema;
+const gameData = mongoose.model('gameData', GameDataSchema);
+module.exports = gameData;
