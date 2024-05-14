@@ -6,6 +6,8 @@ import Home from './pages/Home.jsx';
 import Profile from './pages/Profile.jsx';
 import Game from './pages/Game.jsx';
 import Leaderboard from './pages/Leaderboard.jsx';
+import Login from './pages/login.jsx';
+import SignUp from './pages/SignUp.jsx';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 const router = createBrowserRouter([
@@ -28,6 +30,14 @@ const router = createBrowserRouter([
       {
         path: '/leaderboard',
         element: <Leaderboard />,
+      },
+      {
+        path: '/login',
+        element: <Login />,
+      },
+      {
+        path: '/signup',
+        element: <SignUp />,
       },
     ],
   },
