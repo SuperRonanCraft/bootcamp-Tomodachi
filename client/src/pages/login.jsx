@@ -4,4 +4,6 @@ function validateForm() {
     var errorMessage = document.getElementById('error-message');
 
     errorMessage.textContent = '';
+
+    if (username === '' || password === '')
 }
