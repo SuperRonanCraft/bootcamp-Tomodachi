@@ -10,5 +10,7 @@ function validateForm() {
         return false;
     }
 
-    if (username !== 'admin' || password !== 'password123')
+    if (username !== 'admin' || password !== 'password123') [
+        
+    ]
 }
