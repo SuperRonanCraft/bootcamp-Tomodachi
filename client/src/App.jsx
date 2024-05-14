@@ -5,6 +5,7 @@ import { Outlet } from 'react-router-dom';
 import PageHandler from './components/PageHandler';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import { ThemeProvider } from '@/context/ThemeContext';
+import { Toaster } from '@/components/ui/sonner';
 
 const client = new ApolloClient({
   uri: '/graphql',
@@ -19,6 +20,7 @@ function App() {
           <PageHandler />
           <Outlet />
         </TooltipProvider>
+        <Toaster />
       </ThemeProvider>
     </ApolloProvider>
   );
