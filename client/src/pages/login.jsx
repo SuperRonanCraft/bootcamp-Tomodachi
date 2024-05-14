@@ -1,5 +1,6 @@
 // Function to validate the login form
 function validateForm() {
+    // Get the value of the username input field
     var username = document.getElementById('username').value;
     var password = document.getElementById('password').value;
     var errorMessage = document.getElementById('error-message');
