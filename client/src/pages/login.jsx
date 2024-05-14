@@ -8,4 +8,6 @@ const LoginForm = () => {
     const [password, setPassword] = useState('');
     // useState hook to manage the state of the error message
     const [errorMessage, setErrorMessage] = useState('');
+
+    // Function to validate the form inputs
 }
