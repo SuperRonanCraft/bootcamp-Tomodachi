@@ -1,4 +1,9 @@
-export default function createPet(name, food, happiness, energy) {
+export default function createPet(
+  name,
+  food = 30,
+  happiness = 25,
+  energy = 50
+) {
   return {
     name,
     food,
@@ -32,5 +37,5 @@ export const POSSIBILITIES = {
 export const THRESHOLDS = {
   death: 0,
   life: 3,
-  deductionPoint: 20,
+  deductionPoint: 50,
 };

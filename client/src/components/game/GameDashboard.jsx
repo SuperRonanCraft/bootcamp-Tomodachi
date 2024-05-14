@@ -11,7 +11,7 @@ export default function GameDashboard() {
   const { setPetState } = usePetContext();
 
   useEffect(() => {
-    setPetState(createPet('Alfonso', 20, 20, 60));
+    setPetState(createPet('Alfonso'));
     gameLoop();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
