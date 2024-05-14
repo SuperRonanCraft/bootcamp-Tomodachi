@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { useGameContext } from '../../context/GameContext';
 import createPet from '../../lib/Pet';
 import useGameHandler from '../../lib/useGameLoop';
+import GameLog from './gamelog/GameLog';
 
 export default function GameDashboard() {
   const { petState, setPetState } = useGameContext();
@@ -28,12 +29,16 @@ export default function GameDashboard() {
   }, [food, happiness, energy]);
 
   return (
-    <div className="flex flex-col gap-4 w-fit mx-auto h-screen justify-center items-center">
-      <Emoji />
-      <div className="grid grid-cols-3 gap-4 w-full">
-        <Status />
-        <Action />
+    <div className="flex flex-row w-fit mx-auto gap-4">
+      <GameLog />
+      <div className="flex flex-col gap-4">
+        <Emoji />
+        <div className="grid grid-cols-3 gap-4 w-full">
+          <Status />
+          <Action />
+        </div>
       </div>
+      <GameLog />
     </div>
   );
 }
