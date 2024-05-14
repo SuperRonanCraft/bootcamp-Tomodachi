@@ -3,8 +3,11 @@ import ActionButton from './ActionButton';
 import { useState } from 'react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
+import useGameHook from '../../../lib/useGameHook';
 
 export default function Feed() {
+  const { feed } = useGameHook();
+
   // call the game logic hook here and add onclick to buttons (for alain)
   const [foodCount, setFoodCount] = useState(10);
 
@@ -27,6 +30,7 @@ export default function Feed() {
       });
       return;
     }
+    feed();
     setFoodCount((prev) => prev - 1);
   }
 
