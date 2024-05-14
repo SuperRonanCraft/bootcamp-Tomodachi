@@ -3,5 +3,6 @@ export default function createGame(name, tickMultiplier, pet) {
     name,
     tickMultiplier,
     pet,
+    logs: [],
   };
 }
