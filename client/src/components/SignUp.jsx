@@ -1,31 +1,39 @@
 import { useState } from 'react';
 import { useMutation } from '@apollo/client';
-import auth from '../../../server/utils/auth';
-import React from 'react';
-// Add login mutation here
 
-const LoginForm = () => {
+const SignupForm = () => {
   const [formState, setFormState] = useState({
     email: '',
     password: '',
+    username: '',
   });
-  //TODO: LOGIN_USER Mututation for logging in and checking for errors
-  const [loginUser, { loading, error }] = useMutation(LOGIN_USER);
-  //TODO: If login is successful handle form submission
+
+  const [signupUser, { loading, error }] = useMutation(SIGNUP_USER);
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
+  };
+
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     try {
-      const { data } = await loginUser({
-        variables: { email: formState.email, password: formState.password },
+      const { data } = await signupUser({
+        variables: {
+          email: formState.email,
+          password: formState.password,
+          username: formState.username,
+        },
       });
-
-      auth.login(data.login.token); // Assuming your auth module handles login token
+      console.log('Signup successful:', data);
     } catch (error) {
-      console.error('Login error:', error);
+      console.error('Signup error:', error);
     }
   };
 
-  //TODO: a react form for the user to fill out that we will export from this page
   return (
     <form onSubmit={handleFormSubmit}>
       <input
@@ -42,12 +50,19 @@ const LoginForm = () => {
         onChange={handleInputChange}
         placeholder="Password"
       />
+      <input
+        type="text"
+        name="username"
+        value={formState.username}
+        onChange={handleInputChange}
+        placeholder="Username"
+      />
       <button type="submit" disabled={loading}>
-        {loading ? 'Logging in...' : 'Log in'}
+        {loading ? 'Signing up...' : 'Sign up'}
       </button>
       {error && <p>Error: {error.message}</p>}
     </form>
   );
 };
 
-export default LoginForm;
+export default SignupForm;
