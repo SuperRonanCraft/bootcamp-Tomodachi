@@ -61,6 +61,10 @@ const resolvers = {
       );
       return user;
     },
+    deleteGameData: async (parent, { _id }) => {
+      const user = await User.findByIdAndDelete(_id);
+      return user;
+    },
   },
 };
 
