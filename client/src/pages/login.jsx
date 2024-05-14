@@ -28,4 +28,5 @@ const LoginForm = () => {
 // Check if the username and password match the hardcoded credentials
 if (username !== 'admin' || password !== 'password123') {
     // If the credentials do not match, display an error message
+    setErrorMessage('Invalid username or password.');
 }
