@@ -6,5 +6,12 @@ export default function Energy() {
   const {
     petState: { energy },
   } = useGameContext();
-  return <StatusBar icon={<Zap />} value={energy} tooltip="Energy" />;
+  return (
+    <StatusBar
+      icon={<Zap />}
+      value={energy}
+      tooltip="Energy"
+      indicatorClass="bg-blue-500"
+    />
+  );
 }
