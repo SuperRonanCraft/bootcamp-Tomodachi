@@ -11,7 +11,7 @@ function validateForm() {
     }
 
     if (username !== 'admin' || password !== 'password123') {
-        
+        errorMessage.textContent = 'Invalid username or password.';
     }
 
 }
