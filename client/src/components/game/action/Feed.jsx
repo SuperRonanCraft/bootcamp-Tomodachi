@@ -1,4 +1,4 @@
-import { BeerOff, CircleX, UtensilsCrossed, X } from 'lucide-react';
+import { BeerOff, UtensilsCrossed, X } from 'lucide-react';
 import ActionButton from './ActionButton';
 import { useState } from 'react';
 import { toast } from 'sonner';
