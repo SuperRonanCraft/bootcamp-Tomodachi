@@ -17,7 +17,8 @@ export default function Nav() {
               <Link to="/leaderboard">Leaderboard</Link>
             </li>
             <li className="absolute right-0 z-10 mt-2 w-48">
-              <Link to="/signup"> Sign up</Link>
+              <Link to="/signup"> Sign up </Link>
+              <Link to="/login"> Login </Link>
             </li>
           </ul>
           <ModeToggle />
