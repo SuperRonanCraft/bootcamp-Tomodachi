@@ -3,5 +3,5 @@ function validateForm() {
     var password = document.getElementById('password').value;
     var errorMessage = document.getElementById('error-message');
 
-    errorMessage.textContent = ''
+    errorMessage.textContent = '';
 }
