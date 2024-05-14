@@ -18,6 +18,7 @@ function validateForm() {
         return false;
     }
 
+    // Check if the username and password match the hardcoded credentials
     if (username !== 'admin' || password !== 'password123') {
         errorMessage.textContent = 'Invalid username or password.';
         return false;
