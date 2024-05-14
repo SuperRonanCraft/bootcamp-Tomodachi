@@ -33,6 +33,6 @@ const LoginForm = () => {
     // If the credentials are valid, display a success message
     alert('Login successful!');
     return true; // Allow the form to be submitted
-  }
+  };
 
 }
