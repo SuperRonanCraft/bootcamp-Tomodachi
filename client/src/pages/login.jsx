@@ -7,5 +7,6 @@ function validateForm() {
 
     if (username === '' || password === '') {
         errorMessage.textContent = 'All fields are required.';
+        return false;
     }
 }
