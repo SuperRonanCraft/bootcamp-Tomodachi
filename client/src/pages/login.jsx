@@ -2,6 +2,7 @@
 function validateForm() {
     // Get the value of the username input field
     var username = document.getElementById('username').value;
+    // Get the value of the password input field
     var password = document.getElementById('password').value;
     var errorMessage = document.getElementById('error-message');
 
