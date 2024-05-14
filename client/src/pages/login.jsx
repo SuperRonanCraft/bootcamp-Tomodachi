@@ -13,4 +13,6 @@ const LoginForm = () => {
     const validateForm = (event) =>
     // Prevent the default form submission behavior
     event.preventDefault();
+
+    // Clear any previous error messages
 }
