@@ -1,15 +1,9 @@
-import { Button } from '@/components/ui/button';
+import useGameHook from '../../../lib/useGameHook';
+import ActionButton from './ActionButton';
+import { Gamepad2 } from 'lucide-react';
 
 export default function Play() {
+  const { play } = useGameHook();
   // call the game logic hook here and add onclick to buttons (for alain)
-  return (
-    <Button
-      size="sm"
-      onClick={() => {
-        console.log('add the game logic function here');
-      }}
-    >
-      Play
-    </Button>
-  );
+  return <ActionButton onClick={play} text="Play" icon={<Gamepad2 />} />;
 }

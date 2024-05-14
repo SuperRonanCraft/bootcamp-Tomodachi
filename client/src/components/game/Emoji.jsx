@@ -1,10 +1,19 @@
 import Lottie from 'lottie-react';
 import happy from '../../assets/happy.json';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
 
 export default function Emoji() {
   return (
-    <div className="border rounded-md p-8">
-      <Lottie animationData={happy} />
-    </div>
+    <Card className="dark:border-primary dark:border-4 dark:shadow-primary dark:shadow-lg shadow-2xl bg-inherit">
+      <CardContent className="pt-6">
+        <Lottie animationData={happy} />
+      </CardContent>
+    </Card>
   );
 }

@@ -2,8 +2,10 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 
 import './index.css';
 import { Outlet } from 'react-router-dom';
-import PageHandler from './components/PageHandler';
+import Nav from './components/landing/nav';
 import { TooltipProvider } from '@/components/ui/tooltip';
+import { ThemeProvider } from '@/context/ThemeContext';
+import { Toaster } from '@/components/ui/sonner';
 
 const client = new ApolloClient({
   uri: '/graphql',
@@ -13,10 +15,13 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      <TooltipProvider>
-        <PageHandler />
-        <Outlet />
-      </TooltipProvider>
+      <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+        <TooltipProvider>
+          <Nav />
+          <Outlet />
+        </TooltipProvider>
+        <Toaster />
+      </ThemeProvider>
     </ApolloProvider>
   );
 }

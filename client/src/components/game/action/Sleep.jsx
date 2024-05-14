@@ -1,15 +1,9 @@
-import { Button } from '@/components/ui/button';
+import useGameHook from '../../../lib/useGameHook';
+import ActionButton from './ActionButton';
+import { Moon } from 'lucide-react';
 
 export default function Sleep() {
+  const { sleep } = useGameHook();
   // call the game logic hook here and add onclick to buttons (for alain)
-  return (
-    <Button
-      size="sm"
-      onClick={() => {
-        console.log('add the game logic function here');
-      }}
-    >
-      Sleep
-    </Button>
-  );
+  return <ActionButton onClick={sleep} text="Sleep" icon={<Moon />} />;
 }
