@@ -3,13 +3,16 @@ const { signToken, AuthenticationError } = require('../utils/auth');
 
 const resolvers = {
   Query: {
-    me: async () => {
+    me: async (_, { userId }) => {
+      return await User.findById(userId);
+    },
+    users: async () => {
       return await User.find();
     },
   },
   Mutation: {
-    login: async (_, { email, password }) => {
-      const user = await User.findOne({ email });
+    login: async (_, { username, password }) => {
+      const user = await User.findOne({ username });
 
       if (!user) {
         throw AuthenticationError;
@@ -40,6 +43,27 @@ const resolvers = {
       }
 
       throw AuthenticationError;
+    },
+    createGameData: async (
+      parent,
+      { food, energy, happiness, name, userId }
+    ) => {
+      const user = await User.findByIdAndUpdate(
+        userId,
+        {
+          $addToSet: {
+            gameData: { food, energy, happiness, name },
+          },
+        },
+        {
+          new: true,
+        }
+      );
+      return user;
+    },
+    deleteUser: async (parent, { _id }) => {
+      const user = await User.findByIdAndDelete(_id);
+      return user;
     },
   },
 };
