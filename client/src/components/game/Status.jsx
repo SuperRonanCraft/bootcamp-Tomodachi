@@ -16,7 +16,7 @@ export default function Status() {
     <Card className="col-span-2">
       <CardHeader>
         <CardTitle>{petState ? petState.name : 'Pet Name'}</CardTitle>
-        <CardDescription>Pet Status {petState.LETHAL_ACTIONS}</CardDescription>
+        <CardDescription>Pet Status {petState.status}</CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col justify-between gap-2">
         <Food />

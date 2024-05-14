@@ -193,7 +193,7 @@ function tooPerfect(pet) {
 
   // traverses values array to see if all values are above a game win threshold
   function isAboveWinThreshold(value) {
-    return value > 33;
+    return value >= 100;
   }
 
   if (keyValues[0] === keyValues[1] && keyValues[1] === keyValues[2]) {

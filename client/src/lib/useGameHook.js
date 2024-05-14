@@ -8,25 +8,25 @@ export default function useGameHook() {
 
   function play(happiness_array) {
     const newPet = { ...pet };
-    executeAction(newPet, 'play', { happiness_array });
+    const outcome = executeAction(newPet, 'play', { happiness_array });
     setPetState(newPet);
   }
 
   function feed() {
     const newPet = { ...pet };
-    executeAction(newPet, 'feed');
+    const outcome = executeAction(newPet, 'feed');
     setPetState(newPet);
   }
 
   function sleep() {
     const newPet = { ...pet };
-    executeAction(newPet, 'sleep');
+    const outcome = executeAction(newPet, 'sleep');
     setPetState(newPet);
   }
 
   function battleBeast() {
     const newPet = { ...pet };
-    battle(newPet);
+    const outcome = battle(newPet);
     setPetState(newPet);
   }
 

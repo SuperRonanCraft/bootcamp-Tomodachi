@@ -1,13 +1,28 @@
-export default function getStatus(pet) {
+export function getRating(pet) {
   const energy = pet.energy;
   const hunger = pet.hunger;
   const happiness = pet.happiness;
+  //Status stuff
+  let status = RATING.HAPPY;
+  if (hunger <= 10) status = RATING.HUNGRY;
+  if (happiness <= 10 && hunger >= 30) status = RATING.SAD;
+  if (energy <= 15 && hunger < 30) status = RATING.UPSET;
+  if (energy <= 15 && happiness > 50) status = RATING.TIRED;
+
+  return status;
 }
 
-const STATUS_HAPPY = 'Happy';
-const STATUS_SAD = 'Happy';
-const STATUS_TIRED = 'Tired';
-const STATUS_SLEEPING = 'Sleeping';
-const STATUS_UPSET = 'Upset';
-const STATUS_HUNGRY = 'Hungry';
-const STATUS_LEVEL = 'Leveled Up';
+export const RATING = {
+  HAPPY: 'Happy',
+  SAD: 'Sad',
+  TIRED: 'Tired',
+  UPSET: 'Upset',
+  HUNGRY: 'Hungry',
+};
+
+export const STATUS = {
+  EATING: 'Eating',
+  PLAYING: 'Playing',
+  SLEEPING: 'Sleeping',
+  IDLE: 'Idle',
+};
