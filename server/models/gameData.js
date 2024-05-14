@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
-const GameDataSchema = new Schema({
+const gameDataSchema = new Schema({
   food: {
     type: Number,
     required: true,
@@ -14,6 +14,10 @@ const GameDataSchema = new Schema({
     type: Number,
     required: true,
   },
+  name: {
+    type: String,
+    required: true,
+  },
   lastSaveDate: {
     type: Number,
     default: Date.now,
@@ -24,5 +28,4 @@ const GameDataSchema = new Schema({
   },
 });
 
-const gameData = mongoose.model('gameData', GameDataSchema);
-module.exports = gameData;
+module.exports = gameDataSchema;

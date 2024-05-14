@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 const bcrypt = require('bcrypt');
-
+const gameDataSchema = require('./gameData');
 const userSchema = new Schema({
   username: {
     type: String,
@@ -20,12 +20,7 @@ const userSchema = new Schema({
     required: true,
     minlength: 5,
   },
-  gameData: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'gameData',
-    },
-  ],
+  gameData: [gameDataSchema],
 });
 userSchema.pre('save', async function (next) {
   if (this.isNew || this.isModified('password')) {
