@@ -5,5 +5,7 @@ function validateForm() {
 
     errorMessage.textContent = '';
 
-    if (username === '' || password === '')
+    if (username === '' || password === '') {
+        
+    }
 }
