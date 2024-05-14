@@ -16,4 +16,7 @@ const LoginForm = () => {
 
     // Clear any previous error messages
     setErrorMessage('');
+
+    // Check if either the username or password fields are empty
+    if (username === '' || password === '')
 }
