@@ -10,6 +10,7 @@ function validateForm() {
     // Clear any previous error messages
     errorMessage.textContent = '';
 
+    // Check if either the username or password fields are empty
     if (username === '' || password === '') {
         errorMessage.textContent = 'All fields are required.';
         return false;
