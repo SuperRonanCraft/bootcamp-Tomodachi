@@ -1,14 +1,14 @@
 import { Link } from 'react-router-dom';
-import { ModeToggle } from './ModeToggle';
+import { ModeToggle } from '../ModeToggle';
 
-export default function PageHandler() {
+export default function Nav() {
   return (
     <div>
       <main>
         <nav>
-          <ul className="flex flex-row">
+          <ul className="flex space-x-4 m-4">
             <li>
-              <Link to="/">Home</Link>
+              <Link to="/landing">Home</Link>
             </li>
             <li>
               <Link to="/profile">Profile</Link>
@@ -16,8 +16,8 @@ export default function PageHandler() {
             <li>
               <Link to="/leaderboard">Leaderboard</Link>
             </li>
-            <li>
-              <Link to="/game">Game</Link>
+            <li className="absolute right-0 z-10 mt-2 w-48">
+              <Link to="/signup"> Sign up</Link>
             </li>
           </ul>
           <ModeToggle />
