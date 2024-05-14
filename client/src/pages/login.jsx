@@ -16,7 +16,7 @@ function validateForm() {
         errorMessage.textContent = 'All fields are required.';
         // Prevent the form from being submitted
         return false;
-}
+    }
 
     if (username !== 'admin' || password !== 'password123') {
         errorMessage.textContent = 'Invalid username or password.';
