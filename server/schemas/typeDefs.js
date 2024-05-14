@@ -30,7 +30,7 @@ type Mutation{
     updateUser(username: String, _id:ID): User
     login(username: String!, password: String!): Auth
     createGameData(food:Int, energy:Int, happiness:Int, name:String!, userId:String!):User
-    deleteGameData(_id:ID!):User
+    deleteUser(_id:ID!):User
 }
 `;
 module.exports = typeDefs;
