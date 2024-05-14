@@ -1,6 +1,4 @@
 import { createContext, useContext, useState } from 'react';
-import createGame from '../lib/Game';
-import createPet from '../lib/Pet';
 
 // Initialize new context for students
 const GameContext = createContext();
@@ -11,8 +9,8 @@ export const useGameContext = () => useContext(GameContext);
 
 // The provider is responsible for creating our state, updating the state, and persisting values to the children
 export default function PetProvider({ children }) {
-  const [petState, setPetState] = useState(createPet());
-  const [gameState, setGameState] = useState(createGame('LNHLS', 1, petState));
+  const [petState, setPetState] = useState({});
+  const [gameState, setGameState] = useState({});
 
   // The value prop expects an initial state object
   return (
