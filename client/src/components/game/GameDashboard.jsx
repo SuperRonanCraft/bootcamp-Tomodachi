@@ -19,7 +19,7 @@ export default function GameDashboard() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      gameTick(500, petState);
+      gameTick(getTickDelay(), petState);
     }, getTickDelay());
 
     return () => clearInterval(interval);

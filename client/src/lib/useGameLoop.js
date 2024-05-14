@@ -1,6 +1,6 @@
 import { usePetContext } from '../context/PetContext';
 
-const defaultTickDelay = 500;
+const defaultTickDelay = 1000;
 const tickMultiplier = 1;
 const foodDecayTicks = 5;
 const happinessDecayTicks = 10;
