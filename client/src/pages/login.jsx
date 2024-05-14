@@ -10,4 +10,5 @@ const LoginForm = () => {
     const [errorMessage, setErrorMessage] = useState('');
 
     // Function to validate the form inputs
+    const validateForm = (event) =>
 }
