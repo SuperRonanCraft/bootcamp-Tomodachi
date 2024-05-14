@@ -6,6 +6,6 @@ function validateForm() {
     errorMessage.textContent = '';
 
     if (username === '' || password === '') {
-        errorMessage.textContent = 'All fields are required.'
+        errorMessage.textContent = 'All fields are required.';
     }
 }
