@@ -35,3 +35,4 @@ if (username !== 'admin' || password !== 'password123') {
 
 // If the credentials are valid, display a success message
 alert('Login successful!');
+// Allow the form to be submitted
