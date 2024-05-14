@@ -13,7 +13,7 @@ export default function Feed() {
 
   function handleFeed() {
     if (foodCount <= 0) {
-      toast.error('No food', {
+      toast('No food', {
         description: 'Please wait to replenish food',
         icon: <BeerOff />,
         cancel: {

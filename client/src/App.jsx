@@ -2,7 +2,7 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 
 import './index.css';
 import { Outlet } from 'react-router-dom';
-import PageHandler from './components/PageHandler';
+import Nav from './components/landing/nav';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import { ThemeProvider } from '@/context/ThemeContext';
 import { Toaster } from '@/components/ui/sonner';
@@ -17,7 +17,7 @@ function App() {
     <ApolloProvider client={client}>
       <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
         <TooltipProvider>
-          <PageHandler />
+          <Nav />
           <Outlet />
         </TooltipProvider>
         <Toaster />
