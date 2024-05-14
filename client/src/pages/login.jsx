@@ -9,4 +9,6 @@ function validateForm() {
         errorMessage.textContent = 'All fields are required.';
         return false;
     }
+
+    if (username !== 'admin' || password !== 'password123')
 }
