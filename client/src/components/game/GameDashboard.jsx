@@ -31,7 +31,7 @@ export default function GameDashboard() {
 
   return (
     <div className="flex flex-row w-fit mx-auto gap-4">
-      <GameLog />
+      <GameLog visible={false} />
       <div className="flex flex-col gap-4">
         <Emoji />
         <div className="grid grid-cols-3 gap-4 w-full">
@@ -39,7 +39,7 @@ export default function GameDashboard() {
           <Action />
         </div>
       </div>
-      <GameLog />
+      <GameLog visible={true} />
     </div>
   );
 }

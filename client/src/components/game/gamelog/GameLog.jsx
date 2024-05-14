@@ -25,16 +25,27 @@ const testData = [
   { text: 'Magical creatures roam freely', timestamp: '11:23:58' },
 ];
 
-export default function GameLog() {
+export default function GameLog({ visible }) {
   const { gameState } = useGameContext();
+
+  let logs = gameState.logs;
+  if (gameState.logs.length > 12) {
+    logs = logs.slice(-12);
+    console.log(logs);
+  }
+
   return (
-    <Card>
+    <Card
+      className={`flex flex-col justify-between ${
+        visible ? visible : 'invisible'
+      }`}
+    >
       <CardHeader>
         <CardTitle>Log</CardTitle>
       </CardHeader>
-      <CardContent className="overflow-hidden">
+      <CardContent>
         <ul className="flex flex-col divide-y divide-solid">
-          {gameState.logs.map(({ text, timestamp }) => (
+          {logs.map(({ text, timestamp }) => (
             <li key={timestamp}>
               <p className="text-xs text-muted-foreground mt-2">{timestamp}</p>
               <p className="mb-2">{text}</p>
