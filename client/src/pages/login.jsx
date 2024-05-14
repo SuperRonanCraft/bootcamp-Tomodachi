@@ -7,7 +7,7 @@ function validateForm() {
     // Get the error message element to display validation messages
     var errorMessage = document.getElementById('error-message');
 
-// Clear any previous error messages
+    // Clear any previous error messages
     errorMessage.textContent = '';
 
     if (username === '' || password === '') {
