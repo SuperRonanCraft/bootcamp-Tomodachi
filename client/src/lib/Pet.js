@@ -25,11 +25,14 @@ export function createPetLog(text, importance = IMPORTANCE.NORMAL) {
     hour12: false,
     timeZone: 'America/Los_Angeles',
   };
-  return {
+  const log = {
     timestamp: new Intl.DateTimeFormat('en-US', options).format(new Date()),
     text,
     importance,
   };
+
+  console.log(log);
+  return log;
 }
 
 export const POSSIBILITIES = {

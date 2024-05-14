@@ -1,5 +1,6 @@
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { useGameContext } from '../../../context/GameContext';
 
 const testData = [
   { text: 'Eloquent cats chase mice', timestamp: '12:34:56' },
@@ -25,6 +26,7 @@ const testData = [
 ];
 
 export default function GameLog() {
+  const { gameState } = useGameContext();
   return (
     <Card>
       <CardHeader>
@@ -32,7 +34,7 @@ export default function GameLog() {
       </CardHeader>
       <CardContent className="overflow-hidden">
         <ul className="flex flex-col divide-y divide-solid">
-          {testData.map(({ text, timestamp }) => (
+          {gameState.logs.map(({ text, timestamp }) => (
             <li key={timestamp}>
               <p className="text-xs text-muted-foreground mt-2">{timestamp}</p>
               <p className="mb-2">{text}</p>

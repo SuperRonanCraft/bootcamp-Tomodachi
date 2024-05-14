@@ -3,28 +3,26 @@ import Emoji from './Emoji';
 import Status from './Status';
 import { useEffect } from 'react';
 import { useGameContext } from '../../context/GameContext';
-import createPet from '../../lib/Pet';
-import useGameHandler from '../../lib/useGameLoop';
 import GameLog from './gamelog/GameLog';
 import useGameLoop from '../../lib/useGameLoop';
-import createGame from '../../lib/Game';
 
 export default function GameDashboard() {
-  const { petState, setPetState, gameState, setGameState } = useGameContext();
+  const { petState } = useGameContext();
   const { food, happiness, energy } = petState;
-  const { gameTick, getTickDelay } = useGameLoop();
+  const { gameTick } = useGameLoop();
 
   useEffect(() => {
-    setPetState(createPet());
-    setGameState(createGame('Mike'));
+    //DOWNLOAD DATA FROM DATABASE
+    // setPetState();
+    // setGameState();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
       // console.log(petState);
-      gameTick(getTickDelay(), petState);
-    }, getTickDelay());
+      gameTick(1000, petState);
+    }, 1000);
 
     return () => clearInterval(interval);
 
