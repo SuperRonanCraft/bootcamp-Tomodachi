@@ -32,3 +32,5 @@ if (username !== 'admin' || password !== 'password123') {
     // Prevent the form from being submitted
     return false;
 }
+
+// If the credentials are valid, display a success message
