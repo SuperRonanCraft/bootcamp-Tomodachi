@@ -56,7 +56,10 @@ const SignUpForm = () => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="gap-8 mx-8 w-[600px] flex flex-col"
+      >
         <FormField
           control={form.control}
           name="email"
@@ -113,9 +116,11 @@ const SignUpForm = () => {
             </FormItem>
           )}
         />
-        <Button type="submit" disabled={loading}>
-          {loading ? 'Signing up...' : 'Sign up'}
-        </Button>
+        <div className="flex justify-center">
+          <Button className="w-[200px] " type="submit" disabled={loading}>
+            {loading ? 'Signing up...' : 'Sign up'}
+          </Button>
+        </div>
         {error && <p>Error: {error.message}</p>}
       </form>
     </Form>
