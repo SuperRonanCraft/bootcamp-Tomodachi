@@ -30,8 +30,8 @@ export const QUERY_ALL_USERS = gql`
         energy
         happiness
         name
-        createDate
-        lastSavedDate
+        createdDate
+        lastSaveDate
       }
     }
   }
