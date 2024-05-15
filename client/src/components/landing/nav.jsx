@@ -5,6 +5,7 @@ export default function Nav() {
   return (
     <div>
       <main>
+        {/* Add Tailwind CSS classes for primary color background and */}
         <nav>
           <ul className="flex space-x-4 m-4">
             <li>
