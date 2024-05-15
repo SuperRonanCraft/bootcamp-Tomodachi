@@ -6,7 +6,7 @@ import Sleep from '@/components/game/action/Sleep';
 
 export default function Action() {
   return (
-    <Card className="col-span-1">
+    <Card className="col-span-3 md:col-span-1">
       <CardHeader>
         <CardTitle>Actions</CardTitle>
       </CardHeader>

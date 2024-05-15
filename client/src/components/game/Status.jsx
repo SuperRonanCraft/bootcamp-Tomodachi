@@ -8,15 +8,21 @@ import {
 import Food from './status/Food';
 import Happiness from './status/Happiness';
 import Energy from './status/Energy';
-import { usePetContext } from '../../context/PetContext';
+import { useGameContext } from '../../context/GameContext';
+import { getRating } from '../../lib/petStatus';
 
 export default function Status() {
-  const { petState } = usePetContext();
+  const { petState, gameState } = useGameContext();
   return (
-    <Card className="col-span-2">
-      <CardHeader>
-        <CardTitle>{petState ? petState.name : 'Pet Name'}</CardTitle>
-        <CardDescription>Pet Status {petState.status}</CardDescription>
+    <Card className="col-span-3 md:col-span-2">
+      <CardHeader className="flex flex-row justify-between">
+        <CardTitle>{gameState.name} </CardTitle>
+
+        <CardDescription className="text-right">
+          <p>Emotion: {getRating(petState)}</p>
+          {/* <p>Status: {petState.status}</p> */}
+          <p>Multiplier x{gameState.tickMultiplier}</p>
+        </CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col justify-between gap-2">
         <Food />
