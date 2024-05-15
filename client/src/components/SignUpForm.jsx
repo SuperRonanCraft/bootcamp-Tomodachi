@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useMutation } from '@apollo/client';
-import AuthService from './utils/auth';
+import AuthService from '../utils/auth';
 import React from 'react';
-import { SIGN_UP_USER } from './utils/mutations';
+import { ADD_USER } from '../utils/mutations';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -39,7 +39,7 @@ const SignUpForm = () => {
     resolver: zodResolver(formSchema),
   });
 
-  const [signUpUser, { loading, error }] = useMutation(SIGN_UP_USER);
+  const [signUpUser, { loading, error }] = useMutation(ADD_USER);
 
   const onSubmit = async (formData) => {
     try {
