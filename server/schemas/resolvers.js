@@ -56,6 +56,7 @@ const resolvers = {
       parent,
       { food, energy, happiness, name, userId }
     ) => {
+      console.log('test');
       const user = await User.findByIdAndUpdate(
         userId,
         {

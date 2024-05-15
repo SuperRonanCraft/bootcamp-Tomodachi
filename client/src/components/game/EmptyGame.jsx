@@ -12,34 +12,19 @@ import { Input } from '@/components/ui/input';
 
 import { Button } from '@/components/ui/button';
 
-import { useMutation } from '@apollo/client';
-
-import { CREATE_GAME_DATA } from '@/utils/mutations';
-import { QUERY_USER } from '@/utils/queries';
+import NewGameForm from '@/components/NewGameForm';
 
 export default function EmptyGame() {
-  const [addGame, { loading }] = useMutation(CREATE_GAME_DATA, {
-    refetchQueries: [QUERY_USER, 'User'],
-  });
-
-  function handleAddGame() {}
-
   return (
     <div className="flex justify-center items-center h-screen">
       <Card>
         <CardHeader>
           <CardTitle>You have no games</CardTitle>
-          <CardDescription>Click the button to create a game</CardDescription>
+          <CardDescription>Create a new Game</CardDescription>
         </CardHeader>
         <CardContent>
-          <Label>Name</Label>
-          <Input />
+          <NewGameForm />
         </CardContent>
-        <CardFooter>
-          <Button className="w-full" onClick={handleAddGame}>
-            Press Me!
-          </Button>
-        </CardFooter>
       </Card>
     </div>
   );
