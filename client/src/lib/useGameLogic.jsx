@@ -1,5 +1,8 @@
 import { useGameContext } from '../context/GameContext';
 import { POSSIBILITIES, THRESHOLDS, createPetLog } from './Pet';
+import { toast } from 'sonner';
+import { Button } from '@/components/ui/button';
+import { BeerOff, X } from 'lucide-react';
 
 //All the logic for the game, advances with executeAction
 export default function useGameLogic() {
@@ -10,12 +13,31 @@ export default function useGameLogic() {
     petState: pet,
   } = useGameContext();
 
+  function showToast(message) {
+    toast(message, {
+      description: 'Please wait to replenish food',
+      icon: <BeerOff />,
+      cancel: {
+        label: (
+          <Button size="icon" variant="ghost">
+            <X className="w-6 h-6 text-foreground" />
+          </Button>
+        ),
+        onClick: () => {},
+      },
+      cancelButtonStyle: {
+        backgroundColor: 'inherit',
+      },
+    });
+  }
+
   function warning(message) {
     setGameState((prev) => {
       const newLog = [...prev.logs];
       newLog.push(createPetLog(message));
       return { ...prev, logs: newLog };
     });
+    showToast(message);
     console.log(message);
   }
 
