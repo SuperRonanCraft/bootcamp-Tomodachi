@@ -1,9 +1,26 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { ModeToggle } from '../ModeToggle';
 import AuthService from '../../utils/auth';
 import { Button } from '../ui/button';
+import { Sheet, SheetContent, SheetTrigger } from '../ui/sheet';
+import { Menu } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import NavItem from './NavItem';
 
 export default function Nav() {
+  const [sheetOpen, setSheetOpen] = useState(false);
+
+  const location = useLocation();
+  useEffect(() => {
+    setSheetOpen(false);
+  }, [location]);
+
+  const navLoggedIn = [
+    { title: 'Play', link: '/' },
+    { title: 'Home', link: '/landing' },
+    { title: 'Leaderboard', link: '/leaderboard' },
+  ];
+
   return (
     <div>
       <main>
@@ -11,19 +28,32 @@ export default function Nav() {
         <nav className="absolute left-0 right-0 top-0 p-4 bg-foreground shadow-md w-full">
           {/* Use flex to align items and justify-between to space out the links and theme toggle */}
           <ul className="flex items-center justify-between w-full">
-            {/* Group links in a flex container with horizontal spacing */}
             <div className="flex gap-4">
-              <li>
-                <Link to="/landing" className="text-background">
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link to="/leaderboard" className="text-background">
-                  Leaderboard
-                </Link>
-              </li>
+              {navLoggedIn.map((item) => (
+                <NavItem key={item.link} {...item} />
+              ))}
             </div>
+            {/* Group links in a flex container with horizontal spacing */}
+            <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
+              <SheetTrigger asChild>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="shrink-0 md:hidden"
+                >
+                  <Menu className="h-5 w-5" />
+                  <span className="sr-only">Toggle navigation menu</span>
+                </Button>
+              </SheetTrigger>
+
+              <SheetContent side="left">
+                <nav className="grid gap-6 text-lg font-medium">
+                  {navLoggedIn.map((item) => (
+                    <NavItem key={item.link} {...item} />
+                  ))}
+                </nav>
+              </SheetContent>
+            </Sheet>
             {/* Empty spacer to push Sign Up and Log In links to the right */}
             <div className="flex-grow" />
             {/* Place Sign Up and Log In links to the right side */}
