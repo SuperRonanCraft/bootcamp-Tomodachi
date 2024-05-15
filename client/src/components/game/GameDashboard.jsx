@@ -11,13 +11,6 @@ export default function GameDashboard() {
   const { gameTick } = useGameLoop();
 
   useEffect(() => {
-    //DOWNLOAD DATA FROM DATABASE
-    // setPetState();
-    // setGameState();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
     const interval = setInterval(() => {
       // console.log(petState);
 
