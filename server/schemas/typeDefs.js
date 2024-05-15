@@ -12,6 +12,7 @@ type Auth{
 }
 
 type GameData {
+    _id: ID
     food: Int
     energy: Int
     happiness: Int
@@ -31,6 +32,7 @@ type Mutation{
     login(username: String!, password: String!): Auth
     createGameData(food:Int, energy:Int, happiness:Int, name:String!, userId:String!):User
     deleteUser(_id:ID!):User
+    deleteGameData(userId:String!, _id:ID!):User
 }
 `;
 module.exports = typeDefs;
