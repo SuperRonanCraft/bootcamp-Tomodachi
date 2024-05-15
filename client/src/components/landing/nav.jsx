@@ -6,7 +6,7 @@ export default function Nav() {
     <div>
       <main>
         {/* Position the nav bar absolutely with left, right, and top set to 0 */}
-        <nav className="bg-blue-500 p-4">
+        <nav className="bg-blue-500 absolute left-0 right-0 top-0 p-4 bg-white shadow-md p-4">
           {/* Use flex to align items and justify between to space out the links and theme toggle */}
           <ul className="flex items-center justify-between space-x-4">
             {/* Group links in a flex container with horizontal spacing */}
