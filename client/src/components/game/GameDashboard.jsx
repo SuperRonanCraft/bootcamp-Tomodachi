@@ -3,7 +3,6 @@ import Emoji from './Emoji';
 import Status from './Status';
 import { useEffect } from 'react';
 import { useGameContext } from '../../context/GameContext';
-import GameLog from './gamelog/GameLog';
 import useGameLoop from '../../lib/useGameLoop';
 
 export default function GameDashboard() {
@@ -25,15 +24,13 @@ export default function GameDashboard() {
 
   return (
     <div className="flex flex-row w-fit mx-auto gap-4">
-      <GameLog visible={false} />
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4 mx-8 md:mx-0">
         <Emoji />
         <div className="grid grid-cols-3 gap-4 w-full">
           <Status />
           <Action />
         </div>
       </div>
-      <GameLog visible={true} />
     </div>
   );
 }
