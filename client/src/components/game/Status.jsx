@@ -19,9 +19,9 @@ export default function Status() {
         <CardTitle>{gameState.name}</CardTitle>
 
         <CardDescription className="text-right">
-          <div>Emotion: {getRating(petState)}</div>
+          <>Emotion: {getRating(petState)}</>
           {/* <p>Status: {petState.status}</p> */}
-          <div>Multiplier x{gameState.tickMultiplier}</div>
+          <>Multiplier x{gameState.tickMultiplier}</>
         </CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col justify-between gap-2">
