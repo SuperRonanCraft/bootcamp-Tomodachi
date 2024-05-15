@@ -28,7 +28,7 @@ const formSchema = z.object({
     }),
 });
 
-export default function NewGameForm() {
+export default function NewGameForm({ setOpen }) {
   const [createGameData, { loading }] = useMutation(CREATE_GAME_DATA, {
     refetchQueries: [{ query: QUERY_USER }],
   });
@@ -62,7 +62,9 @@ export default function NewGameForm() {
             </FormItem>
           )}
         />
-        <Button type="submit">Click Me!</Button>
+        <Button type="submit" className="w-full" onClick={() => setOpen(false)}>
+          Click Me!
+        </Button>
       </form>
     </Form>
   );

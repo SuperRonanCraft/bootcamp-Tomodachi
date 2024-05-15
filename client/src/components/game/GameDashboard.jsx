@@ -10,11 +10,13 @@ import { UPDATE_GAMEDATA } from '../../utils/mutations';
 import { QUERY_USER } from '../../utils/queries';
 import { useParams } from 'react-router-dom';
 import auth from '../../utils/auth';
+import useGameHook from '../../lib/useGameHook';
 
 export default function GameDashboard() {
-  const { petState, setGameState, setPetState } = useGameContext();
+  const { petState } = useGameContext();
   const { food, happiness, energy } = petState;
   const { gameTick } = useGameLoop();
+  const { changeGame } = useGameHook();
   const { gameId } = useParams();
   const [updateGameData] = useMutation(UPDATE_GAMEDATA);
   const { loading, data } = useQuery(QUERY_USER, {
@@ -27,23 +29,8 @@ export default function GameDashboard() {
     // console.log(data.me.gameData);
     const gamesArray = data.me.gameData;
     const gameData = gamesArray.filter(({ _id }) => _id === gameId)[0];
-    // console.log(gameData);
-    setGameState((prev) => {
-      const newGame = { ...prev };
-      newGame.name = gameData.name;
-      newGame.gameId = gameId;
-      return newGame;
-    });
-    setPetState((prev) => {
-      // console.log('Pet', prev);
-      const newPet = { ...prev };
-      newPet.food = gameData.food;
-      newPet.energy = gameData.energy;
-      newPet.happiness = gameData.happiness;
-      // console.log('New Pet', newPet);
-      return newPet;
-    });
-  }, [loading]);
+    changeGame(gameData);
+  }, [loading, gameId]);
 
   //Update data
   useEffect(() => {
@@ -63,6 +50,7 @@ export default function GameDashboard() {
 
   //Game Tick
   useEffect(() => {
+    if (food <= 0 || happiness <= 0 || energy <= 0) return;
     const interval = setInterval(() => {
       // console.log(petState);
 
@@ -77,7 +65,7 @@ export default function GameDashboard() {
   if (loading) return <h2>Loading</h2>;
 
   return (
-    <div className="flex flex-row w-fit mx-auto gap-4 mt-64">
+    <div className="flex flex-row w-fit mx-auto gap-4 mt-24">
       <div className="flex flex-col gap-4 mx-8 md:mx-0">
         <TabContainer />
         <Emoji />
