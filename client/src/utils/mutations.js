@@ -1,4 +1,34 @@
 import { gql } from '@apollo/client';
+export const UPDATE_GAMEDATA = gql`
+  mutation UpdateGameData(
+    $userId: String!
+    $gameId: ID!
+    $food: Int
+    $energy: Int
+    $happiness: Int
+  ) {
+    updateGameData(
+      userId: $userId
+      gameId: $gameId
+      food: $food
+      energy: $energy
+      happiness: $happiness
+    ) {
+      _id
+      email
+      username
+      gameData {
+        _id
+        food
+        energy
+        happiness
+        name
+        lastSaveDate
+        createdDate
+      }
+    }
+  }
+`;
 export const LOGIN = gql`
   mutation loginUser($username: String!, $password: String!) {
     login(username: $username, password: $password) {
