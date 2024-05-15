@@ -10,6 +10,7 @@ export default function Nav() {
           {/* Use flex to align items and justify between to space out the links and theme toggle */}
           <ul className="flex items-center justify-between space-x-4">
             {/* Group links in a flex container with horizontal spacing */}
+            <div className="flex space-x-4"></div>
             <li>
               <Link to="/landing">Home</Link>
             </li>
