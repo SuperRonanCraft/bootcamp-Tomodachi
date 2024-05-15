@@ -6,26 +6,32 @@ export default function Nav() {
     <div>
       <main>
         {/* Position the nav bar absolutely with left, right, and top set to 0 */}
-        <nav className="bg-blue-500 absolute left-0 right-0 top-0 p-4 bg-white shadow-md p-4">
+        <nav className="absolute left-0 right-0 top-0 p-4 bg-white shadow-md w-full">
           {/* Use flex to align items and justify-between to space out the links and theme toggle */}
           <ul className="flex items-center justify-between w-full">
             {/* Group links in a flex container with horizontal spacing */}
-            <div className="flex space-x-4"></div>
-            <li>
-              <Link to="/landing">Home</Link>
-            </li>
-            <li>
-              <Link to="/profile">Profile</Link>
-            </li>
-            <li>
-              <Link to="/leaderboard">Leaderboard</Link>
-            </li>
-            <li className="absolute right-0 z-10 mt-2 w-48">
-              <Link to="/signup"> Sign up </Link>
-              <Link to="/login"> Login </Link>
-            </li>
+            <div className="flex space-x-4">
+              <li>
+                <Link to="/landing" className="text-black">Home</Link>
+              </li>
+              <li>
+                <Link to="/profile" className="text-black">Profile</Link>
+              </li>
+              <li>
+                <Link to="/leaderboard" className="text-black">Leaderboard</Link>
+              </li>
+              <li>
+                <Link to="/signup" className="text-black">Sign up</Link>
+              </li>
+              <li>
+                <Link to="/login" className="text-black">Login</Link>
+              </li>
+            </div>
+            {/* Place ModeToggle to the right side */}
+            <div>
+              <ModeToggle />
+            </div>
           </ul>
-          <ModeToggle />
         </nav>
       </main>
     </div>

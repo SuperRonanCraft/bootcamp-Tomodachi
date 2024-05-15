@@ -17,8 +17,8 @@ type GameData {
     energy: Int
     happiness: Int
     name: String
-    createDate:Int
-    lastSavedDate:Int
+    createdDate: Float
+    lastSaveDate: Float
 }
 
 type Query{
@@ -30,9 +30,10 @@ type Mutation{
     addUser(username: String!, email: String!, password: String!): Auth
     updateUser(username: String, _id:ID): User
     login(username: String!, password: String!): Auth
-    createGameData(food:Int, energy:Int, happiness:Int, name:String!, userId:String!):User
-    deleteUser(_id:ID!):User
-    deleteGameData(userId:String!, _id:ID!):User
+    createGameData(food:Int, energy:Int, happiness:Int, name:String!, userId:String!): User
+    deleteUser(_id:ID!): User
+    deleteGameData(userId:String!, gameId:ID!): User
+    updateGameData(userId:String!, gameId:ID!, food:Int, energy:Int, happiness:Int): User
 }
 `;
 module.exports = typeDefs;

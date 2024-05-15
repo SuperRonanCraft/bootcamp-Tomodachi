@@ -32,11 +32,11 @@ export default function useGameLogic() {
   }
 
   function warning(message) {
-    setGameState((prev) => {
-      const newLog = [...prev.logs];
-      newLog.push(createPetLog(message));
-      return { ...prev, logs: newLog };
-    });
+    // setGameState((prev) => {
+    //   const newLog = [...prev.logs];
+    //   newLog.push(createPetLog(message));
+    //   return { ...prev, logs: newLog };
+    // });
     showToast(message);
     console.log(message);
   }
@@ -278,9 +278,9 @@ export default function useGameLogic() {
     //Test to make sure that the pet is not going to die
     if (checkImpactDeath(valuesAfter) === false) {
       const newPet = { ...pet };
-      newPet.food = valuesAfter.food;
-      newPet.happiness = valuesAfter.happiness;
-      newPet.energy = valuesAfter.energy;
+      newPet.food = Math.min(valuesAfter.food, 100);
+      newPet.happiness = Math.min(valuesAfter.happiness, 100);
+      newPet.energy = Math.min(valuesAfter.energy, 100);
       setPetState(newPet);
       checkForDanger();
     } else {
