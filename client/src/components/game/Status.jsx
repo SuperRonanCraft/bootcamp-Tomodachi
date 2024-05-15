@@ -14,7 +14,7 @@ import { getRating } from '../../lib/petStatus';
 export default function Status() {
   const { petState, gameState } = useGameContext();
   return (
-    <Card className="col-span-2">
+    <Card className="col-span-3 md:col-span-2">
       <CardHeader className="flex flex-row justify-between">
         <CardTitle>{gameState.name} </CardTitle>
 
