@@ -22,8 +22,8 @@ export default function GameDashboard() {
   });
   //Download data
   useEffect(() => {
-    // console.log('DOWNLOADING!');
     if (loading) return;
+    // console.log('DOWNLOADING!');
     // console.log(data.me.gameData);
     const gamesArray = data.me.gameData;
     const gameData = gamesArray.filter(({ _id }) => _id === gameId)[0];
@@ -43,7 +43,7 @@ export default function GameDashboard() {
       // console.log('New Pet', newPet);
       return newPet;
     });
-  }, [data, gameId]);
+  }, [loading]);
 
   //Update data
   useEffect(() => {

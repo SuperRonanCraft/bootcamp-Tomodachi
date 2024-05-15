@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ModeToggle } from '../ModeToggle';
 import AuthService from '../../utils/auth';
+import { Button } from '../ui/button';
 
 export default function Nav() {
   return (
@@ -35,9 +36,7 @@ export default function Nav() {
                     </Link>
                   </li>
                   <li>
-                    <Link to="/logout" className="text-background">
-                      Logout
-                    </Link>
+                    <Button onClick={AuthService.logout}>Logout</Button>
                   </li>
                 </>
               ) : (
@@ -52,9 +51,9 @@ export default function Nav() {
                       Login
                     </Link>
                   </li>
-                  <ModeToggle />
                 </>
               )}
+              <ModeToggle />
             </div>
             {/* Place ModeToggle to the right side */}
           </ul>

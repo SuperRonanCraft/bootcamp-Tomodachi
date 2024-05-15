@@ -14,7 +14,7 @@ export default function TabContainer() {
 
   const gamesArray = data.me.gameData;
 
-  console.log(gamesArray);
+  // console.log(gamesArray);
 
   return (
     <ul className="flex flex-row gap-2">

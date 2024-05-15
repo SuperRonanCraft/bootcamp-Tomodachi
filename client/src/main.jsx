@@ -10,6 +10,7 @@ import Login from './pages/login.jsx';
 import SignUp from './pages/SignUp.jsx';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import EmptyGame from './components/game/EmptyGame.jsx';
+import AuthGuard from './components/landing/AuthGuard.jsx';
 
 const router = createBrowserRouter([
   {
@@ -19,14 +20,6 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <EmptyGame />,
-      },
-      {
-        path: '/:gameId',
-        element: <Game />,
-      },
-      {
-        path: '/profile',
-        element: <Profile />,
       },
       {
         path: '/landing',
@@ -43,6 +36,19 @@ const router = createBrowserRouter([
       {
         path: '/signup',
         element: <SignUp />,
+      },
+      {
+        element: <AuthGuard />,
+        children: [
+          {
+            path: '/:gameId',
+            element: <Game />,
+          },
+          {
+            path: '/profile',
+            element: <Profile />,
+          },
+        ],
       },
     ],
   },
