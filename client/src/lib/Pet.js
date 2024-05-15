@@ -23,7 +23,7 @@ export function createPetLog(text, importance = IMPORTANCE.NORMAL) {
     minute: 'numeric',
     second: 'numeric',
     hour12: false,
-    timeZone: 'America/Los_Angeles',
+    timeZone: 'America/New_York',
   };
   const log = {
     timestamp: new Intl.DateTimeFormat('en-US', options).format(new Date()),
@@ -57,7 +57,7 @@ export const POSSIBILITIES = {
 export const THRESHOLDS = {
   death: 0,
   life: 3,
-  deductionPoint: 30,
+  deductionPoint: 20,
 };
 
 export const IMPORTANCE = {

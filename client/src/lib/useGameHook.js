@@ -2,33 +2,29 @@ import { useGameContext } from '../context/GameContext';
 import useGameLogic from './useGameLogic';
 import useGameLoop from './useGameLoop';
 
+//Gives access to buttons to call these functions
 export default function useGameHook() {
-  const { petState: pet, setPetState } = useGameContext();
+  const { gameState } = useGameContext();
   const { startGame } = useGameLoop();
-  const { battle, executeAction } = useGameLogic();
+  const { battle, executeAction, warning } = useGameLogic();
 
   function play(happiness_array) {
-    const newPet = { ...pet };
-    const outcome = executeAction(newPet, 'play', { happiness_array });
-    setPetState(newPet);
+    // warning(`${gameState.name} is playing!`);
+    executeAction('play', { happiness_array });
   }
 
   function feed() {
-    const newPet = { ...pet };
-    const outcome = executeAction(newPet, 'feed');
-    setPetState(newPet);
+    // warning(`${gameState.name} has been feed!`);
+    executeAction('feed');
   }
 
   function sleep() {
-    const newPet = { ...pet };
-    const outcome = executeAction(newPet, 'sleep');
-    setPetState(newPet);
+    // warning(`${gameState.name} is taking a nap...`);
+    executeAction('sleep');
   }
 
   function battleBeast() {
-    const newPet = { ...pet };
-    const outcome = battle(newPet);
-    setPetState(newPet);
+    battle();
   }
 
   function gameLoop() {

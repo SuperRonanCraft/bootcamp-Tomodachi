@@ -30,7 +30,7 @@ export default function GameLog({ visible }) {
 
   let logs = gameState.logs;
   if (gameState.logs.length > 12) {
-    logs = logs.slice(-12);
+    // logs = logs.slice(-12);
     console.log(logs);
   }
 
@@ -45,8 +45,8 @@ export default function GameLog({ visible }) {
       </CardHeader>
       <CardContent>
         <ul className="flex flex-col divide-y divide-solid">
-          {logs.map(({ text, timestamp }) => (
-            <li key={timestamp}>
+          {logs.map(({ text, timestamp }, index) => (
+            <li key={timestamp + index}>
               <p className="text-xs text-muted-foreground mt-2">{timestamp}</p>
               <p className="mb-2">{text}</p>
             </li>

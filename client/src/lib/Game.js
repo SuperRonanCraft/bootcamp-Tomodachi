@@ -1,4 +1,4 @@
-export default function createGame(name, tickMultiplier = 6) {
+export default function createGame(name, tickMultiplier = 1) {
   return {
     name,
     tickMultiplier,
