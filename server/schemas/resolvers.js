@@ -34,15 +34,22 @@ const resolvers = {
 
       return { token, user };
     },
-    updateUser: async (_, args, context) => {
-      if (context.user) {
-        const user = await User.findByIdAndUpdate(context.user._id, args, {
-          new: true,
-        });
-        return { user };
+    updateUser: async (_, { username, _id }) => {
+      try {
+        const user = await User.findByIdAndUpdate(
+          _id,
+          { username },
+          {
+            new: true,
+          }
+        );
+        if (!user) {
+          throw AuthenticationError;
+        }
+        return user;
+      } catch (err) {
+        throw AuthenticationError;
       }
-
-      throw AuthenticationError;
     },
     createGameData: async (
       parent,
@@ -100,5 +107,4 @@ const resolvers = {
     },
   },
 };
-
 module.exports = resolvers;
