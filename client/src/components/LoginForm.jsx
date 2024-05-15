@@ -8,6 +8,14 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { Button } from '@/components/ui/button';
 import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+} from '@/components/ui/card';
+import {
   Form,
   FormControl,
   FormDescription,
@@ -49,58 +57,74 @@ const LoginForm = () => {
 
   //A react form for the user to fill out that we will export from this page
   return (
-    <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="gap-8 mx-8 w-[600px] flex flex-col"
-      >
-        <FormField
-          control={form.control}
-          name="username"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Username</FormLabel>
-              <FormControl>
-                <Input placeholder="Username" {...field} />
-              </FormControl>
-              <FormDescription>
-                This is your public display name.
-              </FormDescription>
-              {form.formState.errors.username && (
-                <FormMessage>
-                  {form.formState.errors.username.message}
-                </FormMessage>
-              )}
-            </FormItem>
-          )}
-        />
+    <div className="container mx-auto">
+      <Card>
+        <CardHeader>
+          <CardTitle>Log In</CardTitle>
+          <CardDescription>
+            You must be logged in to play the game
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Form {...form}>
+            <form
+              onSubmit={form.handleSubmit(onSubmit)}
+              className="gap-8 flex flex-col"
+            >
+              <FormField
+                control={form.control}
+                name="username"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Username</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Username" {...field} />
+                    </FormControl>
+                    <FormDescription>
+                      This is your public display name.
+                    </FormDescription>
+                    {form.formState.errors.username && (
+                      <FormMessage>
+                        {form.formState.errors.username.message}
+                      </FormMessage>
+                    )}
+                  </FormItem>
+                )}
+              />
 
-        <FormField
-          control={form.control}
-          name="password"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Password</FormLabel>
-              <FormControl>
-                <Input type="password" placeholder="Password" {...field} />
-              </FormControl>
-              <FormDescription>This is your password.</FormDescription>
-              {form.formState.errors.password && (
-                <FormMessage>
-                  {form.formState.errors.password.message}
-                </FormMessage>
-              )}
-            </FormItem>
-          )}
-        />
-        <div className="flex justify-center">
-          <Button className="w-[200px] " type="submit" disabled={loading}>
-            {loading ? 'Signing up...' : 'Sign up'}
-          </Button>
-        </div>
-        {error && <p>Error: {error.message}</p>}
-      </form>
-    </Form>
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Password</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="password"
+                        placeholder="Password"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormDescription>This is your password.</FormDescription>
+                    {form.formState.errors.password && (
+                      <FormMessage>
+                        {form.formState.errors.password.message}
+                      </FormMessage>
+                    )}
+                  </FormItem>
+                )}
+              />
+              <div className="flex justify-center">
+                <Button className="w-[200px] " type="submit" disabled={loading}>
+                  {loading ? 'Signing up...' : 'Sign up'}
+                </Button>
+              </div>
+              {error && <p>Error: {error.message}</p>}
+            </form>
+          </Form>
+        </CardContent>
+      </Card>
+    </div>
   );
 };
 

@@ -43,8 +43,8 @@ export const LOGIN = gql`
           energy
           happiness
           name
-          createDate
-          lastSavedDate
+          createdDate
+          lastSaveDate
         }
       }
     }
@@ -64,8 +64,8 @@ export const ADD_USER = gql`
           energy
           happiness
           name
-          createDate
-          lastSavedDate
+          createdDate
+          lastSaveDate
         }
       }
     }
@@ -91,8 +91,8 @@ export const UPDATE_USER = gql`
         energy
         happiness
         name
-        createDate
-        lastSavedDate
+        createdDate
+        lastSaveDate
       }
     }
   }
@@ -122,8 +122,8 @@ export const CREATE_GAME_DATA = gql`
         energy
         happiness
         name
-        createDate
-        lastSavedDate
+        createdDate
+        lastSaveDate
       }
     }
   }
@@ -141,8 +141,8 @@ export const DELETE_GAME_DATA = gql`
         energy
         happiness
         name
-        createDate
-        lastSavedDate
+        createdDate
+        lastSaveDate
       }
     }
   }

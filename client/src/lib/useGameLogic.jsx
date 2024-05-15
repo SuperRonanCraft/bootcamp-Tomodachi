@@ -15,7 +15,7 @@ export default function useGameLogic() {
 
   function showToast(message) {
     toast(message, {
-      description: 'Please wait to replenish food',
+      // description: 'Please wait to replenish food',
       icon: <BeerOff />,
       cancel: {
         label: (

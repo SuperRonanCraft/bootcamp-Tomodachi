@@ -22,8 +22,8 @@ export default function GameDashboard() {
   });
   //Download data
   useEffect(() => {
-    // console.log('DOWNLOADING!');
     if (loading) return;
+    // console.log('DOWNLOADING!');
     // console.log(data.me.gameData);
     const gamesArray = data.me.gameData;
     const gameData = gamesArray.filter(({ _id }) => _id === gameId)[0];
@@ -43,7 +43,7 @@ export default function GameDashboard() {
       // console.log('New Pet', newPet);
       return newPet;
     });
-  }, [data]);
+  }, [loading]);
 
   //Update data
   useEffect(() => {
@@ -77,7 +77,7 @@ export default function GameDashboard() {
   if (loading) return <h2>Loading</h2>;
 
   return (
-    <div className="flex flex-row w-fit mx-auto gap-4">
+    <div className="flex flex-row w-fit mx-auto gap-4 mt-64">
       <div className="flex flex-col gap-4 mx-8 md:mx-0">
         <TabContainer />
         <Emoji />
