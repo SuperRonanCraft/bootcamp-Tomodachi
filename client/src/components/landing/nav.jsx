@@ -21,6 +21,8 @@ export default function Nav() {
                 <Link to="/leaderboard" className="text-black">Leaderboard</Link>
               </li>
             </div>
+            {/* Empty spacer to push Sign Up and Log In links to the right */}
+            <div className="flex-grow" />
             {/* Place Sign Up and Log In links to the right side */}
             <div className="flex space-x-4">
               <li>
