@@ -29,7 +29,7 @@ const formSchema = z.object({
 });
 
 export default function NewGameForm() {
-  const [addGame, { loading }] = useMutation(CREATE_GAME_DATA);
+  const [createGameData, { loading }] = useMutation(CREATE_GAME_DATA);
 
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -40,7 +40,7 @@ export default function NewGameForm() {
 
   function onSubmit({ name }) {
     console.log(name, auth.getProfile().data._id);
-    addGame({ variables: { name, userId: auth.getProfile().data._id } });
+    createGameData({ variables: { name, userId: auth.getProfile().data._id } });
   }
 
   return (

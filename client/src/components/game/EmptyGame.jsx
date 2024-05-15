@@ -17,7 +17,7 @@ import NewGameForm from '@/components/NewGameForm';
 export default function EmptyGame() {
   return (
     <div className="flex justify-center items-center h-screen">
-      <Card>
+      <Card className="min-w-[400px]">
         <CardHeader>
           <CardTitle>You have no games</CardTitle>
           <CardDescription>Create a new Game</CardDescription>
