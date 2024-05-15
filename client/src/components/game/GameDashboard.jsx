@@ -43,7 +43,7 @@ export default function GameDashboard() {
       // console.log('New Pet', newPet);
       return newPet;
     });
-  }, [data]);
+  }, [data, gameId]);
 
   //Update data
   useEffect(() => {
