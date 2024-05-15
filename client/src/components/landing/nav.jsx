@@ -21,16 +21,22 @@ export default function Nav() {
                 <Link to="/leaderboard" className="text-black">Leaderboard</Link>
               </li>
             </div>
+            {/* Empty spacer to push Sign Up and Log In links to the right */}
+            <div className="flex-grow" />
+            {/* Place Sign Up and Log In links to the right side */}
+            <div className="flex space-x-4">
+              <li className="ml-2">
+                <Link to="/signup" className="text-black">Sign up</Link>
+              </li>
+              <li className="ml-2">
+                <Link to="/login" className="text-black">Login</Link>
+              </li>
+            </div>
             {/* Place ModeToggle to the right side */}
             <div>
               <ModeToggle />
             </div>
           </ul>
-          {/* Align Sign Up and Log In links to the right */}
-          <div className="flex justify-end">
-            <Link to="/signup" className="text-black">Sign up</Link>
-            <Link to="/login" className="text-black ml-4">Login</Link>
-          </div>
         </nav>
       </main>
     </div>
