@@ -95,7 +95,7 @@ const LoginForm = () => {
         />
         <div className="flex justify-center">
           <Button className="w-[200px] " type="submit" disabled={loading}>
-            {loading ? 'Signing up...' : 'Sign up'}
+            {loading ? 'Logging in...' : 'Login'}
           </Button>
         </div>
         {error && <p>Error: {error.message}</p>}
