@@ -122,8 +122,8 @@ export const CREATE_GAME_DATA = gql`
         energy
         happiness
         name
-        createDate
-        lastSavedDate
+        createdDate
+        lastSaveDate
       }
     }
   }
