@@ -1,37 +1,47 @@
 import { useState } from 'react';
 import { useMutation } from '@apollo/client';
-import AuthService from './utils/auth';
+import AuthService from '../utils/auth';
 import React from 'react';
-import { LOGIN_USER } from './utils/mutations';
-// Add login mutation here
+import { LOGIN } from '../utils/mutations';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+import { Button } from '@/components/ui/button';
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+
+const formSchema = z.object({
+  username: z.string().min(3, {
+    message: 'Username must be at least 3 characters.',
+  }),
+  password: z.string().min(6, {
+    message: 'Password must be at least 6 characters.',
+  }),
+});
 
 const LoginForm = () => {
-  const [formState, setFormState] = useState({
-    username: '',
-    password: '',
+  const form = useForm({
+    resolver: zodResolver(formSchema),
   });
-  //LOGIN_USER Mututation for logging in and checking for errors
-  const [loginUser, { loading, error }] = useMutation(LOGIN_USER);
-  //If login is successful handle form submission
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setFormState({
-      ...formState,
-      [name]: value,
-    });
-  };
 
-  const handleFormSubmit = async (event) => {
-    event.preventDefault();
+  const [loginUser, { loading, error }] = useMutation(LOGIN);
+
+  const onSubmit = async (formData) => {
     try {
       const { data } = await loginUser({
-        variables: {
-          username: formState.username,
-          password: formState.password,
-        },
+        variables: formData,
       });
 
-      AuthService.login(data.login.token); // Assuming your auth module handles login token
+      console.log(formData);
+      AuthService.login(data.login.token);
     } catch (error) {
       console.error('Login error:', error);
     }
@@ -39,28 +49,58 @@ const LoginForm = () => {
 
   //A react form for the user to fill out that we will export from this page
   return (
-    <form onSubmit={handleFormSubmit}>
-      <input
-        type="username"
-        id="username"
-        name="username"
-        value={formState.username}
-        onChange={handleInputChange}
-        placeholder="Username"
-      />
-      <input
-        type="password"
-        id="password"
-        name="password"
-        value={formState.password}
-        onChange={handleInputChange}
-        placeholder="Password"
-      />
-      <button type="submit" disabled={loading}>
-        {loading ? 'Logging in...' : 'Log in'}
-      </button>
-      {error && <p>Error: {error.message}</p>}
-    </form>
+    <Form {...form}>
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="gap-8 mx-8 w-[600px] flex flex-col"
+      >
+        <FormField
+          control={form.control}
+          name="username"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Username</FormLabel>
+              <FormControl>
+                <Input placeholder="Username" {...field} />
+              </FormControl>
+              <FormDescription>
+                This is your public display name.
+              </FormDescription>
+              {form.formState.errors.username && (
+                <FormMessage>
+                  {form.formState.errors.username.message}
+                </FormMessage>
+              )}
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="password"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Password</FormLabel>
+              <FormControl>
+                <Input type="password" placeholder="Password" {...field} />
+              </FormControl>
+              <FormDescription>This is your password.</FormDescription>
+              {form.formState.errors.password && (
+                <FormMessage>
+                  {form.formState.errors.password.message}
+                </FormMessage>
+              )}
+            </FormItem>
+          )}
+        />
+        <div className="flex justify-center">
+          <Button className="w-[200px] " type="submit" disabled={loading}>
+            {loading ? 'Signing up...' : 'Sign up'}
+          </Button>
+        </div>
+        {error && <p>Error: {error.message}</p>}
+      </form>
+    </Form>
   );
 };
 
