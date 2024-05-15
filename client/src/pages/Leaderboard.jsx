@@ -1,3 +1,5 @@
+import LeaderboardTable from '../components/LeaderboardTable';
+
 export default function Leaderboard() {
   return (
     <div className="container">
@@ -8,6 +10,10 @@ export default function Leaderboard() {
         Care for your Tomodachis and comepete with other users for a spot on our
         leaderboard!
       </h2>
+
+      <div className="container">
+        <LeaderboardTable />
+      </div>
     </div>
   );
 }
