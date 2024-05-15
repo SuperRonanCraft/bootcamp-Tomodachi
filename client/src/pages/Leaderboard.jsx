@@ -1,3 +1,13 @@
 export default function Leaderboard() {
-  return <div>This is the Leadeboard Page</div>;
+  return (
+    <div className="container">
+      <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-7xl text-center my-8 bg-gradient-to-r from-violet-600 to-rose-400 text-transparent bg-clip-text">
+        Tomodachi Leaderboard
+      </h1>
+      <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold text-center tracking-tight first:mt-0 my-8">
+        Care for your Tomodachis and comepete with other users for a spot on our
+        leaderboard!
+      </h2>
+    </div>
+  );
 }
