@@ -10,13 +10,18 @@ import {
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-// import auth from '@/utils/auth';
+import auth from '@/utils/auth';
 
 const ChangeUsername = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">Edit Username</Button>
+        <Button
+          variant="outline"
+          className="rounded-lg border drop-shadow-md hover:drop-shadow-xl dark:border-primary dark:border-3 dark:shadow-primary dark:shadow-md m-8"
+        >
+          Edit Username
+        </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
@@ -30,13 +35,17 @@ const ChangeUsername = () => {
             <Label htmlFor="name" className="text-right">
               Name
             </Label>
-            <Input id="name" value="Pedro Duarte" className="col-span-3" />
+            <Input id="name" placeholder="name" className="col-span-3" />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="username" className="text-right">
               Username
             </Label>
-            <Input id="username" value="@peduarte" className="col-span-3" />
+            <Input
+              id="username"
+              placeholder="new username"
+              className="col-span-3"
+            />
           </div>
         </div>
         <DialogFooter>
