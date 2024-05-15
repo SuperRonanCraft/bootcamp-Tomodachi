@@ -12,7 +12,7 @@ import { useParams } from 'react-router-dom';
 import auth from '../../utils/auth';
 
 export default function GameDashboard() {
-  const { petState, setGameState } = useGameContext();
+  const { petState, setGameState, setPetState } = useGameContext();
   const { food, happiness, energy } = petState;
   const { gameTick } = useGameLoop();
   const { gameId } = useParams();
@@ -22,14 +22,33 @@ export default function GameDashboard() {
   });
   //Download data
   useEffect(() => {
-    //setGameState((prev) => {
-    //const _data = { ...prev };
-    //return data;
-    //});
+    // console.log('DOWNLOADING!');
+    if (loading) return;
+    // console.log(data.me.gameData);
+    const gamesArray = data.me.gameData;
+    const gameData = gamesArray.filter(({ _id }) => _id === gameId)[0];
+    // console.log(gameData);
+    setGameState((prev) => {
+      const newGame = { ...prev };
+      newGame.name = gameData.name;
+      newGame.gameId = gameId;
+      return newGame;
+    });
+    setPetState((prev) => {
+      // console.log('Pet', prev);
+      const newPet = { ...prev };
+      newPet.food = gameData.food;
+      newPet.energy = gameData.energy;
+      newPet.happiness = gameData.happiness;
+      // console.log('New Pet', newPet);
+      return newPet;
+    });
   }, [data]);
 
   //Update data
   useEffect(() => {
+    // console.log('UPLOADING!');
+    if (loading) return;
     const data = {
       userId: auth.getProfile().data._id,
       gameId,
@@ -56,8 +75,6 @@ export default function GameDashboard() {
   }, [food, happiness, energy]);
 
   if (loading) return <h2>Loading</h2>;
-
-  console.log('GAMEDATA:', data);
 
   return (
     <div className="flex flex-row w-fit mx-auto gap-4">
