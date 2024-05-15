@@ -5,7 +5,7 @@ export default function Nav() {
   return (
     <div>
       <main>
-        {/* Add Tailwind CSS classes for primary color background and */}
+        {/* Position the nav bar absolutely with left, right, and top set to 0 */}
         <nav className="bg-blue-500 p-4">
           {/* Use flex to align items and justify between to space out the links and theme toggle */}
           <ul className="flex items-center justify-between space-x-4">
