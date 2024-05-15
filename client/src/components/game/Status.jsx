@@ -16,12 +16,12 @@ export default function Status() {
   return (
     <Card className="col-span-3 md:col-span-2">
       <CardHeader className="flex flex-row justify-between">
-        <CardTitle>{gameState.name} </CardTitle>
+        <CardTitle>{gameState.name}</CardTitle>
 
         <CardDescription className="text-right">
-          <p>Emotion: {getRating(petState)}</p>
+          <div>Emotion: {getRating(petState)}</div>
           {/* <p>Status: {petState.status}</p> */}
-          <p>Multiplier x{gameState.tickMultiplier}</p>
+          <div>Multiplier x{gameState.tickMultiplier}</div>
         </CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col justify-between gap-2">
