@@ -1,74 +1,77 @@
+'use client';
+
 import { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import AuthService from './utils/auth';
 import React from 'react';
 import { SIGN_UP_USER } from './utils/mutations';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+
+import { Button } from '@/components/ui/button';
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+
+const formSchema = z.object({
+  username: z.string().min(3, {
+    message: 'Username must be at least 3 characters.',
+  }),
+  password: z.string().min(6, {
+    message: 'Password must be at least 6 characters.',
+  }),
+});
 
 const SignUpForm = () => {
-  const [formState, setFormState] = useState({
-    username: '',
-    email: '',
-    password: '',
+  const form = useForm({
+    resolver: zodResolver(formSchema),
   });
 
   const [signUpUser, { loading, error }] = useMutation(SIGN_UP_USER);
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setFormState({
-      ...formState,
-      [name]: value,
-    });
-  };
-
-  const handleFormSubmit = async (event) => {
-    event.preventDefault();
+  const handleFormSubmit = async (formData) => {
     try {
       const { data } = await signUpUser({
-        variables: {
-          username: formState.username,
-          email: formState.email,
-          password: formState.password,
-        },
+        variables: formData,
       });
 
-      AuthService.login(data.signUp.token);
+      console.log(data);
+      AuthService.login(data.addUser.token);
     } catch (error) {
       console.error('Sign up error:', error);
     }
   };
 
   return (
-    <form onSubmit={handleFormSubmit}>
-      <input
-        type="email"
-        id="email"
-        name="email"
-        value={formState.email}
-        onChange={handleInputChange}
-        placeholder="Email"
-      />
-      <input
-        type="text"
-        id="username"
-        name="username"
-        value={formState.username}
-        onChange={handleInputChange}
-        placeholder="Username"
-      />
-      <input
-        type="password"
-        id="password"
-        name="password"
-        value={formState.password}
-        onChange={handleInputChange}
-        placeholder="Password"
-      />
-      <button type="submit" disabled={loading}>
-        {loading ? 'Signing up...' : 'Sign up'}
-      </button>
-      {error && <p>Error: {error.message}</p>}
-    </form>
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <FormField
+          control={form.control}
+          name="username"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Username</FormLabel>
+              <FormControl>
+                <Input placeholder="shadcn" {...field} />
+              </FormControl>
+              <FormDescription>
+                This is your public display name.
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <Button type="submit">Submit</Button>
+      </form>
+    </Form>
   );
 };
 
