@@ -30,7 +30,7 @@ export default function GameDashboard() {
     const gamesArray = data.me.gameData;
     const gameData = gamesArray.filter(({ _id }) => _id === gameId)[0];
     changeGame(gameData);
-  }, [loading]);
+  }, [loading, gameId]);
 
   //Update data
   useEffect(() => {
