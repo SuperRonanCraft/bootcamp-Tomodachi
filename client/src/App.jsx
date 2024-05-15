@@ -20,7 +20,7 @@ function App() {
           <Nav />
           <Outlet />
         </TooltipProvider>
-        <Toaster />
+        <Toaster position="top-right" />
       </ThemeProvider>
     </ApolloProvider>
   );
