@@ -60,8 +60,10 @@ const LoginForm = () => {
     <div className="container mx-auto">
       <Card>
         <CardHeader>
-          <CardTitle>Create an account</CardTitle>
-          <CardDescription>You must create an account to play</CardDescription>
+          <CardTitle>Log In</CardTitle>
+          <CardDescription>
+            You must be logged in to play the game
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <Form {...form}>
