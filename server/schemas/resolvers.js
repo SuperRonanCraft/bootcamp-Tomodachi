@@ -34,14 +34,17 @@ const resolvers = {
 
       return { token, user };
     },
-    updateUser: async (_, args, context) => {
+    updateUser: async (_, { username, _id }, context) => {
       if (context.user) {
-        const user = await User.findByIdAndUpdate(context.user._id, args, {
-          new: true,
-        });
-        return { user };
+        const user = await User.findByIdAndUpdate(
+          _id,
+          { username },
+          {
+            new: true,
+          }
+        );
+        return user;
       }
-
       throw AuthenticationError;
     },
     createGameData: async (
