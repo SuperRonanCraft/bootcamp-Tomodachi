@@ -9,6 +9,7 @@ import Leaderboard from './pages/Leaderboard.jsx';
 import Login from './pages/login.jsx';
 import SignUp from './pages/SignUp.jsx';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import EmptyGame from './components/game/EmptyGame.jsx';
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
+        element: <EmptyGame />,
+      },
+      {
+        path: '/:gameId',
         element: <Game />,
       },
       {
