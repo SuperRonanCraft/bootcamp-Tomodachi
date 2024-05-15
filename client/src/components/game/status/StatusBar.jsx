@@ -6,7 +6,7 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip';
 
-export default function StatusBar({ icon, value, tooltip }) {
+export default function StatusBar({ icon, value, tooltip, indicatorClass }) {
   return (
     <div className="flex flex-row items-center gap-3">
       <Tooltip>
@@ -16,7 +16,7 @@ export default function StatusBar({ icon, value, tooltip }) {
         </TooltipContent>
       </Tooltip>
 
-      <Progress value={value} />
+      <Progress value={value} indicatorClass={indicatorClass} />
     </div>
   );
 }

@@ -1,14 +1,12 @@
 import { STATUS } from '../lib/petStatus';
 
 export default function createPet(
-  name,
   food = 30,
   happiness = 25,
   energy = 50,
   status = STATUS.IDLE
 ) {
   return {
-    name,
     food,
     happiness,
     energy,
@@ -19,6 +17,24 @@ export default function createPet(
   };
 }
 
+export function createPetLog(text, importance = IMPORTANCE.NORMAL) {
+  const options = {
+    hour: 'numeric',
+    minute: 'numeric',
+    second: 'numeric',
+    hour12: false,
+    timeZone: 'America/New_York',
+  };
+  const log = {
+    timestamp: new Intl.DateTimeFormat('en-US', options).format(new Date()),
+    text,
+    importance,
+  };
+
+  // console.log(log);
+  return log;
+}
+
 export const POSSIBILITIES = {
   // how each action can change pet data
   play: {
@@ -27,7 +43,7 @@ export const POSSIBILITIES = {
     energy: [-2, -3, -4], //[-1, -2, -3],
   },
   feed: {
-    food: [3, 4, 5], //[2, 3, 4, 5],
+    food: [6, 8, 10], //[2, 3, 4, 5],
     happiness: [2, 3, 4], //[1, 2, 3, 4],
     energy: [-1, -2, -3], //[-2, -3, -4],
   },
@@ -41,5 +57,11 @@ export const POSSIBILITIES = {
 export const THRESHOLDS = {
   death: 0,
   life: 3,
-  deductionPoint: 30,
+  deductionPoint: 20,
+};
+
+export const IMPORTANCE = {
+  NORMAL: 'normal',
+  WARNING: 'warning',
+  SEVERE: 'severe',
 };

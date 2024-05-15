@@ -1,6 +1,6 @@
 import { BeerOff, UtensilsCrossed, X } from 'lucide-react';
 import ActionButton from './ActionButton';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import useGameHook from '../../../lib/useGameHook';
@@ -10,6 +10,16 @@ export default function Feed() {
 
   // call the game logic hook here and add onclick to buttons (for alain)
   const [foodCount, setFoodCount] = useState(10);
+  const [feedButton, setFeedButton] = useState({ enabled: true, cooldown: 0 });
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [feedButton]);
+
+  function cooldown() {
+    setFeedButton(false);
+    setTimeout(() => {}, 10000);
+  }
 
   function handleFeed() {
     if (foodCount <= 0) {
@@ -32,6 +42,7 @@ export default function Feed() {
     }
     feed();
     setFoodCount((prev) => prev - 1);
+    cooldown();
   }
 
   return (
@@ -41,7 +52,7 @@ export default function Feed() {
           <p className="text-xs">{foodCount}</p>
         </div>
         <ActionButton
-          onClick={handleFeed}
+          onClick={feedButton ? handleFeed : () => {}}
           text="Feed"
           icon={<UtensilsCrossed />}
         />
