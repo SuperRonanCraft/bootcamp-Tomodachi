@@ -20,6 +20,9 @@ export default function Nav() {
               <li>
                 <Link to="/leaderboard" className="text-black">Leaderboard</Link>
               </li>
+            </div>
+            {/* Place Sign Up and Log In links to the right side */}
+            <div className="flex space-x-4">
               <li>
                 <Link to="/signup" className="text-black">Sign up</Link>
               </li>
