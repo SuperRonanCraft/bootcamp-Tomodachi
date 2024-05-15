@@ -5,7 +5,7 @@ import { Button } from '../ui/button';
 
 export default function Nav() {
   return (
-    <div className="fixed left-0 right-0 top-0">
+    <div className="fixed left-0 right-0 top-0 z-10">
       <main>
         {/* Position the nav bar absolutely with left, right, and top set to 0 */}
         <nav className="p-4 bg-foreground shadow-md w-full">
