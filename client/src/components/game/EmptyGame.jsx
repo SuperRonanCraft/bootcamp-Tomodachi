@@ -4,17 +4,26 @@ import {
   CardTitle,
   CardDescription,
   CardContent,
-  CardFooter,
 } from '@/components/ui/card';
-import { Label } from '@/components/ui/label';
-
-import { Input } from '@/components/ui/input';
-
-import { Button } from '@/components/ui/button';
 
 import NewGameForm from '@/components/NewGameForm';
+import auth from '../../utils/auth';
+import { Navigate } from 'react-router-dom';
+import { useQuery } from '@apollo/client';
+import { QUERY_USER } from '../../utils/queries';
 
 export default function EmptyGame() {
+  const loggedIn = auth.loggedIn();
+  if (!loggedIn) return <Navigate to={'/landing'} />;
+
+  const { loading, data } = useQuery(QUERY_USER, {
+    variables: { userId: auth.getProfile().data._id },
+  });
+
+  if (loading) return <h1>Loading...</h1>;
+
+  if (data.me.gameData)
+    return <Navigate to={`/${data.me.gameData[0]._id}`} replace />;
   return (
     <div className="flex justify-center items-center h-screen">
       <Card className="min-w-[400px]">
