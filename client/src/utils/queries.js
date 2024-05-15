@@ -8,11 +8,11 @@ export const QUERY_USER = gql`
       username
       gameData {
         _id
-        createDate
+        createdDate
         energy
         food
         happiness
-        lastSavedDate
+        lastSaveDate
         name
       }
     }

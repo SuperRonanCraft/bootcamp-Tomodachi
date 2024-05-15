@@ -4,6 +4,7 @@ const { signToken, AuthenticationError } = require('../utils/auth');
 const resolvers = {
   Query: {
     me: async (_, { userId }) => {
+      console.log(userId);
       return await User.findById(userId);
     },
     users: async () => {
@@ -85,7 +86,7 @@ const resolvers = {
       return user;
     },
     updateGameData: async (_, { userId, gameId, food, happiness, energy }) => {
-      const user = await User.updateOne(
+      await User.updateOne(
         { _id: userId },
         {
           $set: {
