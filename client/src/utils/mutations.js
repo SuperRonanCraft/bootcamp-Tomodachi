@@ -1,45 +1,4 @@
 import { gql } from '@apollo/client';
-
-// export const LOGIN_USER = gql`
-//   mutation LoginUser($username: String!, $password: String!) {
-//     login(username: $username, password: $password) {
-//       token
-//       user {
-//         _id
-//         username
-//       }
-//     }
-//   }
-// `;
-
-// export const SIGN_UP_USER = gql`
-//   mutation signUp($username: String!, $email: String!, $password: String!) {
-//     addUser(username: $username, email: $email, password: $password) {
-//       token
-//       user {
-//         _id
-//         username
-//         email
-//         gameData {
-//           food
-//           energy
-//           happiness
-//           name
-//         }
-//       }
-//     }
-//   }
-// `;
-
-export const DELETE_USER = gql`
-  mutation deleteUser($id: ID!) {
-    deleteUser(_id: $id) {
-      _id
-    }
-  }
-`;
-// check update user
-
 export const LOGIN = gql`
   mutation loginUser($username: String!, $password: String!) {
     login(username: $username, password: $password) {
@@ -57,6 +16,31 @@ export const LOGIN = gql`
           createDate
           lastSavedDate
         }
+      }
+    }
+  }
+`;
+export const DELETE_USER = gql`
+  mutation deleteUser($id: ID!) {
+    deleteUser(_id: $id) {
+      _id
+    }
+  }
+`;
+export const UPDATE_USER = gql`
+  mutation UpdateUser($username: String, $id: ID) {
+    updateUser(username: $username, _id: $id) {
+      _id
+      username
+      email
+      gameData {
+        _id
+        food
+        energy
+        happiness
+        name
+        createDate
+        lastSavedDate
       }
     }
   }

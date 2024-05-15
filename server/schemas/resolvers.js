@@ -34,8 +34,8 @@ const resolvers = {
 
       return { token, user };
     },
-    updateUser: async (_, { username, _id }, context) => {
-      if (context.user) {
+    updateUser: async (_, { username, _id }) => {
+      try {
         const user = await User.findByIdAndUpdate(
           _id,
           { username },
@@ -43,9 +43,13 @@ const resolvers = {
             new: true,
           }
         );
+        if (!user) {
+          throw AuthenticationError;
+        }
         return user;
+      } catch (err) {
+        throw AuthenticationError;
       }
-      throw AuthenticationError;
     },
     createGameData: async (
       parent,
@@ -82,5 +86,4 @@ const resolvers = {
     },
   },
 };
-
 module.exports = resolvers;
