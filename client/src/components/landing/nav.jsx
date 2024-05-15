@@ -23,12 +23,12 @@ export default function Nav() {
             </div>
             {/* Empty spacer to push Sign Up and Log In links to the right */}
             <div className="flex-grow" />
-            {/* Place Sign Up and Log In links to the right side with a little margin-left */}
-            <div className="flex space-x-4 ml-4">
-              <li>
+            {/* Place Sign Up and Log In links to the right side */}
+            <div className="flex space-x-4">
+              <li className="ml-2">
                 <Link to="/signup" className="text-black">Sign up</Link>
               </li>
-              <li>
+              <li className="ml-2">
                 <Link to="/login" className="text-black">Login</Link>
               </li>
             </div>
