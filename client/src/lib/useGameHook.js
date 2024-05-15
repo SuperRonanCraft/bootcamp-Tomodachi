@@ -1,12 +1,10 @@
-import { useGameContext } from '../context/GameContext';
 import useGameLogic from './useGameLogic';
 import useGameLoop from './useGameLoop';
 
 //Gives access to buttons to call these functions
 export default function useGameHook() {
-  const { gameState } = useGameContext();
   const { startGame } = useGameLoop();
-  const { battle, executeAction, warning } = useGameLogic();
+  const { battle, executeAction } = useGameLogic();
 
   function play(happiness_array) {
     // warning(`${gameState.name} is playing!`);

@@ -8,6 +8,21 @@ const energyDecayTicks = 7;
 let foodDecay_prev = 0;
 let happinessDecay_prev = 0;
 let energyDecay_prev = 0;
+
+export function timeLeft({ food, energy, happiness }) {
+  const data = {
+    food: food * foodDecayTicks - foodDecay_prev,
+    energy: energy * energyDecayTicks - energyDecay_prev,
+    happiness: happiness * happinessDecayTicks - happinessDecay_prev,
+  };
+  const keyValues = Object.values(data);
+
+  const smallestValue = Math.min(...keyValues);
+  // const smallestIndex = keyValues.indexOf(smallestValue);
+  // console.log(data);
+  return smallestValue;
+}
+
 export default function useGameLoop() {
   const {
     petState: pet,
