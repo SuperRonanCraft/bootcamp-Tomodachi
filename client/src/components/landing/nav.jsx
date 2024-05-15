@@ -7,6 +7,7 @@ export default function Nav() {
       <main>
         {/* Add Tailwind CSS classes for primary color background and */}
         <nav className="bg-blue-500 p-4">
+          {/* Use flex to align items and justify between to space out the links and theme toggle */}
           <ul className="flex space-x-4 m-4">
             <li>
               <Link to="/landing">Home</Link>
