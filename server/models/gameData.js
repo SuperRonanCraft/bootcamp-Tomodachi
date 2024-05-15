@@ -4,15 +4,15 @@ const { Schema } = mongoose;
 const gameDataSchema = new Schema({
   food: {
     type: Number,
-    required: true,
+    default: 100,
   },
   happiness: {
     type: Number,
-    required: true,
+    default: 100,
   },
   energy: {
     type: Number,
-    required: true,
+    default: 100,
   },
   name: {
     type: String,

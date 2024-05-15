@@ -72,17 +72,38 @@ const resolvers = {
       const user = await User.findByIdAndDelete(_id);
       return user;
     },
-    deleteGameData: async (_, { userId, _id }) => {
+    deleteGameData: async (_, { userId, gameId }) => {
       const user = await User.findByIdAndUpdate(
         userId,
         {
-          $pull: { gameData: { _id } },
+          $pull: { gameData: { _id: gameId } },
         },
         {
           new: true,
         }
       );
       return user;
+    },
+    updateGameData: async (_, { userId, gameId, food, happiness, energy }) => {
+      await User.updateOne(
+        { _id: userId },
+        {
+          $set: {
+            'gameData.$[i].food': food,
+            'gameData.$[i].happiness': happiness,
+            'gameData.$[i].energy': energy,
+            'gameData.$[i].lastSaveDate': Date.now(),
+          },
+        },
+        {
+          arrayFilters: [
+            {
+              'i._id': gameId,
+            },
+          ],
+        }
+      );
+      return User.findById(userId);
     },
   },
 };

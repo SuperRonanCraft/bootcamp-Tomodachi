@@ -1,4 +1,34 @@
 import { gql } from '@apollo/client';
+export const UPDATE_GAMEDATA = gql`
+  mutation UpdateGameData(
+    $userId: String!
+    $gameId: ID!
+    $food: Int
+    $energy: Int
+    $happiness: Int
+  ) {
+    updateGameData(
+      userId: $userId
+      gameId: $gameId
+      food: $food
+      energy: $energy
+      happiness: $happiness
+    ) {
+      _id
+      email
+      username
+      gameData {
+        _id
+        food
+        energy
+        happiness
+        name
+        lastSaveDate
+        createdDate
+      }
+    }
+  }
+`;
 export const LOGIN = gql`
   mutation loginUser($username: String!, $password: String!) {
     login(username: $username, password: $password) {
@@ -13,8 +43,8 @@ export const LOGIN = gql`
           energy
           happiness
           name
-          createDate
-          lastSavedDate
+          createdDate
+          lastSaveDate
         }
       }
     }
@@ -34,8 +64,8 @@ export const ADD_USER = gql`
           energy
           happiness
           name
-          createDate
-          lastSavedDate
+          createdDate
+          lastSaveDate
         }
       }
     }
@@ -61,8 +91,8 @@ export const UPDATE_USER = gql`
         energy
         happiness
         name
-        createDate
-        lastSavedDate
+        createdDate
+        lastSaveDate
       }
     }
   }
@@ -92,8 +122,8 @@ export const CREATE_GAME_DATA = gql`
         energy
         happiness
         name
-        createDate
-        lastSavedDate
+        createdDate
+        lastSaveDate
       }
     }
   }
@@ -111,8 +141,8 @@ export const DELETE_GAME_DATA = gql`
         energy
         happiness
         name
-        createDate
-        lastSavedDate
+        createdDate
+        lastSaveDate
       }
     }
   }
