@@ -25,10 +25,10 @@ export default function Nav() {
             <div className="flex-grow" />
             {/* Place Sign Up and Log In links to the right side */}
             <div className="flex space-x-4">
-              <li className="ml-2">
+              <li className="ml-1">
                 <Link to="/signup" className="text-black">Sign up</Link>
               </li>
-              <li className="ml-2">
+              <li className="ml-1">
                 <Link to="/login" className="text-black">Login</Link>
               </li>
             </div>
