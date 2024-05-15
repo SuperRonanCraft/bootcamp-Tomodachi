@@ -1,7 +1,5 @@
-import { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import AuthService from '../utils/auth';
-import React from 'react';
 import { ADD_USER } from '../utils/mutations';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
@@ -13,7 +11,6 @@ import {
   CardTitle,
   CardDescription,
   CardContent,
-  CardFooter,
 } from '@/components/ui/card';
 import {
   Form,

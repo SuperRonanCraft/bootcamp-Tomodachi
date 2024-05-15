@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { ModeToggle } from '../ModeToggle';
+import AuthService from '../../utils/auth';
 
 export default function Nav() {
   return (
@@ -12,26 +13,48 @@ export default function Nav() {
             {/* Group links in a flex container with horizontal spacing */}
             <div className="flex gap-4">
               <li>
-                <Link to="/landing" className="text-background">Home</Link>
+                <Link to="/landing" className="text-background">
+                  Home
+                </Link>
               </li>
               <li>
-                <Link to="/profile" className="text-background">Profile</Link>
-              </li>
-              <li>
-                <Link to="/leaderboard" className="text-background">Leaderboard</Link>
+                <Link to="/leaderboard" className="text-background">
+                  Leaderboard
+                </Link>
               </li>
             </div>
             {/* Empty spacer to push Sign Up and Log In links to the right */}
             <div className="flex-grow" />
             {/* Place Sign Up and Log In links to the right side */}
             <div className="flex gap-4 items-center">
-              <li className="ml-1">
-                <Link to="/signup" className="text-background">Sign up</Link>
-              </li>
-              <li className="ml-1">
-                <Link to="/login" className="text-background">Login</Link>
-              </li>
-              <ModeToggle />
+              {AuthService.loggedIn() ? (
+                <>
+                  <li>
+                    <Link to="/profile" className="text-background">
+                      Profile
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/logout" className="text-background">
+                      Logout
+                    </Link>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li className="ml-1">
+                    <Link to="/signup" className="text-background">
+                      Sign up
+                    </Link>
+                  </li>
+                  <li className="ml-1">
+                    <Link to="/login" className="text-background">
+                      Login
+                    </Link>
+                  </li>
+                  <ModeToggle />
+                </>
+              )}
             </div>
             {/* Place ModeToggle to the right side */}
           </ul>
