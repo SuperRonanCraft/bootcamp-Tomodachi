@@ -6,12 +6,7 @@ import { BeerOff, X } from 'lucide-react';
 
 //All the logic for the game, advances with executeAction
 export default function useGameLogic() {
-  const {
-    setGameState,
-    gameState,
-    setPetState,
-    petState: pet,
-  } = useGameContext();
+  const { gameState, setPetState, petState: pet } = useGameContext();
 
   function showToast(message) {
     toast(message, {
