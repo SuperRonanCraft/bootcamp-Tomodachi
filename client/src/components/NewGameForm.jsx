@@ -29,7 +29,9 @@ const formSchema = z.object({
 });
 
 export default function NewGameForm() {
-  const [createGameData, { loading }] = useMutation(CREATE_GAME_DATA);
+  const [createGameData, { loading }] = useMutation(CREATE_GAME_DATA, {
+    refetchQueries: [{ query: QUERY_USER }],
+  });
 
   const form = useForm({
     resolver: zodResolver(formSchema),
