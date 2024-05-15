@@ -2,7 +2,7 @@ import LeaderboardTable from '../components/LeaderboardTable';
 
 export default function Leaderboard() {
   return (
-    <div className="container">
+    <div className="container mt-32">
       <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-7xl text-center my-8 bg-gradient-to-r from-violet-600 to-rose-400 text-transparent bg-clip-text">
         Tomodachi Leaderboard
       </h1>

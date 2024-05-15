@@ -72,9 +72,9 @@ export default function useGameLoop() {
     // console.log({ foodDecay, happinessDecay, energyDecay });
     // console.log({ foodDecay_prev, happinessDecay_prev, energyDecay_prev });
     const newPet = { ...pet };
-    newPet.food -= foodDecay;
-    newPet.energy -= energyDecay;
-    newPet.happiness -= happinessDecay;
+    newPet.food = Math.max(newPet.food - foodDecay);
+    newPet.energy = Math.max(newPet.energy - energyDecay);
+    newPet.happiness = Math.max(newPet.happiness - happinessDecay);
     setPetState(newPet);
     // if (foodDecay > 0 || energyDecay > 0 || happinessDecay > 0) {
     //   const message = `${gameState.name}'s `;
@@ -95,11 +95,11 @@ export default function useGameLoop() {
     // }
   }
 
-  function log(message) {
-    const newLog = [...gameState.logs];
-    newLog.push(createPetLog(message));
-    setGameState({ ...gameState, logs: newLog });
-  }
+  // function log(message) {
+  //   const newLog = [...gameState.logs];
+  //   newLog.push(createPetLog(message));
+  //   setGameState({ ...gameState, logs: newLog });
+  // }
 
   return { gameTick };
 }
