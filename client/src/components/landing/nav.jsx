@@ -9,6 +9,7 @@ export default function Nav() {
         <nav className="bg-blue-500 p-4">
           {/* Use flex to align items and justify between to space out the links and theme toggle */}
           <ul className="flex items-center justify-between space-x-4">
+            {/* Group links in a flex container with horizontal spacing */}
             <li>
               <Link to="/landing">Home</Link>
             </li>
