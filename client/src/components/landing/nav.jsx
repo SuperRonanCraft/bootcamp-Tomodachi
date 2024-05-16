@@ -36,7 +36,7 @@ export default function Nav() {
     <div className="fixed left-0 right-0 top-0 z-10">
       <main>
         {/* Position the nav bar absolutely with left, right, and top set to 0 */}
-        <nav className="p-2 bg-foreground shadow-md w-full">
+        <nav className="p-2 md:pl-8 bg-foreground shadow-md w-full">
           {/* Use flex to align items and justify-between to space out the links and theme toggle */}
 
           <ul className="flex items-center justify-between w-full">
@@ -49,11 +49,7 @@ export default function Nav() {
             </div>
             <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
               <SheetTrigger asChild>
-                <Button
-                  variant="outline"
-                  size="icon"
-                  className="shrink-0 md:hidden"
-                >
+                <Button size="icon" className="shrink-0 md:hidden">
                   <Menu className="h-5 w-5" />
                   <span className="sr-only">Toggle navigation menu</span>
                 </Button>

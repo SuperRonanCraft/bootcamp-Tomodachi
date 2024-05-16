@@ -3,6 +3,7 @@ import emj_happy from '../assets/happy.json';
 import emj_dead from '../assets/dead.json';
 import emj_sleeping from '../assets/sleep.json';
 import emj_tired from '../assets/almostDead.json';
+import emj_hungry from '../assets/hungry.json';
 
 export function getEmotion({ energy, food, happiness }) {
   //Status stuff
@@ -27,7 +28,7 @@ export function getEmoji(emotion) {
     case EMOTION.UPSET:
       return emj_tired;
     case EMOTION.HUNGRY:
-      return emj_almostDead;
+      return emj_hungry;
   }
 }
 
