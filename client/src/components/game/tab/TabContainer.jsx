@@ -7,7 +7,7 @@ import auth from '@/utils/auth';
 
 const testArray = [{ name: 'Mike' }, { name: 'Alfonso' }];
 
-export default function TabContainer() {
+export default function TabContainer({ className }) {
   const { loading, data } = useQuery(QUERY_USER, {
     variables: { userId: auth.getProfile().data._id },
   });
@@ -17,17 +17,19 @@ export default function TabContainer() {
   // console.log(gamesArray);
 
   return (
-    <ul className="flex flex-row gap-2">
-      {gamesArray.map(({ name, _id }, index) => (
-        <li key={_id}>
-          <Tab name={name} gameId={_id} />
-        </li>
-      ))}
-      {gamesArray.length <= 2 && (
-        <li>
-          <AddTab />
-        </li>
-      )}
-    </ul>
+    <div className={className}>
+      <ul className="flex flex-row gap-2 min-w-[300px]">
+        {gamesArray.map(({ name, _id }, index) => (
+          <li key={_id}>
+            <Tab name={name} gameId={_id} />
+          </li>
+        ))}
+        {gamesArray.length <= 2 && (
+          <li>
+            <AddTab />
+          </li>
+        )}
+      </ul>
+    </div>
   );
 }

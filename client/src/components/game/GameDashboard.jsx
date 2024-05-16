@@ -84,11 +84,12 @@ export default function GameDashboard() {
   }
 
   return (
-    <div className="flex flex-row w-fit mx-auto gap-4 mt-24">
-      <div className="flex flex-col gap-4 mx-8 md:mx-0">
-        <TabContainer />
+    <div className="w-fit mx-auto gap-4 mt-32 md:mt-0 md:flex md:items-center md:h-screen">
+      <div className="flex flex-col md:flex-row gap-4 mx-8 md:mx-0">
+        <TabContainer className="block md:hidden" />
         <Emoji emoji={getEmoji(petState)} petState={petState} isDead={isDead} />
-        <div className="grid grid-cols-3 gap-4 w-full">
+        <div className="flex flex-col gap-4">
+          <TabContainer className="hidden md:block" />
           <Status />
           <Action />
         </div>
