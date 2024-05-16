@@ -94,15 +94,17 @@ const HowToPlay = () => {
         How to Play
       </h2>
       <div className="container mx-auto">
-        <div className="mx-32 grid grid-cols-12 gap-4">
-          <Block className="text-3xl font-bold col-span-12">Objective</Block>
-          <Block className="col-span-6 row-span-1">
+        <div className="mx:8 md:mx-16 lg:mx-32 grid grid-cols-12 gap-4">
+          <Block className="text-3xl font-bold col-span-12 lg:col-span-12">
+            Objective
+          </Block>
+          <Block className="col-span-12 lg:col-span-6 row-span-1">
             Keep your &quot;Tomodachi&quot; alive for as long as possible.
           </Block>
-          <Block className="col-span-6 row-span-2">
+          <Block className="col-span-12 lg:col-span-6 row-span-2">
             <Lottie animationData={getEmoji(EMOTION.HAPPY)} />
           </Block>
-          <Block className="col-span-6 row-span-1">
+          <Block className="col-span-12 lg:col-span-6 row-span-1">
             <div className="w-full">
               <h3 className="text-3xl font-bold mb-8">Status</h3>
               <div className="flex flex-col gap-2">
@@ -112,18 +114,18 @@ const HowToPlay = () => {
               </div>
             </div>
           </Block>
-          <Block className="text-3xl font-bold col-span-4 row-span-1">
+          <Block className="text-3xl font-bold col-span-12 lg:col-span-4 row-span-1">
             Bars
           </Block>
-          <Block className="col-span-8">
+          <Block className="col-span-12 lg:col-span-8">
             There are three bars representing different aspects of your
             Tomodachi&apos;s life which are food, happiness, and energy.
           </Block>
 
-          <Block className="col-span-6">
+          <Block className="col-span-12 lg:col-span-6">
             If any bar reaches or goes below 0, you lose.
           </Block>
-          <Block className="col-span-6 row-span-2">
+          <Block className="col-span-12 lg:col-span-6 row-span-2">
             <div className="w-full">
               <div className="flex flex-col gap-2">
                 <Food food={foodOne} />
@@ -132,16 +134,18 @@ const HowToPlay = () => {
               </div>
             </div>
           </Block>
-          <Block className="col-span-6">
+          <Block className="col-span-12 lg:col-span-6">
             If the highest bar is more than 20 points greater than the sum of
             the other two bars, that bar will be reset and you&apos;ll lose a
             lot of points.
           </Block>
-          <Block className="col-span-8 row-span-3">
+          <Block className="col-span-12 lg:col-span-8 row-span-3">
             <Lottie animationData={getEmoji(EMOTION.SAD)} />
           </Block>
-          <Block className="text-3xl font-bold col-span-4">Perfection</Block>
-          <Block className="col-span-4 row-span-1">
+          <Block className="text-3xl font-bold col-span-12 lg:col-span-4">
+            Perfection
+          </Block>
+          <Block className="col-span-12 lg:col-span-4 row-span-1">
             <div className="w-full">
               <div className="flex flex-col gap-2">
                 <Food food={foodTwo} />
@@ -150,37 +154,39 @@ const HowToPlay = () => {
               </div>
             </div>
           </Block>
-          <Block className="col-span-4 text-pretty">
+          <Block className="col-span-12 lg:col-span-4 text-pretty">
             If all three bars are equal, your Tomodachi dies due to perfection.
           </Block>
-          <Block className="text-3xl font-bold col-span-6 row-span-1">
+          <Block className="text-3xl font-bold col-span-12 lg:col-span-6 row-span-1">
             Time
           </Block>
-          <Block className="col-span-6 row-span-3 justify-center text-8xl">
+          <Block className="col-span-12 lg:col-span-6 row-span-3 justify-center text-8xl">
             {timer}
           </Block>
-          <Block className="col-span-6">
-            <Button className="w-full" onClick={() => setEnableTimer(false)}>
+          <Block className="col-span-12 lg:col-span-6">
+            <Button
+              className="w-full"
+              variant="secondary"
+              onClick={() => setEnableTimer(false)}
+            >
               Click Me!
             </Button>
           </Block>
-          <Block className="col-span-6">
+          <Block className="col-span-12 lg:col-span-6">
             Time only moves forward when you&apos;re not clicking any buttons.
             You can&apos;t just click rapidly.
           </Block>
-          <Block className="text-3xl font-bold col-span-3 row-span-1">
+          <Block className="text-3xl font-bold col-span-12 lg:col-span-3 row-span-1">
             Scoring
           </Block>
-          <Block className="col-span-5">
+          <Block className="col-span-12 lg:col-span-5">
             Your score is based on how long you keep your Tomodachi alive and
             well.
           </Block>
-          <Block className="col-span-4">
+          <Block className="col-span-12 lg:col-span-4">
             <AlertDialog>
               <AlertDialogTrigger asChild>
-                <Button className="w-full" variant="destructive">
-                  Try Kill
-                </Button>
+                <Button className="w-full">Try Kill</Button>
               </AlertDialogTrigger>
               <AlertDialogContent>
                 <AlertDialogHeader>
@@ -199,20 +205,22 @@ const HowToPlay = () => {
               </AlertDialogContent>
             </AlertDialog>
           </Block>
-          <Block className="col-span-4">
+          <Block className="col-span-12 lg:col-span-4">
             <Lottie animationData={getEmoji(EMOTION.TIRED)} />
           </Block>
-          <Block className="col-span-4">
+          <Block className="col-span-12 lg:col-span-4">
             <Lottie animationData={getEmoji(EMOTION.UPSET)} />
           </Block>
-          <Block className="col-span-4">
+          <Block className="col-span-12 lg:col-span-4">
             <Lottie animationData={getEmoji(EMOTION.HUNGRY)} />
           </Block>
-          <Block className="text-3xl font-bold col-span-6">Limits</Block>
-          <Block className="col-span-6">
+          <Block className="text-3xl font-bold col-span-12 lg:col-span-6">
+            Limits
+          </Block>
+          <Block className="col-span-12 lg:col-span-6">
             You&apos;re limited to three Tomodachis at a time.
           </Block>
-          <div className="text-3xl col-span-12 text-balance font-extrabold tracking-tight lg:text-6xl mb-16 mt-8 bg-gradient-to-r from-violet-600 to-rose-400 text-transparent bg-clip-text">
+          <div className="text-3xl col-span-12 lg:col-span-12 text-balance font-extrabold tracking-tight lg:text-6xl mb-16 mt-8 bg-gradient-to-r from-violet-600 to-rose-400 text-transparent bg-clip-text">
             That&apos;s the gist of it! Keep those bars up, balance their needs,
             and keep an eye on the time!
           </div>

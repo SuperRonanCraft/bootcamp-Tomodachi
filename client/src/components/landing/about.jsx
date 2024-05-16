@@ -5,7 +5,7 @@ const About = () => {
         About Tomodachi
       </h2>
       <div className="container mx-auto">
-        <p className="mx-32 text-pretty">
+        <p className="mx:8 md:mx-16 lg:mx-32 text-pretty">
           {/* This game is called Tomodachi because you will have a new friend/companion who you will take care of and come to share a strong bond with. 
         We taken the concept of Tamagotchis and created our own virtual pet which incorporates nostaliginess and 21st century using emojis. 
         The concept remains the same in terms of learning to care and nuturing your emoji. The goal is to raise a happy and healthy emoki by feeding it, playing with it and letting it sleep.
