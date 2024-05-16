@@ -1,12 +1,6 @@
 import { Moon, Sun } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
 import { useTheme } from '@/context/ThemeContext';
 
 export function ModeToggle() {
@@ -17,7 +11,7 @@ export function ModeToggle() {
       variant="outline"
       size="icon"
       onClick={() => {
-        console.log(theme);
+        // console.log(theme);
         setTheme(theme === 'light' ? 'dark' : 'light');
       }}
     >
