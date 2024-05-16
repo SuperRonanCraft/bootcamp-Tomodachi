@@ -6,6 +6,13 @@ import Energy from './status/Energy';
 import { Card, CardContent, CardTitle } from '../ui/card';
 import { Button } from '../ui/button';
 export default function GameInfo({ _id, name, energy, food, happiness }) {
+  function playButton() {
+    console.log('Play');
+  }
+
+  function deleteButton() {
+    console.log('Delete');
+  }
   return (
     <Card className="w-full sm:w-2/3 mx-auto mb-2 hover:bg-violet-700">
       <CardTitle>
@@ -24,8 +31,12 @@ export default function GameInfo({ _id, name, energy, food, happiness }) {
         </div>
       </CardContent>
       <div className="mb-2">
-        <Button className="mx-1">Play</Button>
-        <Button className="mx-1">Delete</Button>
+        <Button className="mx-1" onClick={playButton}>
+          Play
+        </Button>
+        <Button className="mx-1" onClick={deleteButton}>
+          Delete
+        </Button>
       </div>
     </Card>
   );
