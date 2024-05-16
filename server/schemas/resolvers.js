@@ -44,6 +44,7 @@ const resolvers = {
           }
         );
         if (!user) {
+          console.log(_id);
           throw AuthenticationError;
         }
         return user;
