@@ -45,7 +45,13 @@ export default function GameInfo({ _id, name, energy, food, happiness }) {
           </div>
         </CardContent>
         <div className="mb-2">
-          <Button className="mx-1" onClick={deleteButton}>
+          <Button
+            className="mx-1"
+            onClick={(e) => {
+              e.stopPropagation();
+              deleteButton();
+            }}
+          >
             Delete
           </Button>
         </div>
