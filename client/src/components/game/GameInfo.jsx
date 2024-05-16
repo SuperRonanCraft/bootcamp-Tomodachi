@@ -21,7 +21,9 @@ export default function GameInfo({ _id, name, energy, food, happiness }) {
       <CardContent>
         <div className="grid grid-cols-4 gap-4 mx-0 sm:mx-auto">
           <div>
-            <Emoji emoji={getEmoji(getEmotion({ energy, food, happiness }))} />
+            <Emoji
+              emoji={getEmoji({ energy, food, happiness, status: 'none' })}
+            />
           </div>
           <div className="my-auto justify-between gap-2 w-full col-span-3">
             <Food food={food} />

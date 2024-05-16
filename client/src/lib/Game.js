@@ -3,5 +3,6 @@ export default function createGame(name, gameId, tickMultiplier = 1) {
     name,
     gameId,
     tickMultiplier,
+    isDead: false,
   };
 }

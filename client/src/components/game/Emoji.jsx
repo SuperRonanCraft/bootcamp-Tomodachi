@@ -4,7 +4,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { useGameContext } from '../../context/GameContext';
 import { timeLeft } from '../../lib/useGameLoop';
 
-export default function Emoji({ emoji, petState }) {
+export default function Emoji({ emoji, petState, isDead }) {
   return (
     <Card className="dark:border-primary dark:border-4 dark:shadow-primary dark:shadow-lg shadow-2xl bg-inherit relative">
       <CardContent className="pt-6">
@@ -12,14 +12,15 @@ export default function Emoji({ emoji, petState }) {
       </CardContent>
       {petState && (
         <p className="absolute top-0 right-6 text-lg">
-          {getTimeLeft(petState)}
+          {getTimeLeft(petState, isDead)}
         </p>
       )}
     </Card>
   );
 }
 
-function getTimeLeft(pet) {
+function getTimeLeft(pet, isDead) {
+  if (isDead) return '00:00';
   const _timeLeft = timeLeft(pet);
 
   const minutes = Math.floor(_timeLeft / 60);
