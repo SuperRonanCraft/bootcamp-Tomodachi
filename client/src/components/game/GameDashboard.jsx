@@ -11,7 +11,7 @@ import { QUERY_USER } from '../../utils/queries';
 import { useParams } from 'react-router-dom';
 import auth from '../../utils/auth';
 import useGameHook from '../../lib/useGameHook';
-import { getEmoji } from '../../lib/petStatus';
+import { getEmoji, getEmotion } from '../../lib/petStatus';
 import {
   Dialog,
   DialogContent,
@@ -108,7 +108,11 @@ export default function GameDashboard() {
     <div className="w-fit mx-auto gap-4 mt-32 md:mt-0 md:flex md:items-center md:h-screen">
       <div className="flex flex-col md:flex-row gap-4 mx-8 md:mx-0">
         <TabContainer className="block md:hidden" />
-        <Emoji emoji={getEmoji(petState)} petState={petState} isDead={isDead} />
+        <Emoji
+          emoji={getEmoji(getEmotion(petState))}
+          petState={petState}
+          isDead={isDead}
+        />
         <div className="flex flex-col gap-4">
           <TabContainer className="hidden md:block" />
           <Status />
