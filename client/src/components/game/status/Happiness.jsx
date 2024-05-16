@@ -1,8 +1,9 @@
-import { Sparkles } from 'lucide-react';
+import { Gamepad2 } from 'lucide-react';
 import StatusBar from './StatusBar';
 
 export default function Happiness({ happiness }) {
   return (
-    <StatusBar icon={<Sparkles />} value={happiness} tooltip="Happiness" />
+    <StatusBar icon={<Gamepad2 />} value={happiness} tooltip="Happiness" />
   );
 }
+``;
