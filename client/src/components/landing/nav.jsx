@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { ModeToggle } from '../ModeToggle';
-import AuthService from '../../utils/auth';
+import auth from '../../utils/auth';
 import { Button } from '../ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '../ui/sheet';
 import { Menu } from 'lucide-react';
@@ -15,12 +15,19 @@ export default function Nav() {
     setSheetOpen(false);
   }, [location]);
 
-  const navLoggedIn = [
-    { title: 'Play', link: '/' },
-    { title: 'Home', link: '/landing' },
-    { title: 'Leaderboard', link: '/leaderboard' },
-  ];
+  const loc = useLocation();
 
+  console.log(loc);
+  const navLoggedIn = [
+    { title: 'Home', link: '/landing' },
+
+    { title: 'Leaderboard', link: '/leaderboard' },
+    {
+      title: 'Play',
+      link: auth.loggedIn() ? '/' : '/login',
+      show: loc.pathname === '/landing' || loc.pathname === '/leaderboard',
+    },
+  ];
   return (
     <div>
       <main>
@@ -29,9 +36,11 @@ export default function Nav() {
           {/* Use flex to align items and justify-between to space out the links and theme toggle */}
           <ul className="flex items-center justify-between w-full">
             <div className="flex gap-4">
-              {navLoggedIn.map((item) => (
-                <NavItem key={item.link} {...item} />
-              ))}
+              {navLoggedIn.map((item) => {
+                if (item.show || item.show === undefined)
+                  return <NavItem key={item.link} {...item} />;
+                else <></>;
+              })}
             </div>
             {/* Group links in a flex container with horizontal spacing */}
             <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
@@ -58,7 +67,7 @@ export default function Nav() {
             <div className="flex-grow" />
             {/* Place Sign Up and Log In links to the right side */}
             <div className="flex gap-4 items-center">
-              {AuthService.loggedIn() ? (
+              {auth.loggedIn() ? (
                 <>
                   <li>
                     <Link to="/profile" className="text-background">
@@ -66,7 +75,7 @@ export default function Nav() {
                     </Link>
                   </li>
                   <li>
-                    <Button onClick={AuthService.logout}>Logout</Button>
+                    <Button onClick={auth.logout}>Logout</Button>
                   </li>
                 </>
               ) : (
