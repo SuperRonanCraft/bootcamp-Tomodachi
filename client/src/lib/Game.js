@@ -12,7 +12,7 @@ export function getTimeLeft(_timeLeft, isDead = false) {
 
   const minutes = Math.floor(_timeLeft / 60);
   let seconds = _timeLeft % 60;
-  if (minutes <= 0 && seconds <= 0) return 'DEAD!';
+  if (minutes <= 0 && seconds <= 0) return 'Deceased...';
   if (seconds < 10) {
     if (seconds == 0) seconds = '00';
     else seconds = `0${seconds}`;
