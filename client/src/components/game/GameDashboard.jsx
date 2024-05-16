@@ -127,11 +127,9 @@ export default function GameDashboard() {
           <AlertDialog>
             <div className="text-right">
               <AlertDialogTrigger asChild>
-                <Button variant="outline" className="mx-2 bg-primary">
-                  Resurrect
-                </Button>
+                <Button className="mx-2 bg-primary">Resurrect</Button>
               </AlertDialogTrigger>
-              <Button className="bg-secondary " onClick={closeBox}>
+              <Button variant="outline" onClick={closeBox}>
                 Cancel
               </Button>
             </div>

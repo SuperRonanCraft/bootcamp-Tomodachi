@@ -11,10 +11,10 @@ function NavItem({ title, link, isSheet = false }) {
       to={link}
       className={`md:text-base ${
         url === link
-          ? 'active text-red-500'
+          ? 'active text-primary'
           : `${isSheet ? 'text-foreground' : 'text-secondary'}`
       }
-      } transition-all duration-300 ease-in-out`}
+      } transition-all duration-300 ease-in-out hover:text-primary/80`}
     >
       {title ? title : link}
     </Link>

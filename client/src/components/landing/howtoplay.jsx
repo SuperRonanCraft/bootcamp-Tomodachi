@@ -8,6 +8,15 @@ import { Button } from '@/components/ui/button';
 import { useEffect, useState } from 'react';
 
 import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
+
+import {
   AlertDialog,
   AlertDialogCancel,
   AlertDialogContent,
@@ -16,6 +25,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
+  AlertDialogAction,
 } from '@/components/ui/alert-dialog';
 
 const HowToPlay = () => {
@@ -35,6 +45,8 @@ const HowToPlay = () => {
     happinessTwo: 10,
     energyTwo: 10,
   });
+
+  const [killOpen, setKillOpen] = useState(false);
   const [timer, setTimer] = useState(0);
   const [enableTimer, setEnableTimer] = useState(true);
 
@@ -183,14 +195,16 @@ const HowToPlay = () => {
             well.
           </Block>
           <Block className="col-span-12 lg:col-span-4">
-            <AlertDialog>
-              <AlertDialogTrigger asChild>
-                <Button className="w-full">Kill Tomodachi</Button>
-              </AlertDialogTrigger>
-              <AlertDialogContent>
-                <AlertDialogHeader>
-                  <AlertDialogTitle>Tommy has died!</AlertDialogTitle>
-                  <AlertDialogDescription>
+            <Dialog open={killOpen}>
+              <DialogTrigger asChild>
+                <Button className="w-full" onClick={setKillOpen}>
+                  Try Kill
+                </Button>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>Guinea Pig has died!</DialogTitle>
+                  <DialogDescription>
                     <p className="text-foreground">
                       How could you let this happen!
                     </p>
@@ -198,24 +212,46 @@ const HowToPlay = () => {
                       Would you like to bring them back to life?
                     </p>
                     <p className="my-2 text-foreground/90">Score: {timer}</p>
-                  </AlertDialogDescription>
-                </AlertDialogHeader>
-                <AlertDialogFooter>
+                  </DialogDescription>
+                </DialogHeader>
+                <AlertDialog>
                   <div className="text-right">
                     <AlertDialogTrigger asChild>
-                      <Button
-                        onClick={() => setTimer(0)}
-                        variant="outline"
-                        className="mx-2 bg-primary"
-                      >
-                        Resurrect
-                      </Button>
+                      <Button className="mx-2 bg-primary">Resurrect</Button>
                     </AlertDialogTrigger>
-                    <AlertDialogCancel>Cancel</AlertDialogCancel>
+                    <Button variant="outline">Cancel</Button>
                   </div>
-                </AlertDialogFooter>
-              </AlertDialogContent>
-            </AlertDialog>
+                  <AlertDialogContent>
+                    <AlertDialogHeader>
+                      <AlertDialogTitle>
+                        Are you absolutely sure?
+                      </AlertDialogTitle>
+                      <AlertDialogDescription>
+                        <p className="text-red-300">
+                          This action cannot be undone!
+                        </p>
+                        <p>
+                          This will permanently delete your current progess,
+                          affect your leaderboard standing and your Tomodachi
+                          will be reset!
+                        </p>
+                      </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                      <AlertDialogCancel>Cancel</AlertDialogCancel>
+                      <AlertDialogAction
+                        onClick={() => {
+                          setTimer(0);
+                          setKillOpen(false);
+                        }}
+                      >
+                        Confirm
+                      </AlertDialogAction>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialog>
+              </DialogContent>
+            </Dialog>
           </Block>
           <Block className="col-span-12 lg:col-span-4">
             <Lottie animationData={getEmoji(EMOTION.TIRED)} />
