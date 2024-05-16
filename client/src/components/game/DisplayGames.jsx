@@ -16,7 +16,7 @@ export default function DisplayGames() {
     <div className="mx-2">
       {data.me.gameData.map((game) => (
         <GameInfo className="text-center" key={game._id} {...game} />
-      ))}{' '}
+      ))}
       {canCreate && <CreateGame />}
     </div>
   );
