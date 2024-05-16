@@ -28,7 +28,7 @@ export default function useGameLogic() {
 
   function warning(message) {
     showToast(message);
-    console.log(message);
+    // console.log(message);
   }
 
   function getRandom(array) {

@@ -32,7 +32,7 @@ export default function useGameHook() {
   }
 
   function changeGame(gameData) {
-    console.log('GameData', gameData);
+    // console.log('GameData', gameData);
     setGameState((prev) => {
       const newGame = { ...prev };
       newGame.name = gameData.name;

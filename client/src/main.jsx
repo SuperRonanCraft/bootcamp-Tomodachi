@@ -1,9 +1,9 @@
-import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App.jsx';
 import './index.css';
 import Home from './pages/Home.jsx';
 import Profile from './pages/Profile.jsx';
+import ProfileById from './pages/ProfileById.jsx';
 import Game from './pages/Game.jsx';
 import Leaderboard from './pages/Leaderboard.jsx';
 import Login from './pages/login.jsx';
@@ -36,6 +36,10 @@ const router = createBrowserRouter([
       {
         path: '/signup',
         element: <SignUp />,
+      },
+      {
+        path: '/profile/:userId',
+        element: <ProfileById />,
       },
       {
         element: <AuthGuard />,

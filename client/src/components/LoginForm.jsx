@@ -48,7 +48,7 @@ const LoginForm = () => {
         variables: formData,
       });
 
-      console.log(formData);
+      // console.log(formData);
       AuthService.login(data.login.token);
     } catch (error) {
       console.error('Login error:', error);
