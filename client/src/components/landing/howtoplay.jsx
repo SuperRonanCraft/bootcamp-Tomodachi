@@ -160,7 +160,7 @@ const HowToPlay = () => {
           <Block className="text-3xl font-bold col-span-12 lg:col-span-6 row-span-1">
             Time
           </Block>
-          <Block className="col-span-12 lg:col-span-6 row-span-3 justify-center text-8xl">
+          <Block className="col-span-12 font-bold lg:col-span-6 row-span-3 justify-center text-8xl">
             {timer}
           </Block>
           <Block className="col-span-12 lg:col-span-6">
@@ -190,17 +190,32 @@ const HowToPlay = () => {
               </AlertDialogTrigger>
               <AlertDialogContent>
                 <AlertDialogHeader>
-                  <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                  <AlertDialogTitle>Tommy has died!</AlertDialogTitle>
                   <AlertDialogDescription>
-                    This action cannot be undone. This will permanently delete
-                    your account and remove your data from our servers.
+                    <p className="text-foreground">
+                      How could you let this happen!
+                    </p>
+                    <p className="my-2">
+                      Would you like to bring them back to life?
+                    </p>
+                    <p className="my-2 text-foreground/90">Score: {timer}</p>
                   </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
-                  <AlertDialogCancel>Let it live this time</AlertDialogCancel>
-                  <AlertDialogAction onClick={() => setTimer(0)}>
-                    Kill
-                  </AlertDialogAction>
+                  <div className="text-right">
+                    <AlertDialogTrigger asChild>
+                      <Button
+                        onClick={() => setTimer(0)}
+                        variant="outline"
+                        className="mx-2"
+                      >
+                        Resurrect
+                      </Button>
+                    </AlertDialogTrigger>
+                    <AlertDialogCancel className="bg-primary">
+                      Cancel
+                    </AlertDialogCancel>
+                  </div>
                 </AlertDialogFooter>
               </AlertDialogContent>
             </AlertDialog>
