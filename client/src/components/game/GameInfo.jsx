@@ -10,7 +10,7 @@ import { useMutation } from '@apollo/client';
 import auth from '../../utils/auth';
 import { Link } from 'react-router-dom';
 import { Play } from 'lucide-react';
-import { getTimeLeft } from '../../lib/Game';
+import { checkDead, getTimeLeft } from '../../lib/Game';
 import { timeLeft } from '../../lib/useGameLoop';
 import { useState } from 'react';
 export default function GameInfo({
@@ -32,9 +32,9 @@ export default function GameInfo({
     });
   }
   return (
-    <Card className="w-full sm:w-2/3 mx-auto mb-2 hover:bg-violet-700 transition group">
+    <Card className="w-full sm:w-2/3 mx-auto mb-2 transition group hover:bg-gradient-to-r hover:from-violet-600 hover:to-rose-400/40 dark:hover:from-violet-600/10 dark:hover:to-rose-400/10">
       {isSelf ? (
-        <Link to={enableLink ? `../${_id}` : '/'} relative="path">
+        <Link to={enableLink ? `../${_id}` : '#'} relative="path">
           {card(
             _id,
             name,
@@ -87,11 +87,13 @@ function card(
             <Emoji
               emoji={getEmoji(getEmotion({ energy, food, happiness }))}
               page="profile"
+              isDead={checkDead({ energy, food, happiness })}
             />
-
-            <div className="absolute top-2 left-2 right-2 bottom-2 opacity-0 group-hover:opacity-90 bg-violet-700 flex justify-center items-center transition">
-              <Play className="w-24 h-24" />
-            </div>
+            {isSelf && (
+              <div className="absolute top-2 left-2 right-2 bottom-2 opacity-0 group-hover:opacity-50 bg-white rounded-sm flex justify-center items-center transition">
+                <Play className="text-black dark:text-gray-800 drop-shadow-2xl w-24 h-24" />
+              </div>
+            )}
           </div>
           <div className="my-auto justify-between gap-2 w-full col-span-3">
             <Food food={food} />
@@ -121,7 +123,11 @@ function card(
               Played For: {getTimeLeft(timeAlive)}
             </p>
             <p className="text-right text-foreground/70">
-              Time Left: {getTimeLeft(timeLeft({ food, energy, happiness }))}
+              Time Left:{' '}
+              {getTimeLeft(
+                timeLeft({ food, energy, happiness }),
+                checkDead({ food, happiness, energy })
+              )}
             </p>
           </div>
         </div>

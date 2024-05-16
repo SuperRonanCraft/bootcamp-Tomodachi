@@ -1,8 +1,10 @@
 import Lottie from 'lottie-react';
 
 import { Card, CardContent } from '../ui/card';
+import { EMOTION, getEmoji } from '../../lib/petStatus';
 
 export default function Emoji({ emoji, petState, page = 'game', isDead }) {
+  if (isDead) emoji = getEmoji(EMOTION.DEAD);
   if (page === 'game') {
     return (
       <div className="flex justify-center items-center rounded-md md:h-[550px] md:w-[550px] aspect-square dark:border-primary dark:border-4 dark:shadow-primary dark:shadow-lg shadow-2xl bg-inherit relative">

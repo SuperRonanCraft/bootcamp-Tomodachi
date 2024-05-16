@@ -32,10 +32,11 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
+import { checkDead } from '../../lib/Game';
 
 export default function GameDashboard() {
   const { petState, gameState, setGameState } = useGameContext();
-  const { timeAlive } = petState;
+  const { timeAlive, food, happiness, energy } = petState;
   const { isDead, name } = gameState;
   const { gameTick } = useGameLoop();
   const { changeGame } = useGameHook();
@@ -60,9 +61,9 @@ export default function GameDashboard() {
     const data = {
       userId: auth.getProfile().data._id,
       gameId,
-      food: petState.food,
-      energy: petState.energy,
-      happiness: petState.happiness,
+      food,
+      energy,
+      happiness,
       timeAlive,
     };
     updateGameData({ variables: data });
@@ -71,13 +72,7 @@ export default function GameDashboard() {
 
   //Game Tick
   useEffect(() => {
-    if (
-      petState.food <= 0 ||
-      petState.happiness <= 0 ||
-      petState.energy <= 0 ||
-      (petState.food === petState.energy &&
-        petState.happiness === petState.energy)
-    ) {
+    if (checkDead({ food, happiness, energy })) {
       setOpen(true);
       setGameState((prev) => {
         return { ...prev, isDead: true };
@@ -91,7 +86,7 @@ export default function GameDashboard() {
     return () => clearTimeout(timeout);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [timeAlive, petState]);
+  }, [timeAlive, food, happiness, energy]);
 
   if (loading) return <h2>Loading</h2>;
 

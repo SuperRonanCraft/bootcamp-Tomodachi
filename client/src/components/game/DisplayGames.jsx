@@ -16,6 +16,7 @@ export default function DisplayGames({ user }) {
         />
       ))}
       {canCreate && auth.getProfile().data._id === user._id && <CreateGame />}
+      <div className="my-32"></div>
     </div>
   );
 }

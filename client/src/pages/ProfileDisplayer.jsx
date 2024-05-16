@@ -12,7 +12,7 @@ const ProfileDisplayer = ({ user }) => {
             : `Welcome ${auth.getProfile().data.username} to Your Profile`}
         </h1>
         {/* Changing Username */}
-        {!user && (
+        {user._id === auth.getProfile().data._id && (
           <ChangeUsername
             variant="outline"
             className="rounded-lg border drop-shadow-md hover:drop-shadow-xl dark:border-primary dark:border-3 dark:shadow-primary dark:shadow-md m-8"

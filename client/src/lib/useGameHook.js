@@ -8,9 +8,9 @@ export default function useGameHook() {
   const { battle, executeAction } = useGameLogic();
   const { setGameState, setPetState } = useGameContext();
 
-  function play(happiness_array) {
+  function play() {
     // warning(`${gameState.name} is playing!`);
-    executeAction('play', { happiness_array });
+    executeAction('play');
   }
 
   function feed() {

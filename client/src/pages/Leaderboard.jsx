@@ -7,8 +7,8 @@ export default function Leaderboard() {
         Tomodachi Leaderboard
       </h1>
       <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold text-center tracking-tight first:mt-0 my-8">
-        Care for your Tomodachis and comepete with other users for a spot on our
-        leaderboard!
+        Check out other users Tomodachis and compete with others for a spot on
+        our leaderboard!
       </h2>
 
       <div className="container">
