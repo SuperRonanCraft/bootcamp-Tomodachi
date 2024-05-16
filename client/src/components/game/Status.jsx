@@ -25,9 +25,9 @@ export default function Status() {
         </CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col justify-between gap-2">
-        <Food />
-        <Happiness />
-        <Energy />
+        <Food food={petState.food} />
+        <Happiness happiness={petState.happiness} />
+        <Energy energy={petState.energy} />
       </CardContent>
     </Card>
   );

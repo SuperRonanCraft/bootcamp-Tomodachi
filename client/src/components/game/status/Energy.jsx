@@ -1,11 +1,7 @@
 import { Zap } from 'lucide-react';
 import StatusBar from './StatusBar';
-import { useGameContext } from '@/context/GameContext.jsx';
 
-export default function Energy() {
-  const {
-    petState: { energy },
-  } = useGameContext();
+export default function Energy({ energy }) {
   return (
     <StatusBar
       icon={<Zap />}

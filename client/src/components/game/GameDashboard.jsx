@@ -43,7 +43,6 @@ export default function GameDashboard() {
       food,
       energy,
       happiness,
-      status,
     };
     // console.log('Uploading', data);
     updateGameData({ variables: data });
@@ -70,7 +69,7 @@ export default function GameDashboard() {
     <div className="flex flex-row w-fit mx-auto gap-4 mt-24">
       <div className="flex flex-col gap-4 mx-8 md:mx-0">
         <TabContainer />
-        <Emoji emoji={getEmoji(petState)} />
+        <Emoji emoji={getEmoji(petState)} petState={petState} />
         <div className="grid grid-cols-3 gap-4 w-full">
           <Status />
           <Action />

@@ -2,19 +2,19 @@ import Lottie from 'lottie-react';
 
 import { Card, CardContent } from '@/components/ui/card';
 import { useGameContext } from '../../context/GameContext';
-import { EMOTION, STATUS, getEmotion } from '../../lib/petStatus';
-import { useEffect, useState } from 'react';
 import { timeLeft } from '../../lib/useGameLoop';
 
-export default function Emoji({ emoji }) {
-  const { petState } = useGameContext();
-
+export default function Emoji({ emoji, petState }) {
   return (
     <Card className="dark:border-primary dark:border-4 dark:shadow-primary dark:shadow-lg shadow-2xl bg-inherit relative">
       <CardContent className="pt-6">
         <Lottie animationData={emoji} />
       </CardContent>
-      <p className="absolute top-0 right-6 text-lg">{getTimeLeft(petState)}</p>
+      {petState && (
+        <p className="absolute top-0 right-6 text-lg">
+          {getTimeLeft(petState)}
+        </p>
+      )}
     </Card>
   );
 }
