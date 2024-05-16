@@ -111,7 +111,7 @@ export default function GameDashboard() {
         <div className="flex flex-col gap-4">
           <TabContainer className="hidden md:block" />
           <Status />
-          <Action />
+          <Action isDead={gameState.isDead} />
         </div>
       </div>
       <Dialog open={open} onOpenChange={setOpen}>
@@ -127,11 +127,13 @@ export default function GameDashboard() {
           <AlertDialog>
             <div className="text-right">
               <AlertDialogTrigger asChild>
-                <Button variant="outline" className="mx-2">
+                <Button variant="outline" className="mx-2 bg-primary">
                   Resurrect
                 </Button>
               </AlertDialogTrigger>
-              <Button onClick={closeBox}>Cancel</Button>
+              <Button className="bg-secondary " onClick={closeBox}>
+                Cancel
+              </Button>
             </div>
             <AlertDialogContent>
               <AlertDialogHeader>

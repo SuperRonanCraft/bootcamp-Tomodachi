@@ -9,7 +9,6 @@ import { useEffect, useState } from 'react';
 
 import {
   AlertDialog,
-  AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
@@ -186,7 +185,7 @@ const HowToPlay = () => {
           <Block className="col-span-12 lg:col-span-4">
             <AlertDialog>
               <AlertDialogTrigger asChild>
-                <Button className="w-full">Try Kill</Button>
+                <Button className="w-full">Kill Tomodachi</Button>
               </AlertDialogTrigger>
               <AlertDialogContent>
                 <AlertDialogHeader>
@@ -207,14 +206,12 @@ const HowToPlay = () => {
                       <Button
                         onClick={() => setTimer(0)}
                         variant="outline"
-                        className="mx-2"
+                        className="mx-2 bg-primary"
                       >
                         Resurrect
                       </Button>
                     </AlertDialogTrigger>
-                    <AlertDialogCancel className="bg-primary">
-                      Cancel
-                    </AlertDialogCancel>
+                    <AlertDialogCancel>Cancel</AlertDialogCancel>
                   </div>
                 </AlertDialogFooter>
               </AlertDialogContent>
