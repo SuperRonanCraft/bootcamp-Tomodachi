@@ -27,7 +27,8 @@ export default function Status() {
         <Food food={petState.food} />
         <Happiness happiness={petState.happiness} />
         <Energy energy={petState.energy} />
-        <p>{getTimeLeft(petState)}</p>
+        <p className="text-center">Time Alive</p>
+        <p className="text-center">{getTimeLeft(petState.timeAlive)}</p>
       </CardContent>
     </Card>
   );

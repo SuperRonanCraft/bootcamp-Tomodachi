@@ -1,5 +1,3 @@
-import { timeLeft } from '../lib/useGameLoop';
-
 export default function createGame(name, gameId, tickMultiplier = 1) {
   return {
     name,
@@ -9,9 +7,8 @@ export default function createGame(name, gameId, tickMultiplier = 1) {
   };
 }
 
-export function getTimeLeft(pet, isDead = false) {
+export function getTimeLeft(_timeLeft, isDead = false) {
   if (isDead) return '00:00';
-  const _timeLeft = timeLeft(pet);
 
   const minutes = Math.floor(_timeLeft / 60);
   let seconds = _timeLeft % 60;
