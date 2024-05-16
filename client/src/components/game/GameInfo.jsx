@@ -31,18 +31,30 @@ export default function GameInfo({
   }
   return (
     <Card className="w-full sm:w-2/3 mx-auto mb-2 hover:bg-violet-700 transition group">
-      {isSelf ? (
-        <Link to={isSelf ? `/${_id}` : '#'}>
-          {card(name, energy, food, happiness, isSelf, deleteButton, timeAlive)}
-        </Link>
-      ) : (
-        card(name, energy, food, happiness, isSelf, deleteButton, timeAlive)
+      {card(
+        _id,
+        name,
+        energy,
+        food,
+        happiness,
+        isSelf,
+        deleteButton,
+        timeAlive
       )}
     </Card>
   );
 }
 
-function card(name, energy, food, happiness, isSelf, deleteButton, timeAlive) {
+function card(
+  _id,
+  name,
+  energy,
+  food,
+  happiness,
+  isSelf,
+  deleteButton,
+  timeAlive
+) {
   return (
     <>
       <CardTitle>
@@ -57,9 +69,11 @@ function card(name, energy, food, happiness, isSelf, deleteButton, timeAlive) {
               page="profile"
             />
             {isSelf && (
-              <div className="absolute top-2 left-2 right-2 bottom-2 opacity-0 group-hover:opacity-90 bg-violet-700 flex justify-center items-center transition">
-                <Play className="w-24 h-24" />
-              </div>
+              <Link to={isSelf ? `/${_id}` : '#'}>
+                <div className="absolute top-2 left-2 right-2 bottom-2 opacity-0 group-hover:opacity-90 bg-violet-700 flex justify-center items-center transition">
+                  <Play className="w-24 h-24" />
+                </div>
+              </Link>
             )}
           </div>
           <div className="my-auto justify-between gap-2 w-full col-span-3">
