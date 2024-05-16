@@ -10,12 +10,15 @@ import { useMutation } from '@apollo/client';
 import auth from '../../utils/auth';
 import { Link } from 'react-router-dom';
 import { Play } from 'lucide-react';
+import { getTimeLeft } from '../../lib/Game';
+import { timeLeft } from '../../lib/useGameLoop';
 export default function GameInfo({
   _id,
   name,
   energy,
   food,
   happiness,
+  timeAlive,
   isSelf,
 }) {
   const [deleteGameData] = useMutation(DELETE_GAME_DATA);
@@ -30,16 +33,16 @@ export default function GameInfo({
     <Card className="w-full sm:w-2/3 mx-auto mb-2 hover:bg-violet-700 transition group">
       {isSelf ? (
         <Link to={isSelf ? `/${_id}` : '#'}>
-          {card(name, energy, food, happiness, isSelf, deleteButton)}
+          {card(name, energy, food, happiness, isSelf, deleteButton, timeAlive)}
         </Link>
       ) : (
-        card(name, energy, food, happiness, isSelf, deleteButton)
+        card(name, energy, food, happiness, isSelf, deleteButton, timeAlive)
       )}
     </Card>
   );
 }
 
-function card(name, energy, food, happiness, isSelf, deleteButton) {
+function card(name, energy, food, happiness, isSelf, deleteButton, timeAlive) {
   return (
     <>
       <CardTitle>
@@ -65,20 +68,31 @@ function card(name, energy, food, happiness, isSelf, deleteButton) {
             <Energy energy={energy} />
           </div>
         </div>
+        <div className="flex flex-nowrap my-3">
+          <div className="mx-auto mb-2">
+            {isSelf && (
+              <Button
+                className="mx-1"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  deleteButton();
+                }}
+              >
+                Delete
+              </Button>
+            )}
+          </div>
+          <div className="flex-grow" />
+          <div>
+            <p className="text-right text-foreground/70">
+              Played For: {getTimeLeft(timeAlive)}
+            </p>
+            <p className="text-right text-foreground/70">
+              Time Left: {getTimeLeft(timeLeft({ food, energy, happiness }))}
+            </p>
+          </div>
+        </div>
       </CardContent>
-      <div className="mb-2">
-        {isSelf && (
-          <Button
-            className="mx-1"
-            onClick={(e) => {
-              e.stopPropagation();
-              deleteButton();
-            }}
-          >
-            Delete
-          </Button>
-        )}
-      </div>
     </>
   );
 }

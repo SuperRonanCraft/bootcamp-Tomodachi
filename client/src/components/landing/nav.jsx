@@ -18,7 +18,7 @@ export default function Nav() {
   const loc = useLocation();
 
   // console.log(loc);
-  const navLoggedIn = [
+  const navItems = [
     { title: 'Home', link: '/landing' },
 
     { title: 'Leaderboard', link: '/leaderboard' },
@@ -36,17 +36,17 @@ export default function Nav() {
     <div className="fixed left-0 right-0 top-0 z-10">
       <main>
         {/* Position the nav bar absolutely with left, right, and top set to 0 */}
-        <nav className="p-4 bg-foreground shadow-md w-full">
+        <nav className="p-2 bg-foreground shadow-md w-full">
           {/* Use flex to align items and justify-between to space out the links and theme toggle */}
+
           <ul className="flex items-center justify-between w-full">
-            <div className="flex gap-4">
-              {navLoggedIn.map((item) => {
+            <div className="hidden flex-col font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
+              {navItems.map((item) => {
                 if (item.show || item.show === undefined)
                   return <NavItem key={item.link} {...item} />;
                 else <></>;
               })}
             </div>
-            {/* Group links in a flex container with horizontal spacing */}
             <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
               <SheetTrigger asChild>
                 <Button
@@ -61,39 +61,33 @@ export default function Nav() {
 
               <SheetContent side="left">
                 <nav className="grid gap-6 text-lg font-medium">
-                  {navLoggedIn.map((item) => (
-                    <NavItem key={item.link} {...item} />
-                  ))}
+                  {navItems.map((item) => {
+                    if (item.show || item.show === undefined)
+                      return (
+                        <NavItem key={item.link} {...item} isSheet={true} />
+                      );
+                    else <></>;
+                  })}
                 </nav>
               </SheetContent>
             </Sheet>
+            {/* Group links in a flex container with horizontal spacing */}
+
             {/* Empty spacer to push Sign Up and Log In links to the right */}
             <div className="flex-grow" />
             {/* Place Sign Up and Log In links to the right side */}
             <div className="flex gap-4 items-center">
               {auth.loggedIn() ? (
                 <>
-                  <li>
-                    <Link to="/profile" className="text-background">
-                      Profile
-                    </Link>
-                  </li>
-                  <li>
-                    <Button onClick={auth.logout}>Logout</Button>
-                  </li>
+                  <NavItem link={'/profile'} title={'Profile'} />
+                  <Button onClick={auth.logout} className="bg-secondary/50">
+                    Logout
+                  </Button>
                 </>
               ) : (
                 <>
-                  <li className="ml-1">
-                    <Link to="/signup" className="text-background">
-                      Sign up
-                    </Link>
-                  </li>
-                  <li className="ml-1">
-                    <Link to="/login" className="text-background">
-                      Login
-                    </Link>
-                  </li>
+                  <NavItem link={'/signup'} title={'Sign Up'} />
+                  <NavItem link={'/login'} title={'Login'} />
                 </>
               )}
               <ModeToggle />
