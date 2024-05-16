@@ -13,6 +13,7 @@ const client = new ApolloClient({
 });
 
 function App() {
+  console.log('Welcome to Tomodachi!');
   return (
     <ApolloProvider client={client}>
       <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">

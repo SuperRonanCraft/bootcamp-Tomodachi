@@ -17,7 +17,7 @@ export default function Nav() {
 
   const loc = useLocation();
 
-  console.log(loc);
+  // console.log(loc);
   const navLoggedIn = [
     { title: 'Home', link: '/landing' },
 

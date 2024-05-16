@@ -12,7 +12,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { UPDATE_USER } from '../utils/mutations';
 import auth from '../utils/auth';
-import { useMutation, useQuery } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { useState } from 'react';
 
 const ChangeUsername = () => {
@@ -21,11 +21,11 @@ const ChangeUsername = () => {
   const submitHandler = () => {
     const currentUsernameField = document.getElementById('currentName').value;
     const newUsernameField = document.getElementById('newUsername').value;
-    console.log(
-      auth.getProfile().data.username,
-      currentUsernameField,
-      newUsernameField
-    );
+    // console.log(
+    //   auth.getProfile().data.username,
+    //   currentUsernameField,
+    //   newUsernameField
+    // );
     if (auth.getProfile().data.username !== currentUsernameField) {
       return;
     }
@@ -34,7 +34,7 @@ const ChangeUsername = () => {
       id: auth.getProfile().data._id,
       username: newUsernameField,
     };
-    console.log(data);
+    // console.log(data);
     updateUsername({
       variables: data,
     });

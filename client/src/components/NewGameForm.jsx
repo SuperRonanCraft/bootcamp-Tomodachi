@@ -41,7 +41,7 @@ export default function NewGameForm({ setOpen }) {
   });
 
   function onSubmit({ name }) {
-    console.log(name, auth.getProfile().data._id);
+    // console.log(name, auth.getProfile().data._id);
     createGameData({ variables: { name, userId: auth.getProfile().data._id } });
   }
 

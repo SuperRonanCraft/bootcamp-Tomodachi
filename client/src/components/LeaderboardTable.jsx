@@ -11,6 +11,7 @@ import {
 import { useQuery } from '@apollo/client';
 import { QUERY_ALL_USERS } from '../utils/queries';
 import { getTimeLeft } from '../lib/Game';
+import { Link } from 'react-router-dom';
 
 export default function LeaderboardTable() {
   const { loading, data, error } = useQuery(QUERY_ALL_USERS);
@@ -60,7 +61,14 @@ export default function LeaderboardTable() {
           {sortedUsers.map((user, index) => (
             <TableRow key={user._id}>
               <TableCell className="font-medium">{index + 1}</TableCell>
-              <TableCell>{user.username}</TableCell>
+              <TableCell>
+                <Link
+                  className="text-foreground/70 hover:underline font-bold"
+                  to={`/profile/${user._id}`}
+                >
+                  {user.username}
+                </Link>
+              </TableCell>
               <TableCell className="text-right">
                 {getTimeLeft(user.totalScore)}
               </TableCell>
