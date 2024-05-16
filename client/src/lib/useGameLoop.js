@@ -1,5 +1,4 @@
 import { useGameContext } from '../context/GameContext';
-import { createPetLog } from './Pet';
 
 const foodDecayTicks = 10;
 const happinessDecayTicks = 12;
@@ -24,12 +23,7 @@ export function timeLeft({ food, energy, happiness }) {
 }
 
 export default function useGameLoop() {
-  const {
-    petState: pet,
-    setPetState,
-    gameState,
-    setGameState,
-  } = useGameContext();
+  const { petState: pet, setPetState, gameState } = useGameContext();
 
   function gameTick() {
     // console.log('Time Progresses...');
@@ -75,6 +69,8 @@ export default function useGameLoop() {
     newPet.food = Math.max(newPet.food - foodDecay);
     newPet.energy = Math.max(newPet.energy - energyDecay);
     newPet.happiness = Math.max(newPet.happiness - happinessDecay);
+    newPet.timeAlive += 1;
+    // console.log('Tick', newPet.timeAlive, pet.timeAlive);
     setPetState(newPet);
     // if (foodDecay > 0 || energyDecay > 0 || happinessDecay > 0) {
     //   const message = `${gameState.name}'s `;

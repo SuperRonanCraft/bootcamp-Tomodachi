@@ -12,6 +12,7 @@ export const QUERY_USER = gql`
         energy
         food
         happiness
+        timeAlive
         lastSaveDate
         name
       }
@@ -30,6 +31,7 @@ export const QUERY_ALL_USERS = gql`
         energy
         happiness
         name
+        timeAlive
         createdDate
         lastSaveDate
       }

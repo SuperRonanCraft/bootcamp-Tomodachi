@@ -31,13 +31,12 @@ export default function useGameHook() {
     startGame();
   }
 
-  function isAlive() {}
-
   function changeGame(gameData) {
-    // console.log(gameData);
+    console.log('GameData', gameData);
     setGameState((prev) => {
       const newGame = { ...prev };
       newGame.name = gameData.name;
+      newGame.isDead = false;
       return newGame;
     });
     setPetState((prev) => {
@@ -46,6 +45,7 @@ export default function useGameHook() {
       newPet.food = gameData.food;
       newPet.energy = gameData.energy;
       newPet.happiness = gameData.happiness;
+      newPet.timeAlive = gameData.timeAlive;
       // console.log('New Pet', newPet);
       return newPet;
     });

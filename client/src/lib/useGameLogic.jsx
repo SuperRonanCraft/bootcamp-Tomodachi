@@ -27,11 +27,6 @@ export default function useGameLogic() {
   }
 
   function warning(message) {
-    // setGameState((prev) => {
-    //   const newLog = [...prev.logs];
-    //   newLog.push(createPetLog(message));
-    //   return { ...prev, logs: newLog };
-    // });
     showToast(message);
     console.log(message);
   }
@@ -259,6 +254,7 @@ export default function useGameLogic() {
   // MAIN ACTIONS AFFECTING PET VALUES
 
   function executeAction(action_key, props) {
+    if (gameState.isDead) return;
     // action key is a corresponding number to know what to communicate to the user
     const possibilities = POSSIBILITIES[action_key];
     var values = getRandomValues(possibilities);

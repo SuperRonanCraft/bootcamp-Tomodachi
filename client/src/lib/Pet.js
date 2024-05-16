@@ -4,6 +4,7 @@ export default function createPet(
   food = 30,
   happiness = 25,
   energy = 50,
+  timeAlive = 0,
   status = STATUS.IDLE
 ) {
   return {
@@ -11,6 +12,7 @@ export default function createPet(
     happiness,
     energy,
     status,
+    timeAlive,
     //Current and Max Tolerated lethal actions
     LETHAL_ACTIONS: 0,
     LETHAL_ACTIONS_MAX: 3,

@@ -6,6 +6,7 @@ export const UPDATE_GAMEDATA = gql`
     $food: Int
     $energy: Int
     $happiness: Int
+    $timeAlive: Int
   ) {
     updateGameData(
       userId: $userId
@@ -13,6 +14,7 @@ export const UPDATE_GAMEDATA = gql`
       food: $food
       energy: $energy
       happiness: $happiness
+      timeAlive: $timeAlive
     ) {
       _id
       email
@@ -23,6 +25,7 @@ export const UPDATE_GAMEDATA = gql`
         energy
         happiness
         name
+        timeAlive
         lastSaveDate
         createdDate
       }
@@ -37,15 +40,6 @@ export const LOGIN = gql`
         _id
         username
         email
-        gameData {
-          _id
-          food
-          energy
-          happiness
-          name
-          createdDate
-          lastSaveDate
-        }
       }
     }
   }
@@ -58,15 +52,6 @@ export const ADD_USER = gql`
         _id
         email
         username
-        gameData {
-          _id
-          food
-          energy
-          happiness
-          name
-          createdDate
-          lastSaveDate
-        }
       }
     }
   }
@@ -85,15 +70,6 @@ export const UPDATE_USER = gql`
       _id
       username
       email
-      gameData {
-        _id
-        food
-        energy
-        happiness
-        name
-        createdDate
-        lastSaveDate
-      }
     }
   }
 `;
@@ -105,6 +81,7 @@ export const CREATE_GAME_DATA = gql`
     $food: Int
     $energy: Int
     $happiness: Int
+    $timeAlive: Int
   ) {
     createGameData(
       name: $name
@@ -112,6 +89,7 @@ export const CREATE_GAME_DATA = gql`
       food: $food
       energy: $energy
       happiness: $happiness
+      timeAlive: $timeAlive
     ) {
       _id
       username
@@ -122,6 +100,7 @@ export const CREATE_GAME_DATA = gql`
         energy
         happiness
         name
+        timeAlive
         createdDate
         lastSaveDate
       }
@@ -141,6 +120,7 @@ export const DELETE_GAME_DATA = gql`
         energy
         happiness
         name
+        timeAlive
         createdDate
         lastSaveDate
       }
