@@ -126,11 +126,11 @@ const HowToPlay = () => {
             </div>
           </Block>
           <Block className="text-3xl font-bold col-span-12 lg:col-span-4 row-span-1">
-            Bars
+            Traits
           </Block>
           <Block className="col-span-12 lg:col-span-8">
-            There are three bars representing different aspects of your
-            Tomodachi&apos;s life which are food, happiness, and energy.
+            There are three traits representing different aspects of your
+            Tomodachi&apos;s life: Food, Happiness, and Energy.
           </Block>
 
           <Block className="col-span-12 lg:col-span-6">
@@ -166,12 +166,17 @@ const HowToPlay = () => {
             </div>
           </Block>
           <Block className="col-span-12 lg:col-span-4 text-pretty">
-            If all three bars are equal, your Tomodachi dies due to perfection.
+            If all three traits are equal, your Tomodachi dies due to
+            perfection.
           </Block>
           <Block className="text-3xl font-bold col-span-12 lg:col-span-6 row-span-1">
             Time
           </Block>
-          <Block className="col-span-12 font-bold lg:col-span-6 row-span-3 justify-center text-8xl">
+          <Block
+            className={`col-span-12 font-bold lg:col-span-6 row-span-3 justify-center text-8xl ${
+              !enableTimer && 'opacity-60'
+            }`}
+          >
             {timer}
           </Block>
           <Block className="col-span-12 lg:col-span-6">
@@ -198,7 +203,9 @@ const HowToPlay = () => {
             <Dialog open={killOpen}>
               <DialogTrigger asChild>
                 <Button className="w-full" onClick={setKillOpen}>
-                  Try Kill
+                  <p>
+                    Kill <span className="font-bold">Tomodachi</span>
+                  </p>
                 </Button>
               </DialogTrigger>
               <DialogContent>
@@ -219,7 +226,14 @@ const HowToPlay = () => {
                     <AlertDialogTrigger asChild>
                       <Button className="mx-2 bg-primary">Resurrect</Button>
                     </AlertDialogTrigger>
-                    <Button variant="outline">Cancel</Button>
+                    <Button
+                      onClick={() => {
+                        setKillOpen(false);
+                      }}
+                      variant="outline"
+                    >
+                      Cancel
+                    </Button>
                   </div>
                   <AlertDialogContent>
                     <AlertDialogHeader>
@@ -266,7 +280,7 @@ const HowToPlay = () => {
             Limits
           </Block>
           <Block className="col-span-12 lg:col-span-6">
-            You&apos;re limited to three Tomodachis at a time.
+            You&apos;re limited to only three Tomodachis at a time!
           </Block>
           <div className="text-3xl col-span-12 lg:col-span-12 text-balance font-extrabold tracking-tight lg:text-6xl mb-16 mt-8 bg-gradient-to-r from-violet-600 to-rose-400 text-transparent bg-clip-text">
             That&apos;s the gist of it! Keep those bars up, balance their needs,
