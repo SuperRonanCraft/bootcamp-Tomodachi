@@ -73,11 +73,11 @@ const resolvers = {
       const user = await User.findByIdAndDelete(_id);
       return user;
     },
-    deleteGameData: async (_, { userId, gameId }) => {
+    deleteGameData: async (_, { userId, _id }) => {
       const user = await User.findByIdAndUpdate(
         userId,
         {
-          $pull: { gameData: { _id: gameId } },
+          $pull: { gameData: { _id } },
         },
         {
           new: true,
