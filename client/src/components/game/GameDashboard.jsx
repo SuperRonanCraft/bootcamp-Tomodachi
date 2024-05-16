@@ -100,6 +100,10 @@ export default function GameDashboard() {
     changeGame({ _id: gameId, name, ...createPet() });
   }
 
+  function closeBox() {
+    setOpen(false);
+  }
+
   return (
     <div className="w-fit mx-auto gap-4 mt-32 md:mt-0 md:flex md:items-center md:h-screen">
       <div className="flex flex-col md:flex-row gap-4 mx-8 md:mx-0">
@@ -118,6 +122,7 @@ export default function GameDashboard() {
             <DialogDescription>
               <p className="text-foreground">How could you let this happen!</p>
               <p className="my-2">Would you like to bring them back to life?</p>
+              <p className="my-2 text-foreground/90">Score: {timeAlive}</p>
             </DialogDescription>
           </DialogHeader>
           <AlertDialog>
@@ -127,7 +132,7 @@ export default function GameDashboard() {
                   Resurrect
                 </Button>
               </AlertDialogTrigger>
-              <Button>Cancel</Button>
+              <Button onClick={closeBox}>Cancel</Button>
             </div>
             <AlertDialogContent>
               <AlertDialogHeader>
@@ -141,7 +146,7 @@ export default function GameDashboard() {
                 </AlertDialogDescription>
               </AlertDialogHeader>
               <AlertDialogFooter>
-                <AlertDialogCancel onClick={setOpen}>Cancel</AlertDialogCancel>
+                <AlertDialogCancel>Cancel</AlertDialogCancel>
                 <AlertDialogAction onClick={resurrect}>
                   Confirm
                 </AlertDialogAction>

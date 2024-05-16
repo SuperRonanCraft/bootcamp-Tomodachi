@@ -38,7 +38,11 @@ export default function StatusBar({ icon, value, tooltip, indicatorClass }) {
         </TooltipContent>
       </Tooltip>
 
-      <Progress value={value} indicatorClass={indicatorClass} />
+      <Progress
+        value={value}
+        indicatorClass={indicatorClass}
+        className="bg-black/20 dark:bg-white/20"
+      />
 
       <p
         className={`absolute -right-2 -top-2 font-semibold ${
