@@ -75,7 +75,9 @@ export default function LeaderboardTable() {
                 >
                   {user.username}{' '}
                   <span className="font-normal">
-                    {user._id === auth.getProfile().data._id && ' (you)'}
+                    {auth.loggedIn() &&
+                      user._id === auth.getProfile().data._id &&
+                      ' (you)'}
                   </span>
                 </Link>
               </TableCell>
