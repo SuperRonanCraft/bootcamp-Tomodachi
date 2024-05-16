@@ -9,7 +9,7 @@ import Food from './status/Food';
 import Happiness from './status/Happiness';
 import Energy from './status/Energy';
 import { useGameContext } from '../../context/GameContext';
-import { getRating } from '../../lib/petStatus';
+import { getEmotion } from '../../lib/petStatus';
 
 export default function Status() {
   const { petState, gameState } = useGameContext();
@@ -19,7 +19,7 @@ export default function Status() {
         <CardTitle>{gameState.name}</CardTitle>
 
         <CardDescription className="text-right">
-          <>Emotion: {getRating(petState)}</>
+          <>Emotion: {getEmotion(petState)}</>
           {/* <p>Status: {petState.status}</p> */}
           <>Multiplier x{gameState.tickMultiplier}</>
         </CardDescription>

@@ -1,18 +1,13 @@
 import Lottie from 'lottie-react';
-import emj_almostDead from '../../assets/almostDead.json';
-import emj_happy from '../../assets/happy.json';
-import emj_dead from '../../assets/dead.json';
-import emj_sleeping from '../../assets/sleep.json';
-import emj_tired from '../../assets/almostDead.json';
+
 import { Card, CardContent } from '@/components/ui/card';
 import { useGameContext } from '../../context/GameContext';
-import { RATING, STATUS, getRating } from '../../lib/petStatus';
+import { EMOTION, STATUS, getEmotion } from '../../lib/petStatus';
 import { useEffect, useState } from 'react';
 import { timeLeft } from '../../lib/useGameLoop';
 
-export default function Emoji() {
+export default function Emoji({ emoji }) {
   const { petState } = useGameContext();
-  const emoji = getEmoji(petState);
 
   return (
     <Card className="dark:border-primary dark:border-4 dark:shadow-primary dark:shadow-lg shadow-2xl bg-inherit relative">
@@ -35,25 +30,4 @@ function getTimeLeft(pet) {
     else seconds = `0${seconds}`;
   }
   return `${minutes}:${seconds}`;
-}
-
-function getEmoji(pet) {
-  const status = pet.status;
-  switch (status) {
-    case STATUS.DEAD:
-      return emj_dead;
-    default:
-      switch (getRating(pet)) {
-        case RATING.HAPPY:
-          return emj_happy;
-        case RATING.SAD:
-          return emj_dead;
-        case RATING.TIRED:
-          return emj_sleeping;
-        case RATING.UPSET:
-          return emj_tired;
-        case RATING.HUNGRY:
-          return emj_almostDead;
-      }
-  }
 }
