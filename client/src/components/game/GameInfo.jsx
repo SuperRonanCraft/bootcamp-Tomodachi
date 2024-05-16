@@ -6,14 +6,15 @@ import Energy from './status/Energy';
 import { Card, CardContent, CardTitle } from '../ui/card';
 import { Button } from '../ui/button';
 import { DELETE_GAME_DATA } from '../../utils/mutations';
-import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import auth from '../../utils/auth';
+import { useNavigate } from 'react-router-dom';
 export default function GameInfo({ _id, name, energy, food, happiness }) {
   const [deleteGameData] = useMutation(DELETE_GAME_DATA);
+  const navigate = useNavigate();
   function playButton() {
     console.log('Play');
-    return <Link to={`/${_id}`} />;
+    navigate(`/${_id}`);
   }
 
   function deleteButton() {
