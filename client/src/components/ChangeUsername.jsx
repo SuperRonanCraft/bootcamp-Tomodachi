@@ -10,11 +10,37 @@ import {
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import auth from '@/utils/auth';
+import { UPDATE_USER } from '../utils/mutations';
+import auth from '../utils/auth';
+import { useMutation, useQuery } from '@apollo/client';
+import { useState } from 'react';
 
 const ChangeUsername = () => {
+  const [open, setOpen] = useState(false);
+  const [updateUsername] = useMutation(UPDATE_USER);
+  const submitHandler = () => {
+    const currentUsernameField = document.getElementById('currentName').value;
+    const newUsernameField = document.getElementById('newUsername').value;
+    console.log(
+      auth.getProfile().data.username,
+      currentUsernameField,
+      newUsernameField
+    );
+    if (auth.getProfile().data.username !== currentUsernameField) {
+      return;
+    }
+    setOpen(false);
+    const data = {
+      userId: auth.getProfile().data._id,
+      username: newUsernameField,
+    };
+    console.log(data);
+    updateUsername({
+      variables: data,
+    });
+  };
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button
           variant="outline"
@@ -33,23 +59,25 @@ const ChangeUsername = () => {
         <div className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="name" className="text-right">
-              Name
+              Current Username
             </Label>
-            <Input id="name" placeholder="name" className="col-span-3" />
+            <Input id="currentName" placeholder="name" className="col-span-3" />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="username" className="text-right">
-              Username
+              New Username
             </Label>
             <Input
-              id="username"
+              id="newUsername"
               placeholder="new username"
               className="col-span-3"
             />
           </div>
         </div>
         <DialogFooter>
-          <Button type="submit">Save changes</Button>
+          <Button type="submit" onClick={submitHandler}>
+            Save changes
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
