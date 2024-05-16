@@ -29,10 +29,10 @@ export default function Nav() {
     },
   ];
   return (
-    <div>
+    <div className="fixed left-0 right-0 top-0 z-10">
       <main>
         {/* Position the nav bar absolutely with left, right, and top set to 0 */}
-        <nav className="absolute left-0 right-0 top-0 p-4 bg-foreground shadow-md w-full">
+        <nav className="p-4 bg-foreground shadow-md w-full">
           {/* Use flex to align items and justify-between to space out the links and theme toggle */}
           <ul className="flex items-center justify-between w-full">
             <div className="flex gap-4">

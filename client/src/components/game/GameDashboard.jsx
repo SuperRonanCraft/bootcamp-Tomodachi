@@ -11,10 +11,11 @@ import { QUERY_USER } from '../../utils/queries';
 import { useParams } from 'react-router-dom';
 import auth from '../../utils/auth';
 import useGameHook from '../../lib/useGameHook';
+import { getEmoji } from '../../lib/petStatus';
 
 export default function GameDashboard() {
   const { petState } = useGameContext();
-  const { food, happiness, energy } = petState;
+  const { food, happiness, energy, status } = petState;
   const { gameTick } = useGameLoop();
   const { changeGame } = useGameHook();
   const { gameId } = useParams();
@@ -65,10 +66,10 @@ export default function GameDashboard() {
   if (loading) return <h2>Loading</h2>;
 
   return (
-    <div className="flex flex-row w-fit mx-auto gap-4 mt-64">
+    <div className="flex flex-row w-fit mx-auto gap-4 mt-24">
       <div className="flex flex-col gap-4 mx-8 md:mx-0">
         <TabContainer />
-        <Emoji />
+        <Emoji emoji={getEmoji(petState)} petState={petState} />
         <div className="grid grid-cols-3 gap-4 w-full">
           <Status />
           <Action />
