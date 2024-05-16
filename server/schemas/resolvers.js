@@ -54,13 +54,13 @@ const resolvers = {
     },
     createGameData: async (
       parent,
-      { food, energy, happiness, name, userId }
+      { food, energy, happiness, name, timeAlive, userId }
     ) => {
       const user = await User.findByIdAndUpdate(
         userId,
         {
           $addToSet: {
-            gameData: { food, energy, happiness, name },
+            gameData: { food, energy, happiness, name, timeAlive },
           },
         },
         {
@@ -85,7 +85,10 @@ const resolvers = {
       );
       return user;
     },
-    updateGameData: async (_, { userId, gameId, food, happiness, energy }) => {
+    updateGameData: async (
+      _,
+      { userId, gameId, food, happiness, energy, timeAlive }
+    ) => {
       await User.updateOne(
         { _id: userId },
         {
@@ -93,6 +96,7 @@ const resolvers = {
             'gameData.$[i].food': food,
             'gameData.$[i].happiness': happiness,
             'gameData.$[i].energy': energy,
+            'gameData.$[i].timeAlive': timeAlive,
             'gameData.$[i].lastSaveDate': Date.now(),
           },
         },
