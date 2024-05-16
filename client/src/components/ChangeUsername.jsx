@@ -31,7 +31,7 @@ const ChangeUsername = () => {
     }
     setOpen(false);
     const data = {
-      userId: auth.getProfile().data._id,
+      _id: auth.getProfile().data._id,
       username: newUsernameField,
     };
     console.log(data);
