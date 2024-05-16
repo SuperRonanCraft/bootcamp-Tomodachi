@@ -70,7 +70,7 @@ export default function useGameLoop() {
     newPet.energy = Math.max(newPet.energy - energyDecay);
     newPet.happiness = Math.max(newPet.happiness - happinessDecay);
     newPet.timeAlive += 1;
-    console.log('Tick', newPet.timeAlive, pet.timeAlive);
+    // console.log('Tick', newPet.timeAlive, pet.timeAlive);
     setPetState(newPet);
     // if (foodDecay > 0 || energyDecay > 0 || happinessDecay > 0) {
     //   const message = `${gameState.name}'s `;

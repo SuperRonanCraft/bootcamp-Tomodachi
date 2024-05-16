@@ -116,19 +116,28 @@ export default function GameDashboard() {
           <DialogHeader>
             <DialogTitle>{name} has died!</DialogTitle>
             <DialogDescription>
-              How could you let this happen!
+              <p className="text-foreground">How could you let this happen!</p>
+              <p className="my-2">Would you like to bring them back to life?</p>
             </DialogDescription>
           </DialogHeader>
           <AlertDialog>
-            <AlertDialogTrigger asChild>
-              <Button variant="outline">Resurrect</Button>
-            </AlertDialogTrigger>
+            <div className="text-right">
+              <AlertDialogTrigger asChild>
+                <Button variant="outline" className="mx-2">
+                  Resurrect
+                </Button>
+              </AlertDialogTrigger>
+              <Button>Cancel</Button>
+            </div>
             <AlertDialogContent>
               <AlertDialogHeader>
                 <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
                 <AlertDialogDescription>
-                  This action cannot be undone! This will permanently delete
-                  your current progess and your Tomodachi will be reset!
+                  <p className="text-red-300">This action cannot be undone!</p>
+                  <p>
+                    This will permanently delete your current progess, affect
+                    your leaderboard standing and your Tomodachi will be reset!
+                  </p>
                 </AlertDialogDescription>
               </AlertDialogHeader>
               <AlertDialogFooter>
