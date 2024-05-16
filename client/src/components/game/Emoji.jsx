@@ -1,7 +1,5 @@
 import Lottie from 'lottie-react';
 
-import { Card, CardContent } from '@/components/ui/card';
-import { useGameContext } from '../../context/GameContext';
 import { timeLeft } from '../../lib/useGameLoop';
 
 export default function Emoji({ emoji, petState, isDead }) {

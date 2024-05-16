@@ -1,5 +1,4 @@
 import { useGameContext } from '../context/GameContext';
-import { createPetLog } from './Pet';
 
 const foodDecayTicks = 10;
 const happinessDecayTicks = 12;

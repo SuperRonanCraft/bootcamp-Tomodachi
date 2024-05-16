@@ -21,6 +21,17 @@ import {
 } from '../ui/dialog';
 import { Button } from '../ui/button';
 import createPet from '../../lib/Pet';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '@/components/ui/alert-dialog';
 
 export default function GameDashboard() {
   const { petState, gameState, setGameState } = useGameContext();
@@ -60,7 +71,13 @@ export default function GameDashboard() {
 
   //Game Tick
   useEffect(() => {
-    if (petState.food <= 0 || petState.happiness <= 0 || petState.energy <= 0) {
+    if (
+      petState.food <= 0 ||
+      petState.happiness <= 0 ||
+      petState.energy <= 0 ||
+      (petState.food === petState.energy &&
+        petState.happiness === petState.energy)
+    ) {
       setOpen(true);
       setGameState((prev) => {
         return { ...prev, isDead: true };
@@ -102,7 +119,26 @@ export default function GameDashboard() {
               How could you let this happen!
             </DialogDescription>
           </DialogHeader>
-          <Button onClick={resurrect}>Resurrect</Button>
+          <AlertDialog>
+            <AlertDialogTrigger asChild>
+              <Button variant="outline">Resurrect</Button>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                <AlertDialogDescription>
+                  This action cannot be undone! This will permanently delete
+                  your current progess and your Tomodachi will be reset!
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel onClick={setOpen}>Cancel</AlertDialogCancel>
+                <AlertDialogAction onClick={resurrect}>
+                  Confirm
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
         </DialogContent>
       </Dialog>
     </div>
