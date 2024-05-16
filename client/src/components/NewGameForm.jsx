@@ -38,11 +38,13 @@ export default function NewGameForm({ setOpen }) {
     defaultValues: {
       name: '',
     },
+    mode: 'onChange',
   });
 
   function onSubmit({ name }) {
     // console.log(name, auth.getProfile().data._id);
     createGameData({ variables: { name, userId: auth.getProfile().data._id } });
+    setOpen(false);
   }
 
   return (
@@ -62,7 +64,7 @@ export default function NewGameForm({ setOpen }) {
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-full" onClick={() => setOpen(false)}>
+        <Button type="submit" className="w-full">
           Click Me!
         </Button>
       </form>

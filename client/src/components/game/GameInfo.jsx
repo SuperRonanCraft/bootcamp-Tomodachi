@@ -12,6 +12,7 @@ import { Link } from 'react-router-dom';
 import { Play } from 'lucide-react';
 import { getTimeLeft } from '../../lib/Game';
 import { timeLeft } from '../../lib/useGameLoop';
+import { useState } from 'react';
 export default function GameInfo({
   _id,
   name,
@@ -22,6 +23,7 @@ export default function GameInfo({
   isSelf,
 }) {
   const [deleteGameData] = useMutation(DELETE_GAME_DATA);
+  const [enableLink, setEnableLink] = useState(true);
 
   function deleteButton() {
     // console.log('Delete');
@@ -31,15 +33,32 @@ export default function GameInfo({
   }
   return (
     <Card className="w-full sm:w-2/3 mx-auto mb-2 hover:bg-violet-700 transition group">
-      {card(
-        _id,
-        name,
-        energy,
-        food,
-        happiness,
-        isSelf,
-        deleteButton,
-        timeAlive
+      {isSelf ? (
+        <Link to={enableLink ? `../${_id}` : '/'} relative="path">
+          {card(
+            _id,
+            name,
+            energy,
+            food,
+            happiness,
+            isSelf,
+            deleteButton,
+            timeAlive,
+            setEnableLink
+          )}
+        </Link>
+      ) : (
+        card(
+          _id,
+          name,
+          energy,
+          food,
+          happiness,
+          isSelf,
+          deleteButton,
+          timeAlive,
+          setEnableLink
+        )
       )}
     </Card>
   );
@@ -53,7 +72,8 @@ function card(
   happiness,
   isSelf,
   deleteButton,
-  timeAlive
+  timeAlive,
+  setEnableLink
 ) {
   return (
     <>
@@ -68,13 +88,10 @@ function card(
               emoji={getEmoji(getEmotion({ energy, food, happiness }))}
               page="profile"
             />
-            {isSelf && (
-              <Link to={isSelf ? `/${_id}` : '#'}>
-                <div className="absolute top-2 left-2 right-2 bottom-2 opacity-0 group-hover:opacity-90 bg-violet-700 flex justify-center items-center transition">
-                  <Play className="w-24 h-24" />
-                </div>
-              </Link>
-            )}
+
+            <div className="absolute top-2 left-2 right-2 bottom-2 opacity-0 group-hover:opacity-90 bg-violet-700 flex justify-center items-center transition">
+              <Play className="w-24 h-24" />
+            </div>
           </div>
           <div className="my-auto justify-between gap-2 w-full col-span-3">
             <Food food={food} />
@@ -91,6 +108,8 @@ function card(
                   e.stopPropagation();
                   deleteButton();
                 }}
+                onMouseOver={() => setEnableLink(false)}
+                onMouseOut={() => setEnableLink(true)}
               >
                 Delete
               </Button>
