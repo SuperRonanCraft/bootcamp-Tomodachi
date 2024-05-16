@@ -16,24 +16,18 @@ export function getEmotion({ energy, food, happiness }) {
   return emotion;
 }
 
-export function getEmoji(pet) {
-  const status = pet.status;
-  switch (status) {
-    case STATUS.DEAD:
+export function getEmoji(emotion) {
+  switch (emotion) {
+    case EMOTION.HAPPY:
+      return emj_happy;
+    case EMOTION.SAD:
       return emj_dead;
-    default:
-      switch (getEmotion(pet)) {
-        case EMOTION.HAPPY:
-          return emj_happy;
-        case EMOTION.SAD:
-          return emj_dead;
-        case EMOTION.TIRED:
-          return emj_sleeping;
-        case EMOTION.UPSET:
-          return emj_tired;
-        case EMOTION.HUNGRY:
-          return emj_almostDead;
-      }
+    case EMOTION.TIRED:
+      return emj_sleeping;
+    case EMOTION.UPSET:
+      return emj_tired;
+    case EMOTION.HUNGRY:
+      return emj_almostDead;
   }
 }
 

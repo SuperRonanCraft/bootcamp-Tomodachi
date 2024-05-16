@@ -22,19 +22,7 @@ export default function EmptyGame() {
 
   if (loading) return <h1>Loading...</h1>;
 
-  if (data.me.gameData)
+  if (data.me.gameData.length > 0)
     return <Navigate to={`/${data.me.gameData[0]._id}`} replace />;
-  return (
-    <div className="flex justify-center items-center h-screen">
-      <Card className="min-w-[400px]">
-        <CardHeader>
-          <CardTitle>You have no games</CardTitle>
-          <CardDescription>Create a new Game</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <NewGameForm />
-        </CardContent>
-      </Card>
-    </div>
-  );
+  return <Navigate to={'/profile'} />;
 }
