@@ -21,19 +21,19 @@ export default function Status() {
         <CardTitle>{gameState.name}</CardTitle>
 
         <CardDescription className="text-right">
-          <>Emotion: {getEmotion(petState)}</>
+          {!gameState.isDead ? `Emotion : ${getEmotion(petState)}` : 'Dead'}
         </CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col justify-between gap-2">
-        <Food food={petState.food} />
-        <Happiness happiness={petState.happiness} />
-        <Energy energy={petState.energy} />
+        <Food food={petState.food} disabled={gameState.isDead} />
+        <Happiness happiness={petState.happiness} disabled={gameState.isDead} />
+        <Energy energy={petState.energy} disabled={gameState.isDead} />
         <div className="">
           <p className="text-left text-foreground/70">
             Played For: {getTimeLeft(petState.timeAlive)}
           </p>
           <p className="text-left text-foreground/70">
-            Time Left: {getTimeLeft(timeLeft(petState))}
+            Time Left: {getTimeLeft(timeLeft(petState), gameState.isDead)}
           </p>
         </div>
       </CardContent>

@@ -1,5 +1,5 @@
 import { useGameContext } from '../context/GameContext';
-import { POSSIBILITIES, THRESHOLDS, createPetLog } from './Pet';
+import { POSSIBILITIES, THRESHOLDS } from './Pet';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { BeerOff, X } from 'lucide-react';
@@ -253,13 +253,13 @@ export default function useGameLogic() {
 
   // MAIN ACTIONS AFFECTING PET VALUES
 
-  function executeAction(action_key, props) {
+  function executeAction(action_key) {
     if (gameState.isDead) return;
-    // action key is a corresponding number to know what to communicate to the user
+    // action key is a corresponding possibility key to randomize by
     const possibilities = POSSIBILITIES[action_key];
     var values = getRandomValues(possibilities);
 
-    // console.log('Values', possibilities, values);
+    // Cache values before changing pet traits
     var valuesAfter = {
       food: pet.food + values.food,
       happiness: pet.happiness + values.happiness,
@@ -268,6 +268,7 @@ export default function useGameLogic() {
 
     //Test to make sure that the pet is not going to die
     if (checkImpactDeath(valuesAfter) === false) {
+      //Update pet State
       const newPet = { ...pet };
       newPet.food = Math.min(valuesAfter.food, 100);
       newPet.happiness = Math.min(valuesAfter.happiness, 100);
@@ -275,8 +276,10 @@ export default function useGameLogic() {
       setPetState(newPet);
       checkForDanger();
     } else {
+      //Give players a boost before death
       preventDeath(action_key);
     }
+    //Check for too perfect condition
     return tooPerfect();
   }
 

@@ -73,7 +73,7 @@ const HowToPlay = () => {
   useEffect(() => {
     if (enableTimer) {
       const interval = setInterval(() => {
-        console.log(enableTimer);
+        // console.log(enableTimer);
 
         setTimer((prev) => (prev >= 1000 ? 0 : prev + 1));
       }, 1000);

@@ -22,13 +22,15 @@ export function getEmoji(emotion) {
     case EMOTION.HAPPY:
       return emj_happy;
     case EMOTION.SAD:
-      return emj_dead;
+      return emj_almostDead;
     case EMOTION.TIRED:
       return emj_sleeping;
     case EMOTION.UPSET:
       return emj_tired;
     case EMOTION.HUNGRY:
       return emj_hungry;
+    case EMOTION.DEAD:
+      return emj_dead;
   }
 }
 
@@ -38,6 +40,7 @@ export const EMOTION = {
   TIRED: 'Tired',
   UPSET: 'Upset',
   HUNGRY: 'Hungry',
+  DEAD: 'Dead',
 };
 
 export const STATUS = {
