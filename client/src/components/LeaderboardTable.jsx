@@ -8,45 +8,45 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { useQuery } from '@apollo/client';
-import { QUERY_ALL_USERS } from '../utils/queries';
+import { QUERY_HIGHEST_SCORES } from '../utils/queries';
 import { getTimeLeft } from '../lib/Game';
 import { Link, useNavigate } from 'react-router-dom';
 import auth from '../utils/auth';
 
 export default function LeaderboardTable() {
-  const { loading, data, error } = useQuery(QUERY_ALL_USERS);
+  const { loading, data, error } = useQuery(QUERY_HIGHEST_SCORES);
   const navigate = useNavigate();
 
   if (loading) return <h1>Loading...</h1>;
   if (error) return <h1>Error: {error.message}</h1>;
 
-  const filteredUsers = data.users.filter(
-    ({ gameData }) => gameData.length > 0
-  );
+  // const filteredUsers = data.users.filter(
+  //   ({ gameData }) => gameData.length > 0
+  // );
 
-  const sortedUsers = filteredUsers
-    .map((user) => {
-      // const total = user.gameData.reduce(
-      //   (acc, game) => {
-      //     return {
-      //       energy: acc.energy + game.energy,
-      //       food: acc.food + game.food,
-      //       happiness: acc.happiness + game.happiness,
-      //     };
-      //   },
-      //   { energy: 0, food: 0, happiness: 0 }
-      // );
-      const largestTime = user.gameData.reduce((acc, game) => {
-        if (game.timeAlive > acc.timeAlive) return game;
-        return acc;
-      });
+  // const sortedUsers = filteredUsers
+  //   .map((user) => {
+  //     // const total = user.gameData.reduce(
+  //     //   (acc, game) => {
+  //     //     return {
+  //     //       energy: acc.energy + game.energy,
+  //     //       food: acc.food + game.food,
+  //     //       happiness: acc.happiness + game.happiness,
+  //     //     };
+  //     //   },
+  //     //   { energy: 0, food: 0, happiness: 0 }
+  //     // );
+  //     const largestTime = user.gameData.reduce((acc, game) => {
+  //       if (game.timeAlive > acc.timeAlive) return game;
+  //       return acc;
+  //     });
 
-      return {
-        ...user,
-        totalScore: largestTime.timeAlive, //total.energy + total.food + total.happiness,
-      };
-    })
-    .sort((a, b) => b.totalScore - a.totalScore);
+  //     return {
+  //       ...user,
+  //       totalScore: largestTime.timeAlive, //total.energy + total.food + total.happiness,
+  //     };
+  //   })
+  //   .sort((a, b) => b.totalScore - a.totalScore);
 
   return (
     <>
@@ -59,7 +59,7 @@ export default function LeaderboardTable() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {sortedUsers.map((user, index) => (
+          {data.highestScores.map((user, index) => (
             <TableRow
               key={user._id}
               className="hover:bg-gradient-to-r hover:from-violet-600/50 hover:to-rose-400/50"
@@ -82,7 +82,7 @@ export default function LeaderboardTable() {
                 </Link>
               </TableCell>
               <TableCell className="text-right">
-                {getTimeLeft(user.totalScore)}
+                {getTimeLeft(user.highestTimeAlive)}
               </TableCell>
             </TableRow>
           ))}

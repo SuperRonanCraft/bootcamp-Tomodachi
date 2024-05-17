@@ -6,6 +6,12 @@ type User{
     gameData: [GameData]
 }
 
+type UserScore {
+    _id: ID
+    username: String
+    highestTimeAlive: Int
+}
+
 type Auth{
     token: ID
     user: User
@@ -24,7 +30,8 @@ type GameData {
 
 type Query{
     me(userId:ID!): User
-    users:[User]
+    users: [User]
+    highestScores: [UserScore]
 }
 
 type Mutation{
