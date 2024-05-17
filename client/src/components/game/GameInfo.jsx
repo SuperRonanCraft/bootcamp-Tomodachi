@@ -3,7 +3,7 @@ import Emoji from '../../components/game/Emoji';
 import Food from './status/Food';
 import Happiness from './status/Happiness';
 import Energy from './status/Energy';
-import { Card, CardContent, CardTitle } from '../ui/card';
+import { Card, CardContent, CardFooter, CardTitle } from '../ui/card';
 import { Button } from '../ui/button';
 import { DELETE_GAME_DATA } from '../../utils/mutations';
 import { useMutation } from '@apollo/client';
@@ -101,8 +101,10 @@ function card(
             <Energy energy={energy} />
           </div>
         </div>
-        <div className="flex flex-nowrap my-3">
-          <div className="mx-auto mb-2">
+      </CardContent>
+      <CardFooter>
+        <div className="flex flex-nowrap w-full">
+          <div className="mx-auto">
             {isSelf && (
               <Button
                 className="mx-1"
@@ -131,7 +133,7 @@ function card(
             </p>
           </div>
         </div>
-      </CardContent>
+      </CardFooter>
     </>
   );
 }

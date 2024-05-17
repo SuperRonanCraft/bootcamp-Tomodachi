@@ -38,3 +38,13 @@ export const QUERY_ALL_USERS = gql`
     }
   }
 `;
+
+export const QUERY_HIGHEST_SCORES = gql`
+  query HighestScores {
+    highestScores {
+      _id
+      username
+      highestTimeAlive
+    }
+  }
+`;

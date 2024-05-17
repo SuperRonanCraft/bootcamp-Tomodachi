@@ -9,6 +9,40 @@ const resolvers = {
     users: async () => {
       return await User.find();
     },
+    highestScores: async () => {
+      return await User.aggregate([
+        {
+          $unwind: '$gameData',
+        },
+        {
+          $group: {
+            _id: '$_id',
+            highestTimeAlive: {
+              $max: '$gameData.timeAlive',
+            },
+            gameData: {
+              $push: '$gameData',
+            },
+            username: { $first: '$username' },
+          },
+        },
+        {
+          $project: {
+            _id: 1,
+            username: 1,
+            highestTimeAlive: 1,
+          },
+        },
+        {
+          $sort: {
+            highestTimeAlive: -1,
+          },
+        },
+        {
+          $limit: 10,
+        },
+      ]);
+    },
   },
   Mutation: {
     login: async (_, { username, password }) => {

@@ -8,8 +8,16 @@ import { Button } from '@/components/ui/button';
 import { useEffect, useState } from 'react';
 
 import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
+
+import {
   AlertDialog,
-  AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
@@ -17,6 +25,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
+  AlertDialogAction,
 } from '@/components/ui/alert-dialog';
 
 const HowToPlay = () => {
@@ -36,6 +45,8 @@ const HowToPlay = () => {
     happinessTwo: 10,
     energyTwo: 10,
   });
+
+  const [killOpen, setKillOpen] = useState(false);
   const [timer, setTimer] = useState(0);
   const [enableTimer, setEnableTimer] = useState(true);
 
@@ -115,11 +126,11 @@ const HowToPlay = () => {
             </div>
           </Block>
           <Block className="text-3xl font-bold col-span-12 lg:col-span-4 row-span-1">
-            Bars
+            Traits
           </Block>
           <Block className="col-span-12 lg:col-span-8">
-            There are three bars representing different aspects of your
-            Tomodachi&apos;s life which are food, happiness, and energy.
+            There are three traits representing different aspects of your
+            Tomodachi&apos;s life: Food, Happiness, and Energy.
           </Block>
 
           <Block className="col-span-12 lg:col-span-6">
@@ -155,12 +166,17 @@ const HowToPlay = () => {
             </div>
           </Block>
           <Block className="col-span-12 lg:col-span-4 text-pretty">
-            If all three bars are equal, your Tomodachi dies due to perfection.
+            If all three traits are equal, your Tomodachi dies due to
+            perfection.
           </Block>
           <Block className="text-3xl font-bold col-span-12 lg:col-span-6 row-span-1">
             Time
           </Block>
-          <Block className="col-span-12 font-bold lg:col-span-6 row-span-3 justify-center text-8xl">
+          <Block
+            className={`col-span-12 font-bold lg:col-span-6 row-span-3 justify-center text-8xl ${
+              !enableTimer && 'opacity-60'
+            }`}
+          >
             {timer}
           </Block>
           <Block className="col-span-12 lg:col-span-6">
@@ -184,14 +200,18 @@ const HowToPlay = () => {
             well.
           </Block>
           <Block className="col-span-12 lg:col-span-4">
-            <AlertDialog>
-              <AlertDialogTrigger asChild>
-                <Button className="w-full">Try Kill</Button>
-              </AlertDialogTrigger>
-              <AlertDialogContent>
-                <AlertDialogHeader>
-                  <AlertDialogTitle>Tommy has died!</AlertDialogTitle>
-                  <AlertDialogDescription>
+            <Dialog open={killOpen}>
+              <DialogTrigger asChild>
+                <Button className="w-full" onClick={setKillOpen}>
+                  <p>
+                    Kill <span className="font-bold">Tomodachi</span>
+                  </p>
+                </Button>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>Guinea Pig has died!</DialogTitle>
+                  <DialogDescription>
                     <p className="text-foreground">
                       How could you let this happen!
                     </p>
@@ -199,26 +219,53 @@ const HowToPlay = () => {
                       Would you like to bring them back to life?
                     </p>
                     <p className="my-2 text-foreground/90">Score: {timer}</p>
-                  </AlertDialogDescription>
-                </AlertDialogHeader>
-                <AlertDialogFooter>
+                  </DialogDescription>
+                </DialogHeader>
+                <AlertDialog>
                   <div className="text-right">
                     <AlertDialogTrigger asChild>
-                      <Button
-                        onClick={() => setTimer(0)}
-                        variant="outline"
-                        className="mx-2"
-                      >
-                        Resurrect
-                      </Button>
+                      <Button className="mx-2 bg-primary">Resurrect</Button>
                     </AlertDialogTrigger>
-                    <AlertDialogCancel className="bg-primary">
+                    <Button
+                      onClick={() => {
+                        setKillOpen(false);
+                      }}
+                      variant="outline"
+                    >
                       Cancel
-                    </AlertDialogCancel>
+                    </Button>
                   </div>
-                </AlertDialogFooter>
-              </AlertDialogContent>
-            </AlertDialog>
+                  <AlertDialogContent>
+                    <AlertDialogHeader>
+                      <AlertDialogTitle>
+                        Are you absolutely sure?
+                      </AlertDialogTitle>
+                      <AlertDialogDescription>
+                        <p className="text-red-300">
+                          This action cannot be undone!
+                        </p>
+                        <p>
+                          This will permanently delete your current progess,
+                          affect your leaderboard standing and your Tomodachi
+                          will be reset!
+                        </p>
+                      </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                      <AlertDialogCancel>Cancel</AlertDialogCancel>
+                      <AlertDialogAction
+                        onClick={() => {
+                          setTimer(0);
+                          setKillOpen(false);
+                        }}
+                      >
+                        Confirm
+                      </AlertDialogAction>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialog>
+              </DialogContent>
+            </Dialog>
           </Block>
           <Block className="col-span-12 lg:col-span-4">
             <Lottie animationData={getEmoji(EMOTION.TIRED)} />
@@ -233,7 +280,7 @@ const HowToPlay = () => {
             Limits
           </Block>
           <Block className="col-span-12 lg:col-span-6">
-            You&apos;re limited to three Tomodachis at a time.
+            You&apos;re limited to only three Tomodachis at a time!
           </Block>
           <div className="text-3xl col-span-12 lg:col-span-12 text-balance font-extrabold tracking-tight lg:text-6xl mb-16 mt-8 bg-gradient-to-r from-violet-600 to-rose-400 text-transparent bg-clip-text">
             That&apos;s the gist of it! Keep those bars up, balance their needs,

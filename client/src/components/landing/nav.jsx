@@ -72,11 +72,11 @@ export default function Nav() {
             {/* Empty spacer to push Sign Up and Log In links to the right */}
             <div className="flex-grow" />
             {/* Place Sign Up and Log In links to the right side */}
-            <div className="flex gap-4 items-center">
+            <div className="flex gap-4 items-center font-medium">
               {auth.loggedIn() ? (
                 <>
                   <NavItem link={'/profile'} title={'Profile'} />
-                  <Button onClick={auth.logout} className="bg-secondary/50">
+                  <Button onClick={auth.logout} variant="logout">
                     Logout
                   </Button>
                 </>
