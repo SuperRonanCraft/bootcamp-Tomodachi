@@ -34,7 +34,7 @@ export default function GameInfo({
   return (
     <Card className="w-full sm:w-2/3 mx-auto mb-2 transition group hover:bg-gradient-to-r hover:from-violet-600 hover:to-rose-400/40 dark:hover:from-violet-600/10 dark:hover:to-rose-400/10">
       {isSelf ? (
-        <Link to={enableLink ? `../${_id}` : '#'} relative="path">
+        <Link to={enableLink ? `../play/${_id}` : '#'} relative="path">
           {card(
             _id,
             name,

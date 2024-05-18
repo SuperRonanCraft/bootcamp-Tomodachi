@@ -1,12 +1,3 @@
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-} from '@/components/ui/card';
-
-import NewGameForm from '@/components/NewGameForm';
 import auth from '../../utils/auth';
 import { Navigate } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
@@ -23,6 +14,6 @@ export default function EmptyGame() {
   if (loading) return <h1>Loading...</h1>;
 
   if (data.me.gameData.length > 0)
-    return <Navigate to={`/${data.me.gameData[0]._id}`} replace />;
+    return <Navigate to={`/play/${data.me.gameData[0]._id}`} replace />;
   return <Navigate to={'/profile'} />;
 }

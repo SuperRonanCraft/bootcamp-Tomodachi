@@ -8,7 +8,11 @@ import Game from './pages/Game.jsx';
 import Leaderboard from './pages/Leaderboard.jsx';
 import Login from './pages/login.jsx';
 import SignUp from './pages/SignUp.jsx';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from 'react-router-dom';
 import EmptyGame from './components/game/EmptyGame.jsx';
 import AuthGuard from './components/landing/AuthGuard.jsx';
 
@@ -20,6 +24,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <EmptyGame />,
+      },
+      {
+        path: '*',
+        element: <Navigate to="/landing" replace />,
       },
       {
         path: '/landing',
@@ -45,7 +53,11 @@ const router = createBrowserRouter([
         element: <AuthGuard />,
         children: [
           {
-            path: '/:gameId',
+            path: '/play',
+            element: <EmptyGame />,
+          },
+          {
+            path: '/play/:gameId',
             element: <Game />,
           },
           {

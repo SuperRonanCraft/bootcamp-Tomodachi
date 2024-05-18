@@ -5,11 +5,8 @@ import { useEffect, useState } from 'react';
 import { useGameContext } from '../../context/GameContext';
 import useGameLoop from '../../lib/useGameLoop';
 import TabContainer from './tab/TabContainer';
-import { useMutation, useQuery } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { UPDATE_GAMEDATA } from '../../utils/mutations';
-import { QUERY_USER } from '../../utils/queries';
-import { useParams } from 'react-router-dom';
-import auth from '../../utils/auth';
 import useGameHook from '../../lib/useGameHook';
 import { getEmoji, getEmotion } from '../../lib/petStatus';
 import {
@@ -33,34 +30,37 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
 import { checkDead } from '../../lib/Game';
+import { useParams } from 'react-router-dom';
 
-export default function GameDashboard() {
-  const { petState, gameState, setGameState } = useGameContext();
+export default function GameDashboard({ gameData, user }) {
+  const { gameId } = useParams();
+  const {
+    petState,
+    gameState: { isDead, name },
+    setGameState,
+  } = useGameContext();
   const { timeAlive, food, happiness, energy } = petState;
-  const { isDead, name } = gameState;
+  // const { isDead, name } = gameState;
   const { gameTick } = useGameLoop();
   const { changeGame } = useGameHook();
-  const { gameId } = useParams();
   const [updateGameData] = useMutation(UPDATE_GAMEDATA);
-  const { loading, data } = useQuery(QUERY_USER, {
-    variables: { userId: auth.getProfile().data._id },
-  });
+
   const [open, setOpen] = useState(false);
 
   //Download data
   useEffect(() => {
-    if (loading) return;
-    const gamesArray = data.me.gameData;
-    const gameData = gamesArray.filter(({ _id }) => _id === gameId)[0];
+    // const gamesArray = data.me.gameData;
+    // const gameData = gamesArray.filter(({ _id }) => _id === gameId)[0];
+    // console.log('GameData updated');
     changeGame(gameData);
-  }, [loading, gameId]);
+  }, [gameId]);
 
   //Update data
   useEffect(() => {
-    if (loading) return;
+    // if (loading) return;
     const data = {
-      userId: auth.getProfile().data._id,
-      gameId,
+      userId: user._id,
+      gameId: gameData._id,
       food,
       energy,
       happiness,
@@ -88,11 +88,11 @@ export default function GameDashboard() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [timeAlive, food, happiness, energy]);
 
-  if (loading) return <h2>Loading</h2>;
+  // if (loading) return <h2>Loading</h2>;
 
   function resurrect() {
     setOpen(false);
-    changeGame({ _id: gameId, name, ...createPet() });
+    changeGame({ _id: gameData._id, name, ...createPet() });
   }
 
   function closeBox() {
@@ -111,7 +111,7 @@ export default function GameDashboard() {
         <div className="flex flex-col gap-4">
           <TabContainer className="hidden md:block" />
           <Status />
-          <Action isDead={gameState.isDead} />
+          <Action isDead={isDead} />
         </div>
       </div>
       <Dialog open={open} onOpenChange={setOpen}>

@@ -9,7 +9,7 @@ export default function Tab({ name, gameId }) {
 
   return (
     <Button variant={`${isSelected ? '' : 'outline'}`}>
-      <Link to={`/${gameId}`}>{name}</Link>
+      <Link to={`/play/${gameId}`}>{name}</Link>
     </Button>
   );
 }

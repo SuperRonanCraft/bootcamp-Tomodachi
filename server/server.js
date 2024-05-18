@@ -1,6 +1,13 @@
 // Import required modules
 const express = require('express');
 const { ApolloServer } = require('@apollo/server');
+require('dotenv').config();
+const {
+  ApolloServerPluginLandingPageLocalDefault,
+} = require('@apollo/server/plugin/landingPage/default');
+const {
+  ApolloServerPluginLandingPageDisabled,
+} = require('@apollo/server/plugin/disabled');
 const { expressMiddleware } = require('@apollo/server/express4');
 
 const path = require('path');
@@ -12,6 +19,12 @@ const app = express();
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  plugins: [
+    // Install a landing page plugin based on NODE_ENV
+    process.env.NODE_ENV === 'production'
+      ? ApolloServerPluginLandingPageDisabled()
+      : ApolloServerPluginLandingPageLocalDefault({ footer: false }),
+  ],
 });
 
 const startApolloServer = async () => {

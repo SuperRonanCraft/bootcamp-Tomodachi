@@ -1,4 +1,4 @@
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { ModeToggle } from '../ModeToggle';
 import auth from '../../utils/auth';
 import { Button } from '../ui/button';
@@ -24,9 +24,9 @@ export default function Nav() {
     { title: 'Leaderboard', link: '/leaderboard' },
     {
       title: 'Play',
-      link: auth.loggedIn() ? '/' : '/login',
+      link: auth.loggedIn() ? '/play' : '/login',
       show:
-        loc.pathname === '/landing' ||
+        loc.pathname === '/' ||
         loc.pathname === '/leaderboard' ||
         loc.pathname === '/profile' ||
         loc.pathname === '/signup',
