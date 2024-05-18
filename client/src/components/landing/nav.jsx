@@ -26,7 +26,7 @@ export default function Nav() {
       title: 'Play',
       link: auth.loggedIn() ? '/play' : '/login',
       show:
-        loc.pathname === '/' ||
+        loc.pathname === '/landing' ||
         loc.pathname === '/leaderboard' ||
         loc.pathname === '/profile' ||
         loc.pathname === '/signup',
