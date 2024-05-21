@@ -68,81 +68,102 @@ const resolvers = {
 
       return { token, user };
     },
-    updateUser: async (_, { username, _id }) => {
+    updateUser: async (_, { username, _id }, context) => {
       try {
-        const user = await User.findByIdAndUpdate(
-          _id,
-          { username },
-          {
-            new: true,
+        if (context.user && context.user._id === _id) {
+          const user = await User.findByIdAndUpdate(
+            _id,
+            { username },
+            {
+              new: true,
+            }
+          );
+          if (!user) {
+            // console.log(_id);
+            return { message: 'User not found!' };
           }
-        );
-        if (!user) {
-          // console.log(_id);
-          throw AuthenticationError;
+
+          return user;
         }
-        return user;
+        throw AuthenticationError;
       } catch (err) {
         throw AuthenticationError;
       }
     },
     createGameData: async (
       parent,
-      { food, energy, happiness, name, timeAlive, userId }
+      { food, energy, happiness, name, timeAlive, userId },
+      context
     ) => {
-      const user = await User.findByIdAndUpdate(
-        userId,
-        {
-          $addToSet: {
-            gameData: { food, energy, happiness, name, timeAlive },
+      if (context.user) {
+        if (context.user._id === userId) {
+          const user = await User.findByIdAndUpdate(
+            userId,
+            {
+              $addToSet: {
+                gameData: { food, energy, happiness, name, timeAlive },
+              },
+            },
+            {
+              new: true,
+            }
+          );
+          return user;
+        }
+        throw AuthenticationError;
+      }
+      throw AuthenticationError;
+    },
+    deleteUser: async (parent, { _id }, context) => {
+      if (context.user && context.user._id === _id) {
+        const user = await User.findByIdAndDelete(_id);
+        return user;
+      }
+      throw AuthenticationError;
+    },
+    deleteGameData: async (_, { userId, _id }, context) => {
+      if (context.user && context.user._id === userId) {
+        const user = await User.findByIdAndUpdate(
+          userId,
+          {
+            $pull: { gameData: { _id } },
           },
-        },
-        {
-          new: true,
-        }
-      );
-      return user;
-    },
-    deleteUser: async (parent, { _id }) => {
-      const user = await User.findByIdAndDelete(_id);
-      return user;
-    },
-    deleteGameData: async (_, { userId, _id }) => {
-      const user = await User.findByIdAndUpdate(
-        userId,
-        {
-          $pull: { gameData: { _id } },
-        },
-        {
-          new: true,
-        }
-      );
-      return user;
+          {
+            new: true,
+          }
+        );
+        return user;
+      }
+      throw AuthenticationError;
     },
     updateGameData: async (
       _,
-      { userId, gameId, food, happiness, energy, timeAlive }
+      { userId, gameId, food, happiness, energy, timeAlive },
+      context
     ) => {
-      await User.updateOne(
-        { _id: userId },
-        {
-          $set: {
-            'gameData.$[i].food': food,
-            'gameData.$[i].happiness': happiness,
-            'gameData.$[i].energy': energy,
-            'gameData.$[i].timeAlive': timeAlive,
-            'gameData.$[i].lastSaveDate': Date.now(),
-          },
-        },
-        {
-          arrayFilters: [
-            {
-              'i._id': gameId,
+      if (context.user && context.user._id === userId) {
+        await User.updateOne(
+          { _id: userId },
+          {
+            $set: {
+              'gameData.$[i].food': food,
+              'gameData.$[i].happiness': happiness,
+              'gameData.$[i].energy': energy,
+              'gameData.$[i].timeAlive': timeAlive,
+              'gameData.$[i].lastSaveDate': Date.now(),
             },
-          ],
-        }
-      );
-      return User.findById(userId);
+          },
+          {
+            arrayFilters: [
+              {
+                'i._id': gameId,
+              },
+            ],
+          }
+        );
+        return User.findById(userId);
+      }
+      return AuthenticationError;
     },
   },
 };
