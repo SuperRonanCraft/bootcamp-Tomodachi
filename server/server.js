@@ -41,7 +41,7 @@ const startApolloServer = async () => {
     })
   );
 
-  app.use('/ping', (req, res) => {
+  app.get('/ping', (req, res) => {
     res.sendStatus(200);
   });
 
