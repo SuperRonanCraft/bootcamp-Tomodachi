@@ -41,6 +41,10 @@ const startApolloServer = async () => {
     })
   );
 
+  app.use('/ping', (req, res) => {
+    res.sendStatus(200);
+  });
+
   if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../client/dist')));
 
